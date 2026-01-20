@@ -20,6 +20,6 @@ frontend/pnpm-debug.log*
 frontend/lerna-debug.log*
 
 frontend/node_modules
-frontend/dist
+frontend/static
 frontend/dist-ssr
 frontend/*.local
