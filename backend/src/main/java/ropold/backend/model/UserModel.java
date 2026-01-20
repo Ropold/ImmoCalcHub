@@ -2,7 +2,7 @@ package ropold.backend.model;
 
 import java.util.List;
 
-public record AppUser(
+public record UserModel(
         String id,
         String username,
         String name,

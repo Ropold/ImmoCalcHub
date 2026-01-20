@@ -1,7 +1,7 @@
 package ropold.backend.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
-import ropold.backend.model.AppUser;
+import ropold.backend.model.UserModel;
 
-public interface AppUserRepository extends MongoRepository<AppUser, String> {
+public interface AppUserRepository extends MongoRepository<UserModel, String> {
 }

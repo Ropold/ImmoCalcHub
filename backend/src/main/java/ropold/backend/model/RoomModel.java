@@ -2,8 +2,8 @@ package ropold.backend.model;
 
 import java.util.List;
 
-public record Room(
+public record RoomModel(
         String name,
-        List<RoomSection> roomSections
+        List<RoomSectionModel> roomSections
 ) {
 }

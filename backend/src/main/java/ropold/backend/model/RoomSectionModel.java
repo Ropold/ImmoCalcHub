@@ -1,6 +1,6 @@
 package ropold.backend.model;
 
-public record RoomSection(
+public record RoomSectionModel(
         double length,
         double width
 ) {
