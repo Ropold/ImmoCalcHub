@@ -1,0 +1,27 @@
+.blue-button {
+    background-color: #66b3ff;
+}
+
+.blue-button:hover {
+    background-color: #007bff;
+}
+
+.purple-button {
+    background-color: #9c27b0; /* Violett */
+}
+
+.purple-button:hover {
+    background-color: #7b1fa2; /* Dunkleres Violett beim Hover */
+}
+
+.green-button {
+    background-color: #66bb6a;
+}
+
+.green-button:hover {
+    background-color: #388e3c;
+}
+
+.margin-top-20{
+    margin-top: 20px;
+}
