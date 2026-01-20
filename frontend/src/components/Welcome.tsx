@@ -11,7 +11,7 @@ export default function Welcome(props: Readonly<WelcomeProps>) {
 
     return (
         <>
-            <h2>Arc Raiders Hub</h2>
+            <h2>Arc Raiders Hub 2</h2>
             <div className="image-wrapper margin-top-20">
                 <img
                     src={welcomePic}
