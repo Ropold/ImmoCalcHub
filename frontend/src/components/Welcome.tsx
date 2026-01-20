@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import "./styles/Welcome.css"
-import welcomePic from "../assets/rainbow-logo-small.png"
+import welcomePic from "../assets/house-logo.jpg"
 
 type WelcomeProps = {
     role: string;

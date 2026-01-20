@@ -2,7 +2,7 @@ import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import "./styles/Navbar.css";
 import * as React from "react";
-import headerLogo from "../assets/rainbow-logo-small.png"
+import headerLogo from "../assets/gso-logo.png";
 import {LanguagesImages} from "./utils/FlagImages.ts";
 import {translatedGameInfo} from "./utils/TranslatedGameInfo.ts";
 import "./styles/Buttons.css"
