@@ -11,11 +11,11 @@ export default function Welcome(props: Readonly<WelcomeProps>) {
 
     return (
         <>
-            <h2>Arc Raiders Hub 2</h2>
+            <h2>Immo Calc Hub</h2>
             <div className="image-wrapper margin-top-20">
                 <img
                     src={welcomePic}
-                    alt="Welcome to Arc Raiders Hub"
+                    alt="Welcome to ImmoCalcHub"
                     className="logo-welcome"
                     onClick={()=> navigate("/items")}
                 />
