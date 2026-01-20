@@ -48,8 +48,8 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: worldquartethub.jar
-          path: backend/target/worldquartethub.jar # must match the finalName in the pom.xml
+          name: immocalchub.jar
+          path: backend/target/immocalchub.jar # must match the finalName in the pom.xml
 
   push-to-docker-hub:
     runs-on: ubuntu-latest
