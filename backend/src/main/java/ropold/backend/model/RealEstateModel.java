@@ -10,6 +10,8 @@ public record RealEstateModel(
         String address,
         double price,
         List<RoomModel> rooms,
+        double totalFloorArea,
+        double totalLivingAreaWoFlV,
         String githubId,
         String createdBy,
         LocalDate createdAt,

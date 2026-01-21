@@ -2,17 +2,23 @@ package ropold.backend.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ropold.backend.model.UserModel;
-import ropold.backend.repository.UserRepository;
+import ropold.backend.model.AppUser;
+import ropold.backend.repository.AppUserRepository;
 
 @Service
 @RequiredArgsConstructor
 public class AppUserService {
 
-    private final UserRepository appUserRepository;
+    private final AppUserRepository appUserRepository;
 
-    public UserModel getUserById(String userId) {
+    public AppUser getUserById(String userId) {
         return appUserRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
+
+    public String getUserRole(String userId) {
+        AppUser user = getUserById(userId);
+        return user.role().name();
+    }
+
 }

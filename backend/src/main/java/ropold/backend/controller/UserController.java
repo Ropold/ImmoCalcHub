@@ -7,6 +7,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ropold.backend.service.AppUserService;
 
 import java.util.Map;
 
@@ -14,6 +15,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
+
+    private final AppUserService appUserService;
 
     @GetMapping(value = "/me", produces = "text/plain")
     public String getMe() {
@@ -26,5 +29,13 @@ public class UserController {
             return Map.of("message", "User not authenticated");
         }
         return user.getAttributes();
+    }
+
+    @GetMapping("/me/role")
+    public String getUserRole(@AuthenticationPrincipal OAuth2User user) {
+        if (user == null) {
+            return "anonymousUser";
+        }
+        return appUserService.getUserRole(user.getName());
     }
 }
