@@ -1,6 +1,6 @@
 # 🧮 ImmoCalcHub – An Real Estate Calculator for the GSO-FI507
 
-<p>⚠️ **Note**: This projects is hosted on free-tier Render server.</p> 
+<p>⚠️ **Note**: This project is hosted on free-tier Render server.</p> 
 <p>⏳ It might take ~45 seconds to start after clicking the link.</p>
 
 <p>
@@ -63,6 +63,9 @@
   - **Spring Security** - OAuth2 authentication and authorization
   - **MongoDB** - NoSQL document database
   - **Maven** - Dependency management and build tool
+  - **JUnit 5** - Unit testing framework
+  - **Cloudinary** - Cloud-based image storage and management
+  - **Mapbox API** - Interactive maps and geocoding services
 
   ### Frontend
   - **React 18** - Modern UI library with hooks
