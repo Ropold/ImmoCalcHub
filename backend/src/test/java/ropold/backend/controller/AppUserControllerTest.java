@@ -11,18 +11,21 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.test.web.servlet.MockMvc;
+import org.junit.jupiter.api.Assertions;
 import ropold.backend.model.AppUser;
+import ropold.backend.model.RealEstateModel;
 import ropold.backend.model.UserRole;
 import ropold.backend.repository.AppUserRepository;
+import ropold.backend.repository.RealEstateRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -34,10 +37,13 @@ class AppUserControllerTest {
     @Autowired
     private AppUserRepository appUserRepository;
 
+    @Autowired
+    private RealEstateRepository realEstateRepository;
 
     @BeforeEach
     void setUp() {
         appUserRepository.deleteAll();
+        realEstateRepository.deleteAll();
 
         AppUser user = new AppUser(
                 "user",
@@ -49,6 +55,50 @@ class AppUserControllerTest {
                 List.of("2")
         );
         appUserRepository.save(user);
+
+        RealEstateModel realEstateModel1 = new RealEstateModel(
+                "1",
+                "Schönes Einfamilienhaus",
+                "Tolles Haus mit Garten",
+                "Musterstraße 1, 50667 Köln",
+                450000.0,
+                List.of(),
+                120.5,
+                115.0,
+                "user",
+                LocalDate.of(2024, 1, 15),
+                "http://example.com/house1.jpg"
+        );
+
+        RealEstateModel realEstateModel2 = new RealEstateModel(
+                "2",
+                "Moderne Wohnung",
+                "Zentral gelegene Wohnung",
+                "Hauptstraße 10, 50668 Köln",
+                320000.0,
+                List.of(),
+                85.0,
+                80.0,
+                "user",
+                LocalDate.of(2024, 2, 20),
+                "http://example.com/apartment1.jpg"
+        );
+
+        RealEstateModel realEstateModel3 = new RealEstateModel(
+                "3",
+                "Penthouse",
+                "Luxuriöses Penthouse",
+                "Rheinufer 5, 50669 Köln",
+                850000.0,
+                List.of(),
+                200.0,
+                190.0,
+                "anotherUser",
+                LocalDate.of(2024, 3, 10),
+                "http://example.com/penthouse.jpg"
+        );
+
+        realEstateRepository.saveAll(List.of(realEstateModel1, realEstateModel2, realEstateModel3));
     }
 
     @Test
@@ -133,6 +183,67 @@ class AppUserControllerTest {
         mockMvc.perform(get("/api/users/me/role"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("anonymousUser"));
+    }
+
+    @Test
+    void testGetUserFavorites_shouldReturnFavoriteRealEstates() throws Exception {
+        OAuth2User mockUser = mock(OAuth2User.class);
+        when(mockUser.getName()).thenReturn("user");
+
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
+        Authentication authentication = new UsernamePasswordAuthenticationToken(mockUser, null, mockUser.getAuthorities());
+        context.setAuthentication(authentication);
+        SecurityContextHolder.setContext(context);
+
+        mockMvc.perform(get("/api/users/favorites"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").value("2"))
+                .andExpect(jsonPath("$[0].title").value("Moderne Wohnung"));
+    }
+
+    @Test
+    void testGetRealEstatesForGithubUser_shouldReturnUserRealEstates() throws Exception {
+        mockMvc.perform(get("/api/users/me/my-real-estates/user"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(2))
+                .andExpect(jsonPath("$[0].title").value("Schönes Einfamilienhaus"))
+                .andExpect(jsonPath("$[1].title").value("Moderne Wohnung"));
+    }
+
+    @Test
+    void testAddRealEstateToFavorites_shouldAddFavorite() throws Exception {
+        OAuth2User mockUser = mock(OAuth2User.class);
+        when(mockUser.getName()).thenReturn("user");
+
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
+        Authentication authentication = new UsernamePasswordAuthenticationToken(mockUser, null, mockUser.getAuthorities());
+        context.setAuthentication(authentication);
+        SecurityContextHolder.setContext(context);
+
+        mockMvc.perform(post("/api/users/favorites/1"))
+                .andExpect(status().isCreated());
+
+        AppUser updatedUser = appUserRepository.findById("user").orElseThrow();
+        Assertions.assertTrue(updatedUser.favoriteRealEstates().contains("1"));
+        Assertions.assertEquals(2, updatedUser.favoriteRealEstates().size());
+    }
+
+    @Test
+    void testRemoveRealEstateFromFavorites_shouldRemoveFavorite() throws Exception {
+        OAuth2User mockUser = mock(OAuth2User.class);
+        when(mockUser.getName()).thenReturn("user");
+
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
+        Authentication authentication = new UsernamePasswordAuthenticationToken(mockUser, null, mockUser.getAuthorities());
+        context.setAuthentication(authentication);
+        SecurityContextHolder.setContext(context);
+
+        mockMvc.perform(delete("/api/users/favorites/2"))
+                .andExpect(status().isNoContent());
+
+        AppUser updatedUser = appUserRepository.findById("user").orElseThrow();
+        Assertions.assertFalse(updatedUser.favoriteRealEstates().contains("2"));
+        Assertions.assertEquals(0, updatedUser.favoriteRealEstates().size());
     }
 
 }
