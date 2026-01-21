@@ -18,4 +18,16 @@ public class RealEstateService {
     public List<RealEstateModel> getAllRealEstates() {
         return realEstateRepository.findAll();
     }
+
+    public RealEstateModel getRealEstateById(String id) {
+    }
+
+    public RealEstateModel addRealEstate(RealEstateModel realEstateModel) {
+    }
+
+    public RealEstateModel updateRealEstate(RealEstateModel updatedRealEstate) {
+    }
+
+    public void deleteRealEstate(String id) {
+    }
 }

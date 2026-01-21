@@ -7,6 +7,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ropold.backend.exception.RealEstateNotFoundException;
 import ropold.backend.model.RealEstateModel;
 import ropold.backend.service.CloudinaryService;
 import ropold.backend.service.RealEstateService;
@@ -62,7 +63,6 @@ public class RealEstateController {
                         realEstateModel.totalFloorArea(),
                         realEstateModel.totalLivingAreaWoFlV(),
                         realEstateModel.githubId(),
-                        realEstateModel.createdBy(),
                         LocalDate.now(),
                         imageUrl
                 )
@@ -103,7 +103,6 @@ public class RealEstateController {
                 realEstateModel.totalFloorArea(),
                 realEstateModel.totalLivingAreaWoFlV(),
                 realEstateModel.githubId(),
-                realEstateModel.createdBy(),
                 LocalDate.now(),
                 newImageUrl
         );

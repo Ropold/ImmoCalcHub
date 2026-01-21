@@ -13,7 +13,6 @@ public record RealEstateModel(
         double totalFloorArea,
         double totalLivingAreaWoFlV,
         String githubId,
-        String createdBy,
         LocalDate createdAt,
         String imageUrl
 ) {
