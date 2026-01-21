@@ -1,14 +1,16 @@
 package ropold.backend.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ropold.backend.model.RealEstateModel;
 import ropold.backend.service.AppUserService;
+import ropold.backend.service.RealEstateService;
 
+import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -17,6 +19,7 @@ import java.util.Map;
 public class UserController {
 
     private final AppUserService appUserService;
+    private final RealEstateService realEstateService;
 
     @GetMapping(value = "/me", produces = "text/plain")
     public String getMe() {
@@ -37,5 +40,30 @@ public class UserController {
             return "anonymousUser";
         }
         return appUserService.getUserRole(user.getName());
+    }
+
+    @GetMapping("/favorites")
+    public List<RealEstateModel> getUserFavorites(@AuthenticationPrincipal OAuth2User authentication) {
+        List<String> favoriteRealEstatesIds = appUserService.getUserFavoriteRealEstates(authentication.getName());
+        return realEstateService.getRealEstatesByIds(favoriteRealEstatesIds);
+    }
+
+    @GetMapping("/me/my-real-estates/{githubId}")
+    public List<RealEstateModel> getRealEstatesForGithubUser(@PathVariable String githubId) {
+        return realEstateService.getRealEstatesForGithubUser(githubId);
+    }
+
+    @PostMapping("/favorites/{realEstateId}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addRealEstateToFavorites(@PathVariable String realEstateId, @AuthenticationPrincipal OAuth2User authentication) {
+        String authenticatedUserId = authentication.getName();
+        appUserService.addRealEstateToFavoriteRealEstates(authenticatedUserId, realEstateId);
+    }
+
+    @DeleteMapping("/favorites/{realEstateId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeRealEstateFromFavorites(@PathVariable String realEstateId, @AuthenticationPrincipal OAuth2User authentication) {
+        String authenticatedUserId = authentication.getName();
+        appUserService.removeRealEstateFromFavoriteRealEstates(authenticatedUserId, realEstateId);
     }
 }
