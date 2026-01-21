@@ -130,4 +130,41 @@ public class RealEstateServiceTest {
         verify(cloudinaryService, times(1)).deleteImage(realEstateModel.imageUrl());
     }
 
+    @Test
+    void testGetRealEstatesByIds(){
+        List<String> ids = List.of("1", "2");
+        when(realEstateRepository.findById("1")).thenReturn(java.util.Optional.of(realEstateModels.get(0)));
+        when(realEstateRepository.findById("2")).thenReturn(java.util.Optional.of(realEstateModels.get(1)));
+
+        List<RealEstateModel> result = realEstateService.getRealEstatesByIds(ids);
+
+        assertEquals(2, result.size());
+        assertEquals(realEstateModels.get(0), result.get(0));
+        assertEquals(realEstateModels.get(1), result.get(1));
+        verify(realEstateRepository, times(1)).findById("1");
+        verify(realEstateRepository, times(1)).findById("2");
+    }
+
+    @Test
+    void testGetRealEstatesForGithubUser(){
+        String githubId = "user";
+
+        List<RealEstateModel> result = realEstateService.getRealEstatesForGithubUser(githubId);
+
+        assertEquals(2, result.size());
+        assertEquals("user", result.get(0).githubId());
+        assertEquals("user", result.get(1).githubId());
+        verify(realEstateRepository, times(1)).findAll();
+    }
+
+    @Test
+    void testGetRealEstatesForGithubUser_NoMatches(){
+        String githubId = "anotherUser";
+
+        List<RealEstateModel> result = realEstateService.getRealEstatesForGithubUser(githubId);
+
+        assertEquals(0, result.size());
+        verify(realEstateRepository, times(1)).findAll();
+    }
+
 }

@@ -66,5 +66,60 @@ class AppUserServiceTest {
         verify(appUserRepository, times(1)).findById(userId);
     }
 
+    @Test
+    void getUserRole_ReturnsUserRole() {
+        String userId = "user";
+        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", UserRole.USER, List.of());
+        when(appUserRepository.findById(userId)).thenReturn(Optional.of(user));
+
+        String result = appUserService.getUserRole(userId);
+
+        assertNotNull(result);
+        assertEquals("USER", result);
+        verify(appUserRepository, times(1)).findById(userId);
+    }
+
+    @Test
+    void addRealEstateToFavoriteRealEstates_AddsRealEstate() {
+        String userId = "user";
+        String realEstateId = "1";
+        List<String> favorites = List.of("2");
+        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", UserRole.USER, favorites);
+        when(appUserRepository.findById(userId)).thenReturn(Optional.of(user));
+
+        appUserService.addRealEstateToFavoriteRealEstates(userId, realEstateId);
+
+        verify(appUserRepository, times(1)).findById(userId);
+        verify(appUserRepository, times(1)).save(any(AppUser.class));
+    }
+
+    @Test
+    void addRealEstateToFavoriteRealEstates_AlreadyExists_DoesNotAdd() {
+        String userId = "user";
+        String realEstateId = "1";
+        List<String> favorites = List.of("1", "2");
+        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", UserRole.USER, favorites);
+        when(appUserRepository.findById(userId)).thenReturn(Optional.of(user));
+
+        appUserService.addRealEstateToFavoriteRealEstates(userId, realEstateId);
+
+        verify(appUserRepository, times(1)).findById(userId);
+        verify(appUserRepository, never()).save(any(AppUser.class));
+    }
+
+    @Test
+    void removeRealEstateFromFavoriteRealEstates_RemovesRealEstate() {
+        String userId = "user";
+        String realEstateId = "1";
+        List<String> favorites = List.of("1", "2");
+        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", UserRole.USER, favorites);
+        when(appUserRepository.findById(userId)).thenReturn(Optional.of(user));
+
+        appUserService.removeRealEstateFromFavoriteRealEstates(userId, realEstateId);
+
+        verify(appUserRepository, times(1)).findById(userId);
+        verify(appUserRepository, times(1)).save(any(AppUser.class));
+    }
+
 }
 
