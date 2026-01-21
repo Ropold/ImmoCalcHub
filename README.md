@@ -1,4 +1,4 @@
-🧮 ImmoCalcHub – An Real Estate Calculator for the GSO-FI507
+# 🧮 ImmoCalcHub – An Real Estate Calculator for the GSO-FI507
 
 <p>⚠️ **Note**: This projects is hosted on free-tier Render server.</p> 
 <p>⏳ It might take ~45 seconds to start after clicking the link.</p>
@@ -10,7 +10,12 @@
   </a> (https://immocalchub.onrender.com/)
 </p>
 
-SonarCloud-backend:
+
+  ---
+
+  ## 📊 Code Quality
+
+  ### Backend:
 
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=ropold_ImmoCalcHub-backend)](https://sonarcloud.io/summary/new_code?id=ropold_ImmoCalcHub-backend)
 
@@ -26,7 +31,7 @@ SonarCloud-backend:
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=ropold_ImmoCalcHub-backend&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=ropold_ImmoCalcHub-backend)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=ropold_ImmoCalcHub-backend&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=ropold_ImmoCalcHub-backend)
 
-SonarCloud-frontend:
+  ### Frontend:
 
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=ropold_ImmoCalcHub-frontend)](https://sonarcloud.io/summary/new_code?id=ropold_ImmoCalcHub-frontend)
 
@@ -46,3 +51,29 @@ SonarCloud-frontend:
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=ropold_ImmoCalcHub-frontend&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=ropold_ImmoCalcHub-frontend)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=ropold_ImmoCalcHub-frontend&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=ropold_ImmoCalcHub-frontend)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=ropold_ImmoCalcHub-frontend&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=ropold_ImmoCalcHub-frontend)
+
+
+  ---
+
+  ## 🛠️ Tech Stack
+
+  ### Backend
+  - **Java 21** - Modern LTS version with latest features
+  - **Spring Boot 3.x** - Enterprise application framework
+  - **Spring Security** - OAuth2 authentication and authorization
+  - **MongoDB** - NoSQL document database
+  - **Maven** - Dependency management and build tool
+
+  ### Frontend
+  - **React 18** - Modern UI library with hooks
+  - **TypeScript** - Type-safe JavaScript
+  - **React Router 6** - Client-side routing
+  - **Axios** - HTTP client for API calls
+  - **Vite** - Fast build tool and dev server
+  - **CSS3** - Custom styling with responsive design
+
+  ### DevOps & Tools
+  - **Docker** - Containerization for deployment
+  - **GitHub Actions** - CI/CD pipeline automation
+  - **Render** - Cloud platform for hosting
+  - **SonarCloud** - Code quality and security analysis
