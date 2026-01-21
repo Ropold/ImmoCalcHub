@@ -48,9 +48,18 @@ export default function Navbar(props: Readonly<NavbarProps>) {
                 }}
             >
                 <h2 className="header-title">Items</h2>
-                <img src={headerLogo} alt="Arc Raider Hub Logo" className="logo-image" />
+                <img src={headerLogo} alt="Immo Calc Hub Logo" className="logo-image" />
             </div>
 
+            <div
+                className="green-button clickable-header"
+                onClick={() => {
+                    navigate("/mapbox-all");
+                     }}
+                >
+                <h2 className="header-title">Map</h2>
+                <img src={headerLogo} alt="Immo Calc Hub Logo" className="logo-image" />
+            </div>
 
 
             {showLanguagePopup && (
