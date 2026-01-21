@@ -94,7 +94,7 @@ public class RealEstateController {
         }
 
         RealEstateModel updatedRealEstate = new RealEstateModel(
-                null,
+                id,
                 realEstateModel.title(),
                 realEstateModel.description(),
                 realEstateModel.address(),
@@ -102,8 +102,8 @@ public class RealEstateController {
                 realEstateModel.rooms(),
                 realEstateModel.totalFloorArea(),
                 realEstateModel.totalLivingAreaWoFlV(),
-                realEstateModel.githubId(),
-                LocalDate.now(),
+                existingRealEstate.githubId(),
+                existingRealEstate.createdAt(),
                 newImageUrl
         );
 
