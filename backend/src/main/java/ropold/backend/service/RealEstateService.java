@@ -65,4 +65,16 @@ public class RealEstateService {
         }
         realEstateRepository.deleteById(id);
     }
+
+    public List<RealEstateModel> getRealEstatesByIds(List<String> ids) {
+        return ids.stream()
+                .map(this::getRealEstateById)
+                .toList();
+    }
+
+    public List<RealEstateModel> getRealEstatesForGithubUser(String githubId) {
+        return realEstateRepository.findAll().stream()
+                .filter(realEstate -> realEstate.githubId().equals(githubId))
+                .toList();
+    }
 }
