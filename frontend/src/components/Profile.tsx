@@ -4,6 +4,7 @@ import "./styles/Profile.css";
 type ProfileProps = {
     user: string;
     userDetails: UserDetails | null;
+    role: string;
     language: string;
 }
 
@@ -35,7 +36,9 @@ export default function Profile(props:Readonly<ProfileProps>){
                     )}
                     <p>Account Created: {new Date(props.userDetails.created_at).toLocaleDateString()}</p>
                     <p>Last Updated: {new Date(props.userDetails.updated_at).toLocaleDateString()}</p>
+                    <h3>Your role: {props.role}</h3>
                 </div>
+
             ) : (
                 <p>Loading...</p>
             )}

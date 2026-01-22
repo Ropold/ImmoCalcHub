@@ -7,11 +7,11 @@ import type { RealEstateModel } from "./model/RealEstateModel.ts";
 
 type MapBoxAllProps = {
     favorites: string[];
-    realEstates: RealEstateModel[];
+    allRealEstates: RealEstateModel[];
     toggleFavorite: (realEstateId: string) => void;
 };
 
-export default function MapBoxAll(props: Readonly<MapBoxAllProps>) {
+export default function MapBox(props: Readonly<MapBoxAllProps>) {
     const mapRef = useRef<mapboxgl.Map | null>(null); // Referenz für die Karte
     const mapContainerRef = useRef<HTMLDivElement | null>(null); // Referenz für den Map Container
     const [geocodeError, setGeocodeError] = useState<string | null>(null); // Fehlerzustand für Geocoding
@@ -63,7 +63,7 @@ export default function MapBoxAll(props: Readonly<MapBoxAllProps>) {
 
     // In useEffect, bevor wir die Karte manipulieren
     useEffect(() => {
-        if (!mapboxConfig || !props.realEstates.length) return; // Wenn kein Mapbox-Token oder keine Immobilien vorhanden sind, nichts tun
+        if (!mapboxConfig || !props.allRealEstates.length) return; // Wenn kein Mapbox-Token oder keine Immobilien vorhanden sind, nichts tun
 
         // Karte initialisieren
         if (mapContainerRef.current) {
@@ -80,7 +80,7 @@ export default function MapBoxAll(props: Readonly<MapBoxAllProps>) {
             // Sicherstellen, dass mapRef.current nicht null ist, bevor es verwendet wird
             if (mapRef.current) {
                 // Marker für jede Immobilie hinzufügen
-                props.realEstates.forEach((realEstate) => {
+                props.allRealEstates.forEach((realEstate) => {
                     geocodeAddress(realEstate.address).then((coordinates) => {
                         if (coordinates) {
                             const [longitude, latitude] = coordinates;
@@ -138,7 +138,7 @@ export default function MapBoxAll(props: Readonly<MapBoxAllProps>) {
                 mapRef.current.remove();
             }
         };
-    }, [props.realEstates, mapboxConfig, props.favorites]);
+    }, [props.allRealEstates, mapboxConfig, props.favorites]);
 
 
     // Funktion zum Suchen eines Ortes und die Karte darauf zu zentrieren

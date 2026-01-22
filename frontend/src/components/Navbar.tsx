@@ -46,7 +46,7 @@ export default function Navbar(props: Readonly<NavbarProps>) {
             <div
                 className="green-button clickable-header"
                 onClick={() => {
-                    navigate("/items");
+                    navigate("/real-estates");
                 }}
             >
                 <h2 className="header-title">Real Estates</h2>
@@ -56,7 +56,7 @@ export default function Navbar(props: Readonly<NavbarProps>) {
             <div
                 className="orange-button clickable-header"
                 onClick={() => {
-                    navigate("/mapbox-all");
+                    navigate("/map-box");
                      }}
                 >
                 <h2 className="header-title">Map</h2>
