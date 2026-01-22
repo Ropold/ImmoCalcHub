@@ -13,6 +13,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.test.web.servlet.MockMvc;
 import org.junit.jupiter.api.Assertions;
 import ropold.backend.model.AppUser;
+import ropold.backend.model.PriceType;
 import ropold.backend.model.RealEstateModel;
 import ropold.backend.model.UserRole;
 import ropold.backend.repository.AppUserRepository;
@@ -62,6 +63,7 @@ class AppUserControllerTest {
                 "Tolles Haus mit Garten",
                 "Musterstraße 1, 50667 Köln",
                 450000.0,
+                PriceType.PURCHASE,
                 List.of(),
                 120.5,
                 115.0,
@@ -76,6 +78,7 @@ class AppUserControllerTest {
                 "Zentral gelegene Wohnung",
                 "Hauptstraße 10, 50668 Köln",
                 320000.0,
+                PriceType.PURCHASE,
                 List.of(),
                 85.0,
                 80.0,
@@ -90,6 +93,7 @@ class AppUserControllerTest {
                 "Luxuriöses Penthouse",
                 "Rheinufer 5, 50669 Köln",
                 850000.0,
+                PriceType.PURCHASE,
                 List.of(),
                 200.0,
                 190.0,

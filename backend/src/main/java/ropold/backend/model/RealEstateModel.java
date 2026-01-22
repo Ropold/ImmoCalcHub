@@ -9,6 +9,7 @@ public record RealEstateModel(
         String description,
         String address,
         double price,
+        PriceType priceType,
         List<RoomModel> rooms,
         double totalFloorArea,
         double totalLivingAreaWoFlV,

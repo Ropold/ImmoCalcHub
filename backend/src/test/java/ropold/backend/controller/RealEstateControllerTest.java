@@ -18,6 +18,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ropold.backend.model.AppUser;
+import ropold.backend.model.PriceType;
 import ropold.backend.model.RealEstateModel;
 import ropold.backend.model.UserRole;
 import ropold.backend.repository.AppUserRepository;
@@ -74,6 +75,7 @@ public class RealEstateControllerTest {
                 "Tolles Haus mit Garten",
                 "Musterstraße 1, 50667 Köln",
                 450000.0,
+                PriceType.PURCHASE,
                 List.of(),
                 120.5,
                 115.0,
@@ -88,6 +90,7 @@ public class RealEstateControllerTest {
                 "Zentral gelegene Wohnung",
                 "Hauptstraße 10, 50668 Köln",
                 320000.0,
+                PriceType.PURCHASE,
                 List.of(),
                 85.0,
                 80.0,
@@ -137,6 +140,7 @@ public class RealEstateControllerTest {
                           "description": "Villa mit Pool",
                           "address": "Seestraße 5, 50670 Köln",
                           "price": 850000.0,
+                          "priceType": "PURCHASE",
                           "rooms": [],
                           "totalFloorArea": 200.0,
                           "totalLivingAreaWoFlV": 190.0,
@@ -160,6 +164,7 @@ public class RealEstateControllerTest {
                         "Villa mit Pool",
                         "Seestraße 5, 50670 Köln",
                         850000.0,
+                        PriceType.PURCHASE,
                         List.of(),
                         200.0,
                         190.0,
