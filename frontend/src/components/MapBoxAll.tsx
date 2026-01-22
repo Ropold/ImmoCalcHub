@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import axios from "axios";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import "./styles/Mapbox.css";
 import type { RealEstateModel } from "./model/RealEstateModel.ts";
 
 type MapBoxAllProps = {
@@ -175,7 +176,7 @@ export default function MapBoxAll(props: Readonly<MapBoxAllProps>) {
             <div>
                 <h3>Cologne ist set to Default-City</h3>
                 {geocodeError && <div>{geocodeError}</div>}
-                <div id="map-container" ref={mapContainerRef} style={{ width: "100%", height: "600px" }} />
+                <div ref={mapContainerRef} style={{ width: "100%", height: "600px" }} />
             </div>
         </>
     );

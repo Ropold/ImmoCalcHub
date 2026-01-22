@@ -10,7 +10,7 @@ import NotFound from "./components/NotFound.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import Profile from "./components/Profile.tsx";
 import Footer from "./components/Footer.tsx";
-import Items from "./components/Items.tsx";
+import RealEstates from "./components/RealEstates.tsx";
 import MapBoxAll from "./components/MapBoxAll.tsx";
 
 export default function App() {
@@ -117,7 +117,7 @@ export default function App() {
         <Routes>
             <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Welcome role={displayRole}/>}/>
-            <Route path="/items" element={<Items />}/>
+            <Route path="/items" element={<RealEstates />}/>
             <Route path="/mapbox-all" element={<MapBoxAll favorites={favorites} realEstates={realEstates} toggleFavorite={toggleFavorite} />} />
             <Route element={<ProtectedRoute user={user}/>}>
                 <Route path="/profile/*" element={<Profile user={user} userDetails={userDetails} language={language}/>} />

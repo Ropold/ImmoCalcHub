@@ -22,6 +22,14 @@
     background-color: #388e3c;
 }
 
+.orange-button {
+    background-color: #ff9e00;
+}
+
+.orange-button:hover {
+    background-color: #e67e00;
+}
+
 .margin-top-20{
     margin-top: 20px;
 }
