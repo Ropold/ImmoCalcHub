@@ -1,14 +1,13 @@
-export enum RoomType {
-    LIVING_ROOM = "LIVING_ROOM",
-    BEDROOM = "BEDROOM",
-    KITCHEN = "KITCHEN",
-    BATHROOM = "BATHROOM",
-    HALLWAY = "HALLWAY",
-    BALCONY = "BALCONY",
-    TERRACE = "TERRACE",
-    BASEMENT = "BASEMENT",
-    STORAGE = "STORAGE",
-    OFFICE = "OFFICE",
-    DINING_ROOM = "DINING_ROOM",
-    OTHER = "OTHER"
-}
+export type RoomType =
+    | "LIVING_ROOM"
+    | "BEDROOM"
+    | "KITCHEN"
+    | "BATHROOM"
+    | "HALLWAY"
+    | "BALCONY"
+    | "TERRACE"
+    | "BASEMENT"
+    | "STORAGE"
+    | "OFFICE"
+    | "DINING_ROOM"
+    | "OTHER";

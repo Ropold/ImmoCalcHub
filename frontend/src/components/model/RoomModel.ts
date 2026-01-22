@@ -1,5 +1,5 @@
-import {RoomType} from "./RoomType.ts";
-import {RoomSectionModel} from "./RoomSectionModel.ts";
+import type {RoomType} from "./RoomType.ts";
+import type {RoomSectionModel} from "./RoomSectionModel.ts";
 
 export type RoomModel = {
     name: string;

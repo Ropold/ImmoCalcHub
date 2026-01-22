@@ -1,4 +1,5 @@
-import {RoomModel} from "./RoomModel.ts";
+import type {RoomModel} from "./RoomModel.ts";
+import type {PriceType} from "./PriceType.ts";
 
 export type RealEstateModel = {
     id: string;
@@ -6,6 +7,7 @@ export type RealEstateModel = {
     description: string;
     address: string;
     price: number;
+    priceType: PriceType;
     rooms: RoomModel[];
     totalFloorArea: number;
     totalLivingAreaWoFlV: number;

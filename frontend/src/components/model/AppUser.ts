@@ -1,4 +1,4 @@
-import {UserRole} from "./UserRole.ts";
+import type {UserRole} from "./UserRole.ts";
 
 export type AppUser = {
     id: string;
