@@ -32,6 +32,7 @@ public class RealEstateService {
                 realEstateModel.description(),
                 realEstateModel.address(),
                 realEstateModel.price(),
+                realEstateModel.priceType(),
                 realEstateModel.rooms(),
                 realEstateModel.totalFloorArea(),
                 realEstateModel.totalLivingAreaWoFlV(),

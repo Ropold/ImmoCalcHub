@@ -59,12 +59,34 @@ public class RealEstateController {
                         realEstateModel.description(),
                         realEstateModel.address(),
                         realEstateModel.price(),
+                        realEstateModel.priceType(),
                         realEstateModel.rooms(),
                         realEstateModel.totalFloorArea(),
                         realEstateModel.totalLivingAreaWoFlV(),
                         realEstateModel.githubId(),
                         LocalDate.now(),
                         imageUrl
+                )
+        );
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/no-login")
+    public RealEstateModel addRealEstateWithNoLogin(@RequestBody RealEstateModel realEstateModel) {
+        return realEstateService.addRealEstate(
+                new RealEstateModel(
+                        null,
+                        realEstateModel.title(),
+                        realEstateModel.description(),
+                        realEstateModel.address(),
+                        realEstateModel.price(),
+                        realEstateModel.priceType(),
+                        realEstateModel.rooms(),
+                        realEstateModel.totalFloorArea(),
+                        realEstateModel.totalLivingAreaWoFlV(),
+                        realEstateModel.githubId(),
+                        LocalDate.now(),
+                        null
                 )
         );
     }
@@ -99,6 +121,7 @@ public class RealEstateController {
                 realEstateModel.description(),
                 realEstateModel.address(),
                 realEstateModel.price(),
+                realEstateModel.priceType(),
                 realEstateModel.rooms(),
                 realEstateModel.totalFloorArea(),
                 realEstateModel.totalLivingAreaWoFlV(),

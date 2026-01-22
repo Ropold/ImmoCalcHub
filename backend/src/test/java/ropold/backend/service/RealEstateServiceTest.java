@@ -2,6 +2,7 @@ package ropold.backend.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ropold.backend.model.PriceType;
 import ropold.backend.model.RealEstateModel;
 import ropold.backend.repository.RealEstateRepository;
 
@@ -30,6 +31,7 @@ public class RealEstateServiceTest {
                 "Tolles Haus mit Garten",
                 "Musterstraße 1, 50667 Köln",
                 450000.0,
+                PriceType.PURCHASE,
                 List.of(),
                 120.5,
                 115.0,
@@ -44,6 +46,7 @@ public class RealEstateServiceTest {
                 "Zentral gelegene Wohnung",
                 "Hauptstraße 10, 50668 Köln",
                 320000.0,
+                PriceType.PURCHASE,
                 List.of(),
                 85.0,
                 80.0,
@@ -78,6 +81,7 @@ public class RealEstateServiceTest {
                 "Villa mit Pool",
                 "Seestraße 5, 50670 Köln",
                 850000.0,
+                PriceType.PURCHASE,
                 List.of(),
                 200.0,
                 190.0,
@@ -104,6 +108,7 @@ public class RealEstateServiceTest {
                 "Tolles Haus mit Garten - Renoviert",
                 "Musterstraße 1, 50667 Köln",
                 450000.0,
+                PriceType.PURCHASE,
                 List.of(),
                 120.5,
                 115.0,

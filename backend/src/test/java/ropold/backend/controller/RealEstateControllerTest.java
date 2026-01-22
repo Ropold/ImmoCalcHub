@@ -18,6 +18,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ropold.backend.model.AppUser;
+import ropold.backend.model.PriceType;
 import ropold.backend.model.RealEstateModel;
 import ropold.backend.model.UserRole;
 import ropold.backend.repository.AppUserRepository;
@@ -74,6 +75,7 @@ public class RealEstateControllerTest {
                 "Tolles Haus mit Garten",
                 "Musterstraße 1, 50667 Köln",
                 450000.0,
+                PriceType.PURCHASE,
                 List.of(),
                 120.5,
                 115.0,
@@ -88,6 +90,7 @@ public class RealEstateControllerTest {
                 "Zentral gelegene Wohnung",
                 "Hauptstraße 10, 50668 Köln",
                 320000.0,
+                PriceType.PURCHASE,
                 List.of(),
                 85.0,
                 80.0,
@@ -137,6 +140,7 @@ public class RealEstateControllerTest {
                           "description": "Villa mit Pool",
                           "address": "Seestraße 5, 50670 Köln",
                           "price": 850000.0,
+                          "priceType": "PURCHASE",
                           "rooms": [],
                           "totalFloorArea": 200.0,
                           "totalLivingAreaWoFlV": 190.0,
@@ -160,6 +164,7 @@ public class RealEstateControllerTest {
                         "Villa mit Pool",
                         "Seestraße 5, 50670 Köln",
                         850000.0,
+                        PriceType.PURCHASE,
                         List.of(),
                         200.0,
                         190.0,
@@ -276,5 +281,43 @@ public class RealEstateControllerTest {
 
         RealEstateModel updated = realEstateRepository.findById("2").orElseThrow();
         Assertions.assertNull(updated.imageUrl());
+    }
+
+    @Test
+    void testPostRealEstateNoLogin_shouldCreateRealEstateWithoutAuthentication() throws Exception {
+        realEstateRepository.deleteAll();
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/immo-calc-hub/no-login")
+                        .contentType("application/json")
+                        .content("""
+                        {
+                          "title": "Testimmobilie",
+                          "description": "Beschreibung der Testimmobilie",
+                          "address": "Teststraße 123, 12345 Teststadt",
+                          "price": 250000.0,
+                          "rooms": [],
+                          "totalFloorArea": 100.0,
+                          "totalLivingAreaWoFlV": 95.0,
+                          "githubId": "anonymous"
+                        }
+                    """))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.title").value("Testimmobilie"))
+                .andExpect(jsonPath("$.description").value("Beschreibung der Testimmobilie"))
+                .andExpect(jsonPath("$.address").value("Teststraße 123, 12345 Teststadt"))
+                .andExpect(jsonPath("$.price").value(250000.0))
+                .andExpect(jsonPath("$.totalFloorArea").value(100.0))
+                .andExpect(jsonPath("$.totalLivingAreaWoFlV").value(95.0))
+                .andExpect(jsonPath("$.githubId").value("anonymous"))
+                .andExpect(jsonPath("$.imageUrl").value(Matchers.nullValue()));
+
+        List<RealEstateModel> allRealEstates = realEstateRepository.findAll();
+        Assertions.assertEquals(1, allRealEstates.size());
+
+        RealEstateModel savedRealEstate = allRealEstates.getFirst();
+        Assertions.assertEquals("Testimmobilie", savedRealEstate.title());
+        Assertions.assertEquals("anonymous", savedRealEstate.githubId());
+        Assertions.assertNotNull(savedRealEstate.createdAt());
+        Assertions.assertNull(savedRealEstate.imageUrl());
     }
 }
