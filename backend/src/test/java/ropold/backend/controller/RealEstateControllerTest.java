@@ -277,4 +277,42 @@ public class RealEstateControllerTest {
         RealEstateModel updated = realEstateRepository.findById("2").orElseThrow();
         Assertions.assertNull(updated.imageUrl());
     }
+
+    @Test
+    void testPostRealEstateNoLogin_shouldCreateRealEstateWithoutAuthentication() throws Exception {
+        realEstateRepository.deleteAll();
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/immo-calc-hub/no-login")
+                        .contentType("application/json")
+                        .content("""
+                        {
+                          "title": "Testimmobilie",
+                          "description": "Beschreibung der Testimmobilie",
+                          "address": "Teststraße 123, 12345 Teststadt",
+                          "price": 250000.0,
+                          "rooms": [],
+                          "totalFloorArea": 100.0,
+                          "totalLivingAreaWoFlV": 95.0,
+                          "githubId": "anonymous"
+                        }
+                    """))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.title").value("Testimmobilie"))
+                .andExpect(jsonPath("$.description").value("Beschreibung der Testimmobilie"))
+                .andExpect(jsonPath("$.address").value("Teststraße 123, 12345 Teststadt"))
+                .andExpect(jsonPath("$.price").value(250000.0))
+                .andExpect(jsonPath("$.totalFloorArea").value(100.0))
+                .andExpect(jsonPath("$.totalLivingAreaWoFlV").value(95.0))
+                .andExpect(jsonPath("$.githubId").value("anonymous"))
+                .andExpect(jsonPath("$.imageUrl").value(Matchers.nullValue()));
+
+        List<RealEstateModel> allRealEstates = realEstateRepository.findAll();
+        Assertions.assertEquals(1, allRealEstates.size());
+
+        RealEstateModel savedRealEstate = allRealEstates.getFirst();
+        Assertions.assertEquals("Testimmobilie", savedRealEstate.title());
+        Assertions.assertEquals("anonymous", savedRealEstate.githubId());
+        Assertions.assertNotNull(savedRealEstate.createdAt());
+        Assertions.assertNull(savedRealEstate.imageUrl());
+    }
 }

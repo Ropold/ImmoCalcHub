@@ -69,6 +69,26 @@ public class RealEstateController {
         );
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/no-login")
+    public RealEstateModel addRealEstateWithNoLogin(@RequestBody RealEstateModel realEstateModel) {
+        return realEstateService.addRealEstate(
+                new RealEstateModel(
+                        null,
+                        realEstateModel.title(),
+                        realEstateModel.description(),
+                        realEstateModel.address(),
+                        realEstateModel.price(),
+                        realEstateModel.rooms(),
+                        realEstateModel.totalFloorArea(),
+                        realEstateModel.totalLivingAreaWoFlV(),
+                        realEstateModel.githubId(),
+                        LocalDate.now(),
+                        null
+                )
+        );
+    }
+
     @PutMapping("/{id}")
     public RealEstateModel updateRealEstate(
             @PathVariable String id,
