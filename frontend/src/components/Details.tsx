@@ -37,7 +37,7 @@ export default function Details({user, favorites, toggleFavorite}: Readonly<Deta
     return (
         <>
             <div className="details-container">
-                <h2>{realEstate.title}</h2>
+                <h2>{realEstate.realEstateTitle}</h2>
                 <p><strong>Beschreibung:</strong> {realEstate.description}</p>
                 <p><strong>Adresse:</strong> {realEstate.address}</p>
                 <p><strong>Preis:</strong> {realEstate.price.toLocaleString("de-DE")} € ({realEstate.priceType === "PURCHASE" ? "Kauf" : "Miete"})</p>
@@ -51,7 +51,7 @@ export default function Details({user, favorites, toggleFavorite}: Readonly<Deta
                         <img
                             className="details-image-larger"
                             src={realEstate.imageUrl}
-                            alt={realEstate.title}
+                            alt={realEstate.realEstateTitle}
                         />
                     )}
                 </div>

@@ -24,10 +24,10 @@ export default function RealEstateCard(props: Readonly<RealEstateCardProps>){
 
     return (
         <div className="real-estate-card" onClick={handleCardClick}>
-            <h3>{props.realEstate.title}</h3>
+            <h3>{props.realEstate.realEstateTitle}</h3>
             <img
                 src={props.realEstate.imageUrl ?? undefined}
-                alt={props.realEstate.title}
+                alt={props.realEstate.realEstateTitle}
                 className="real-estate-card-image"
             />
 

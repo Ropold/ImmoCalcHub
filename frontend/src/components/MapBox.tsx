@@ -92,10 +92,10 @@ export default function MapBox(props: Readonly<MapBoxAllProps>) {
                                 <div style="text-align: center; max-width: 200px;">
                                     <h4>
                                         <a href="/real-estate/${realEstate.id}" style="text-decoration: none; color: #007bff;">
-                                            ${realEstate.title}
+                                            ${realEstate.realEstateTitle}
                                         </a>
                                     </h4>
-                                    <img src="${realEstate.imageUrl}" alt="${realEstate.title}" style="width: 100%; height: auto; border-radius: 8px;"/>
+                                    <img src="${realEstate.imageUrl}" alt="${realEstate.realEstateTitle}" style="width: 100%; height: auto; border-radius: 8px;"/>
                                     <p>${realEstate.description}</p>
                                     <p><strong>Address:</strong> ${realEstate.address}</p>
                                 </div>

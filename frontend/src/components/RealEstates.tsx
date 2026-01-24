@@ -26,7 +26,7 @@ export default function RealEstates(props: Readonly<RealEstatesProps>) {
     function filterRealEstates(realEstates: RealEstateModel[], query: string): RealEstateModel[] {
         const lowerQuery = query.toLowerCase();
         return realEstates.filter(realEstate => {
-            return realEstate.title.toLowerCase().includes(lowerQuery) ||
+            return realEstate.realEstateTitle.toLowerCase().includes(lowerQuery) ||
                    realEstate.description.toLowerCase().includes(lowerQuery) ||
                    realEstate.address.toLowerCase().includes(lowerQuery);
         });

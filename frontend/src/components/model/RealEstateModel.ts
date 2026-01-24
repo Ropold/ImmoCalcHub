@@ -3,7 +3,7 @@ import type {PriceType} from "./PriceType.ts";
 
 export type RealEstateModel = {
     id: string;
-    title: string;
+    realEstateTitle: string;
     description: string;
     address: string;
     price: number;
@@ -18,7 +18,7 @@ export type RealEstateModel = {
 
 export const DefaultRealEstate: RealEstateModel = {
     id: "",
-    title: "",
+    realEstateTitle: "",
     description: "",
     address: "",
     price: 0,
