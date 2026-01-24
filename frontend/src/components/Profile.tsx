@@ -1,3 +1,4 @@
+import {useEffect, useState} from "react";
 import type {UserDetails} from "./model/UserDetailsModel.ts";
 import type {RealEstateModel} from "./model/RealEstateModel.ts";
 import "./styles/Profile.css";
@@ -14,8 +15,19 @@ type ProfileProps = {
     language: string;
 }
 
-export default function Profile(props:Readonly<ProfileProps>){
-    return(
+export default function Profile(props: Readonly<ProfileProps>) {
+
+    const [isEditing, setIsEditing] = useState<boolean>(false);
+    const [activeTab, setActiveTab] = useState<"profile" | "add-real-estate" | "my-real-estates" | "favorites">(() => {
+        const savedTab = localStorage.getItem("activeTab");
+        return (savedTab as "profile" | "add-real-estate" | "my-real-estates" | "favorites") || "profile";
+    });
+
+    useEffect(() => {
+        localStorage.setItem("activeTab", activeTab);
+    }, [activeTab]);
+
+    return (
         <div>
             <h2>Profile</h2>
             {props.userDetails ? (
