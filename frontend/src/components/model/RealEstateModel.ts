@@ -15,3 +15,18 @@ export type RealEstateModel = {
     createdAt: string;
     imageUrl: string | null;
 };
+
+export const DefaultRealEstate: RealEstateModel = {
+    id: "",
+    title: "",
+    description: "",
+    address: "",
+    price: 0,
+    priceType: "PURCHASE",
+    rooms: [],
+    totalFloorArea: 0,
+    totalLivingAreaWoFlV: 0,
+    githubId: "",
+    createdAt: "",
+    imageUrl: null
+};

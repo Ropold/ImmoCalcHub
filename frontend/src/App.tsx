@@ -12,6 +12,7 @@ import Profile from "./components/Profile.tsx";
 import Footer from "./components/Footer.tsx";
 import RealEstates from "./components/RealEstates.tsx";
 import MapBox from "./components/MapBox.tsx";
+import Details from "./components/Details.tsx";
 
 export default function App() {
     const [user, setUser] = useState<string>("anonymousUser");
@@ -135,8 +136,9 @@ export default function App() {
             <Route path="/" element={<Welcome />}/>
             <Route path="/real-estates" element={<RealEstates user={user} favorites={favorites} toggleFavorite={toggleFavorite} allRealEstates={allRealEstates} getAllRealEstates={getAllRealEstates} language={language}/>}/>
             <Route path="/map-box" element={<MapBox favorites={favorites} allRealEstates={allRealEstates} toggleFavorite={toggleFavorite} />} />
+            <Route path="/real-estate/:id" element={<Details user={user} favorites={favorites} toggleFavorite={toggleFavorite} language={language}/>} />
             <Route element={<ProtectedRoute user={user}/>}>
-                <Route path="/profile/*" element={<Profile user={user} userDetails={userDetails} role={role} language={language}/>} />
+                <Route path="/profile/*" element={<Profile user={user} userDetails={userDetails} handleNewRealEstateSubmit={handleNewRealEstateSubmit} handleUpdateRealEstate={handleUpdateRealEstate} handleDeleteRealEstate={handleDeleteRealEstate} favorites={favorites} toggleFavorite={toggleFavorite} role={role} language={language}/>} />
             </Route>
         </Routes>
         <Footer/>

@@ -1,9 +1,15 @@
 import type {UserDetails} from "./model/UserDetailsModel.ts";
+import type {RealEstateModel} from "./model/RealEstateModel.ts";
 import "./styles/Profile.css";
 
 type ProfileProps = {
     user: string;
     userDetails: UserDetails | null;
+    handleNewRealEstateSubmit: (newRealEstate: RealEstateModel) => void;
+    handleUpdateRealEstate: (updatedRealEstate: RealEstateModel) => void;
+    handleDeleteRealEstate: (realEstateId: string) => void;
+    favorites: string[];
+    toggleFavorite: (realEstateId: string) => void;
     role: string;
     language: string;
 }
