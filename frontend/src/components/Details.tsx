@@ -42,7 +42,7 @@ export default function Details({user, favorites, toggleFavorite}: Readonly<Deta
                 <p><strong>Adresse:</strong> {realEstate.address}</p>
                 <p><strong>Preis:</strong> {realEstate.price.toLocaleString("de-DE")} € ({realEstate.priceType === "PURCHASE" ? "Kauf" : "Miete"})</p>
                 <p><strong>Gesamtfläche:</strong> {realEstate.totalFloorArea.toLocaleString("de-DE")} m²</p>
-                <p><strong>Wohnfläche (ohne FlV):</strong> {realEstate.totalLivingAreaWoFlV.toLocaleString("de-DE")} m²</p>
+                <p><strong>Wohnfläche (nach WoFlV):</strong> {realEstate.totalLivingAreaWoFlV.toLocaleString("de-DE")} m²</p>
                 <p><strong>Anzahl Räume:</strong> {realEstate.rooms.length}</p>
                 <p><strong>Erstellt am:</strong> {new Date(realEstate.createdAt).toLocaleDateString("de-DE")}</p>
 
