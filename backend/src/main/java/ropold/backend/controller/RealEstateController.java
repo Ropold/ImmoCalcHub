@@ -55,7 +55,7 @@ public class RealEstateController {
         return realEstateService.addRealEstate(
                 new RealEstateModel(
                         null,
-                        realEstateModel.title(),
+                        realEstateModel.realEstateTitle(),
                         realEstateModel.description(),
                         realEstateModel.address(),
                         realEstateModel.price(),
@@ -76,7 +76,7 @@ public class RealEstateController {
         return realEstateService.addRealEstate(
                 new RealEstateModel(
                         null,
-                        realEstateModel.title(),
+                        realEstateModel.realEstateTitle(),
                         realEstateModel.description(),
                         realEstateModel.address(),
                         realEstateModel.price(),
@@ -117,7 +117,7 @@ public class RealEstateController {
 
         RealEstateModel updatedRealEstate = new RealEstateModel(
                 id,
-                realEstateModel.title(),
+                realEstateModel.realEstateTitle(),
                 realEstateModel.description(),
                 realEstateModel.address(),
                 realEstateModel.price(),

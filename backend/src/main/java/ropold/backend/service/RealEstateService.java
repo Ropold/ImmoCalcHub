@@ -28,7 +28,7 @@ public class RealEstateService {
     public RealEstateModel addRealEstate(RealEstateModel realEstateModel) {
         RealEstateModel newRealEstateModel = new RealEstateModel(
                 idService.generateRandomId(),
-                realEstateModel.title(),
+                realEstateModel.realEstateTitle(),
                 realEstateModel.description(),
                 realEstateModel.address(),
                 realEstateModel.price(),
