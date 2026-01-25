@@ -33,3 +33,19 @@
 .margin-top-20{
     margin-top: 20px;
 }
+
+.active-profile-button{
+    background-color: #999;
+}
+.active-profile-button:hover{
+    cursor: default;
+}
+
+.space-between{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    margin: 10px 5px;
+}
