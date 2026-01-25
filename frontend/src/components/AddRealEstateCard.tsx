@@ -2,8 +2,10 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import type {RealEstateModel} from "./model/RealEstateModel.ts";
-import type {PriceType} from "./model/PriceType.ts";
+import {type PriceType, PRICE_TYPES} from "./model/PriceType.ts";
 import type {RoomModel} from "./model/RoomModel.ts";
+import {ROOM_TYPES} from "./model/RoomType.ts";
+import * as roomHelpers from "./utils/roomHelpers.ts";
 
 type AddRealEstateCardProps = {
     user:string;
@@ -26,6 +28,11 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+
+        if (!priceType) {
+            alert("Bitte PriceType wählen");
+            return;
+        }
 
         const realEstateData = {
             realEstateTitle,
@@ -50,7 +57,7 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
         ));
 
         axios
-            .post("/api/real-estate-hub", data, {
+            .post("/api/immo-calc-hub", data, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
