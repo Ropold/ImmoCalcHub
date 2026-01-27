@@ -11,7 +11,7 @@ import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import Profile from "./components/Profile.tsx";
 import Footer from "./components/Footer.tsx";
 import RealEstates from "./components/RealEstates.tsx";
-import MapBox from "./components/MapBox.tsx";
+import MapBoxButton from "./components/MapBoxButton.tsx";
 import Details from "./components/Details.tsx";
 
 export default function App() {
@@ -135,7 +135,7 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Welcome />}/>
             <Route path="/real-estates" element={<RealEstates user={user} favorites={favorites} toggleFavorite={toggleFavorite} allRealEstates={allRealEstates} getAllRealEstates={getAllRealEstates} language={language}/>}/>
-            <Route path="/map-box" element={<MapBox favorites={favorites} allRealEstates={allRealEstates} toggleFavorite={toggleFavorite} />} />
+            <Route path="/map-box" element={<MapBoxButton favorites={favorites} allRealEstates={allRealEstates} toggleFavorite={toggleFavorite} />} />
             <Route path="/real-estate/:id" element={<Details user={user} favorites={favorites} toggleFavorite={toggleFavorite} language={language}/>} />
             <Route element={<ProtectedRoute user={user}/>}>
                 <Route path="/profile/*" element={<Profile user={user} userDetails={userDetails} handleNewRealEstateSubmit={handleNewRealEstateSubmit} handleUpdateRealEstate={handleUpdateRealEstate} handleDeleteRealEstate={handleDeleteRealEstate} favorites={favorites} toggleFavorite={toggleFavorite} role={role} language={language}/>} />

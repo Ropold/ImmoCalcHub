@@ -84,7 +84,6 @@ export default function Profile(props: Readonly<ProfileProps>) {
                         )}
                     </>
                 )}
-
                 {activeTab === "add-real-estate" && <AddRealEstateCard user={props.user} handleNewRealEstateSubmit={props.handleNewRealEstateSubmit} language={props.language}/>}
                 {activeTab === "my-real-estates" && <MyRealEstates user={props.user} favorites={props.favorites} toggleFavorite={props.toggleFavorite} isEditing={isEditing} setIsEditing={setIsEditing} handleUpdateRealEstate={props.handleUpdateRealEstate} handleDeleteRealEstate={props.handleDeleteRealEstate} language={props.language}/>}
                 {activeTab === "favorites" && <Favorites user={props.user} favorites={props.favorites} toggleFavorite={props.toggleFavorite} language={props.language}/>}

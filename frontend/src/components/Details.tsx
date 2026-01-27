@@ -5,6 +5,7 @@ import {DefaultRealEstate, type RealEstateModel} from "./model/RealEstateModel.t
 import {DefaultUserDetails, type UserDetails} from "./model/UserDetailsModel.ts";
 import "./styles/Details.css";
 import "./styles/Profile.css"
+import MapBoxDetails from "./MapBoxDetails.tsx";
 
 type DetailsProps = {
     user: string;
@@ -90,6 +91,10 @@ export default function Details({user, favorites, toggleFavorite}: Readonly<Deta
                 )}
             </div>
 
+
+
+            <MapBoxDetails realEstateAddress={realEstate.address}/>
+
             <div>
                 <h3>Added by User</h3>
                 <p><strong>Github-User:</strong> {githubUser.login}</p>
@@ -102,6 +107,8 @@ export default function Details({user, favorites, toggleFavorite}: Readonly<Deta
                     />
                 )}
             </div>
+
+
         </>
     )
 }

@@ -13,7 +13,7 @@ export default function Welcome() {
                     src={welcomePic}
                     alt="Welcome to ImmoCalcHub"
                     className="logo-welcome"
-                    onClick={()=> navigate("/items")}
+                    onClick={()=> navigate("/real-estates")}
                 />
             </div>
         </>

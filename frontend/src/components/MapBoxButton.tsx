@@ -11,14 +11,14 @@ type MapBoxAllProps = {
     toggleFavorite: (realEstateId: string) => void;
 };
 
-export default function MapBox(props: Readonly<MapBoxAllProps>) {
+export default function MapBoxButton(props: Readonly<MapBoxAllProps>) {
     const mapRef = useRef<mapboxgl.Map | null>(null); // Referenz für die Karte
     const mapContainerRef = useRef<HTMLDivElement | null>(null); // Referenz für den Map Container
     const [geocodeError, setGeocodeError] = useState<string | null>(null); // Fehlerzustand für Geocoding
     const [mapboxConfig, setMapboxConfig] = useState<string | null>(null); // Zustand für das Mapbox-Token
     const [searchQuery, setSearchQuery] = useState<string>(""); // Zustand für die Suchabfrage
 
-    // Funktion zum Abrufen des MapBox-Konfigurationstokens
+    // Funktion zum Abrufen des MapBoxButton-Konfigurationstokens
     function fetchMapBoxConfig() {
         axios
             .get("/api/mbox/72c81498-f6b2-4a8a-911c-cd217a65e0da")
@@ -28,8 +28,8 @@ export default function MapBox(props: Readonly<MapBoxAllProps>) {
                 mapboxgl.accessToken = resp; // Mapbox-Access-Token setzen
             })
             .catch((error) => {
-                console.error("Error fetching MapBox configuration:", error);
-                setGeocodeError("Failed to fetch MapBox configuration");
+                console.error("Error fetching MapBoxButton configuration:", error);
+                setGeocodeError("Failed to fetch MapBoxButton configuration");
             });
     }
 

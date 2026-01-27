@@ -14,7 +14,7 @@ export default function Searchbar(props: Readonly<SearchBarProps>) {
         <div className="search-bar">
             <input
                 type="text"
-                placeholder="Search by Country Name or other fields..."
+                placeholder="Search by Real Estate Name or other fields..."
                 value={props.searchQuery}
                 onChange={(e) => props.setSearchQuery(e.target.value)}
                 className="search-input"
@@ -22,7 +22,7 @@ export default function Searchbar(props: Readonly<SearchBarProps>) {
 
             <button
                 onClick={handleReset}
-                className={`${props.searchQuery ? "button-group-button" : "button-grey"}`}
+                className={`${props.searchQuery ? "blue-button" : "button-grey"}`}
             >
                 Reset Filters
             </button>
