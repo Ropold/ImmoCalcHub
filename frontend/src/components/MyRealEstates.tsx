@@ -37,8 +37,8 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
     }
 
     useEffect(() => {
-        setFilteredRealEstate(filterRealEstates(userRealEstates, searchQuery, props.language));
-    }, [userRealEstates, searchQuery, props.language]);
+        setFilteredRealEstate(filterRealEstates(userRealEstates, searchQuery));
+    }, [userRealEstates, searchQuery]);
 
     useEffect(() => {
         window.scroll(0, 0);
@@ -46,17 +46,17 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
 
 
 
-    function getUserCountries() {
-        axios.get(`/api/users/me/my-countries/${props.user}`)
+    function getUserRealEstates() {
+        axios.get(`/api/users/me/my-real-estates/${props.user}`)
             .then((response) => {
                 setUserRealEstates(response.data as RealEstateModel[]);
             })
             .catch((error) => {
-                console.error("Error fetching countries:", error);
+                console.error("Error fetching real estates:", error);
             });
     }
     useEffect(() => {
-        getUserCountries();
+        getUserRealEstates();
     }, []);
 
     function handleEditToggle(realEstateId: string) {
@@ -150,7 +150,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                     );
                 })
                 .catch((error) => {
-                    console.error("Error deleting question:", error);
+                    console.error("Error deleting real estate:", error);
                     alert("An unexpected error occurred. Please try again.");
                 })
                 .finally(() => {
@@ -170,7 +170,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                 <div className="popup-overlay">
                     <div className="popup-content">
                         <h3>Confirm Deletion</h3>
-                        <p>Are you sure you want to delete this question?</p>
+                        <p>Are you sure you want to delete this real estate?</p>
                         <div className="popup-actions">
                             <button onClick={handleConfirmDelete} className="popup-confirm">Yes, Delete</button>
                             <button onClick={handleCancel} className="popup-cancel">Cancel</button>
