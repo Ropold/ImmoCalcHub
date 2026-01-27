@@ -72,3 +72,9 @@
 .margin-top-50{
     margin-top: 50px;
 }
+
+#room-section-button {
+    align-self: start;
+    height: fit-content;
+    margin-top: 23px;
+}

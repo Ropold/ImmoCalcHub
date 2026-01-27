@@ -190,6 +190,7 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                             </label>
                             <button
                                 type="button"
+                                id="room-section-button"
                                 className="red-button"
                                 onClick={() => setRooms(roomHelpers.removeRoom(rooms, roomIndex))}
                             >
@@ -197,6 +198,7 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                             </button>
                             <button
                                 type="button"
+                                id="room-section-button"
                                 className="green-button"
                                 onClick={() => setRooms(roomHelpers.addRoomSection(rooms, roomIndex))}
                             >
@@ -250,6 +252,7 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                                         <button
                                             type="button"
                                             className="red-button"
+                                            id="room-section-button"
                                             onClick={() => setRooms(roomHelpers.removeRoomSection(rooms, roomIndex, sectionIndex))}
                                         >
                                             Remove Section
