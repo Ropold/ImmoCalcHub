@@ -3,8 +3,8 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-    margin: 0 auto; /* Horizontal zentrieren */
     max-width: 1400px;
+    margin: 10px 0 auto; /* Horizontal zentrieren */
 }
 
 .real-estate-card {

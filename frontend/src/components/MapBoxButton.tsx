@@ -3,6 +3,7 @@ import axios from "axios";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./styles/Mapbox.css";
+import "./styles/Searchbar.css";
 import type { RealEstateModel } from "./model/RealEstateModel.ts";
 
 type MapBoxAllProps = {
@@ -143,6 +144,11 @@ export default function MapBoxButton(props: Readonly<MapBoxAllProps>) {
 
     // Funktion zum Suchen eines Ortes und die Karte darauf zu zentrieren
     const handleSearch = () => {
+        if (searchQuery.length < 3) {
+            setGeocodeError("Bitte mindestens 3 Zeichen eingeben.");
+            return;
+        }
+        setGeocodeError(null);
         geocodeAddress(searchQuery).then((coordinates) => {
             if (coordinates && mapRef.current) {
                 const [longitude, latitude] = coordinates;
@@ -158,20 +164,20 @@ export default function MapBoxButton(props: Readonly<MapBoxAllProps>) {
 
     return (
         <>
-            <div className="mapbox-all-search-field">
-                {/* Suchfeld */}
+            <div className="search-bar">
                 <input
                     type="text"
+                    className="search-input"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search for a place..."
                     onKeyDown={(e) => {
                         if (e.key === "Enter") {
-                            handleSearch(); // Ruft handleSearch auf, wenn Enter gedrückt wird
+                            handleSearch();
                         }
                     }}
                 />
-                <button onClick={handleSearch}>Search</button>
+                <button className="blue-button search-map-box" onClick={handleSearch}>Search</button>
             </div>
             <div>
                 <h3>Cologne ist set to Default-City</h3>

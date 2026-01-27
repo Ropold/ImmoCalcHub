@@ -47,7 +47,7 @@ export default function RealEstateCard(props: Readonly<RealEstateCardProps>){
             {props.showButtons && (
                 <div className="space-between">
                     <button
-                        className="button-group-button"
+                        className="blue-button"
                         onClick={(e) => {
                             e.stopPropagation();
                             props.handleEditToggle?.(props.realEstate.id);
@@ -56,7 +56,7 @@ export default function RealEstateCard(props: Readonly<RealEstateCardProps>){
                         Edit
                     </button>
                     <button
-                        id="button-delete"
+                        className="red-button"
                         onClick={(e) => {
                             e.stopPropagation();
                             props.handleDeleteClick?.(props.realEstate.id);
