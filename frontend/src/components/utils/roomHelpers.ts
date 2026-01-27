@@ -2,7 +2,7 @@ import type {RoomModel} from "../model/RoomModel.ts";
 import type {RoomSectionModel} from "../model/RoomSectionModel.ts";
 
 export function addRoom(rooms: RoomModel[]): RoomModel[] {
-    return [...rooms, {roomTitel: "", roomType: "LIVING_ROOM", roomSections: []}];
+    return [...rooms, {roomTitel: "", roomType: "LIVING_ROOM", roomSections: [{roomSectionTitel: "", length: 0, width: 0, height: 2.5}]}];
 }
 
 export function updateRoom(rooms: RoomModel[], index: number, field: keyof RoomModel, value: string | RoomSectionModel[]): RoomModel[] {
@@ -21,7 +21,7 @@ export function addRoomSection(rooms: RoomModel[], roomIndex: number): RoomModel
         ...updatedRooms[roomIndex],
         roomSections: [
             ...updatedRooms[roomIndex].roomSections,
-            {roomSectionTitel: "", length: 0, width: 0, height: 0}
+            {roomSectionTitel: "", length: 0, width: 0, height: 2.5}
         ]
     };
     return updatedRooms;

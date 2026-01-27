@@ -21,7 +21,7 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
     const [address, setAddress] = useState<string>("");
     const [price, setPrice] = useState<number>(0);
     const [priceType, setPriceType] = useState<PriceType | null>(null);
-    const [rooms, setRooms] = useState<RoomModel[]>([]);
+    const [rooms, setRooms] = useState<RoomModel[]>([{roomTitel: "", roomType: "LIVING_ROOM", roomSections: [{roomSectionTitel: "", length: 0, width: 0, height: 2.5}]}]);
     const [totalFloorArea, setTotalFloorArea] = useState<number>(0);
     const [totalLivingAreaWoFlV, setTotalLivingAreaWoFlV] = useState<number>(0);
     const [image, setImage] = useState<File | null>(null);
@@ -155,7 +155,6 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                 </div>
 
                 {/* Rooms Section (optional) */}
-                <div className="form-add-room">
                 <div className="margin-top-20">
                     <h3>Rooms</h3>
                     <button
@@ -196,17 +195,16 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                             >
                                 Remove Room
                             </button>
+                            <button
+                                type="button"
+                                className="green-button"
+                                onClick={() => setRooms(roomHelpers.addRoomSection(rooms, roomIndex))}
+                            >
+                                Add new Section
+                            </button>
 
                             {/* Sections */}
                             <div style={{gridColumn: "1 / -1"}}>
-                                <h4>Sections</h4>
-                                <button
-                                    type="button"
-                                    className="blue-button"
-                                    onClick={() => setRooms(roomHelpers.addRoomSection(rooms, roomIndex))}
-                                >
-                                    Add Section
-                                </button>
 
                                 {room.roomSections.map((section, sectionIndex) => (
                                     <div key={sectionIndex} className="edit-form margin-top-20">
@@ -241,14 +239,17 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                                             Height (m):
                                             <input
                                                 className="input-small"
-                                                type="text"
+                                                type="number"
+                                                min="1"
+                                                max="4"
+                                                step="0.5"
                                                 value={section.height}
                                                 onChange={(e) => setRooms(roomHelpers.updateRoomSection(rooms, roomIndex, sectionIndex, "height", Number(e.target.value)))}
                                             />
                                         </label>
                                         <button
                                             type="button"
-                                            className="blue-button"
+                                            className="red-button"
                                             onClick={() => setRooms(roomHelpers.removeRoomSection(rooms, roomIndex, sectionIndex))}
                                         >
                                             Remove Section
@@ -259,9 +260,8 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                         </div>
                     ))}
                 </div>
-                </div>
 
-                <div className="margin-top-20">
+                <div className="margin-top-50">
                     <label>
                         Image:
                         <input type="file" onChange={onFileChange}/>

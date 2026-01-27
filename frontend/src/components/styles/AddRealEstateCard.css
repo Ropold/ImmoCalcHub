@@ -1,6 +1,6 @@
 .edit-form {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 gleich große Spalten */
+    grid-template-columns: repeat(5, 1fr); /* 4 gleich große Spalten */
     gap: 1rem;
     max-width: 1000px;
     width: 100%; /* oder: auto */
