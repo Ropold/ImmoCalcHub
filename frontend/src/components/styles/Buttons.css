@@ -52,3 +52,19 @@
 .margin-top-50{
     margin-top: 50px;
 }
+
+.favorite-on {
+    color: red;
+}
+
+.favorite-off {
+    color: #999;
+}
+
+.red-button {
+    background-color: #ff9999;
+}
+
+.red-button:hover {
+    background-color: #d32f2f;
+}

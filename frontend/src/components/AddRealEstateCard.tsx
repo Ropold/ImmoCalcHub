@@ -4,6 +4,8 @@ import axios from "axios";
 import type {RealEstateModel} from "./model/RealEstateModel.ts";
 import {type PriceType, PRICE_TYPES} from "./model/PriceType.ts";
 import type {RoomModel} from "./model/RoomModel.ts";
+import {type RoomType, ROOM_TYPES} from "./model/RoomType.ts";
+import * as roomHelpers from "./utils/roomHelpers.ts";
 import "./styles/AddRealEstateCard.css"
 
 type AddRealEstateCardProps = {
@@ -152,7 +154,112 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                     </label>
                 </div>
 
-                {/* TODO: Rooms Section hier einfügen */}
+                {/* Rooms Section (optional) */}
+                <div className="form-add-room">
+                <div className="margin-top-20">
+                    <h3>Rooms</h3>
+                    <button
+                        type="button"
+                        className="blue-button"
+                        onClick={() => setRooms(roomHelpers.addRoom(rooms))}
+                    >
+                        Add Room
+                    </button>
+
+                    {rooms.map((room, roomIndex) => (
+                        <div key={roomIndex} className="edit-form margin-top-20">
+                            <label className="add-real-estate-label">
+                                Room Title:
+                                <input
+                                    className="input-small"
+                                    type="text"
+                                    value={room.roomTitel}
+                                    onChange={(e) => setRooms(roomHelpers.updateRoom(rooms, roomIndex, "roomTitel", e.target.value))}
+                                />
+                            </label>
+                            <label className="add-real-estate-label">
+                                Room Type:
+                                <select
+                                    className="input-small"
+                                    value={room.roomType}
+                                    onChange={(e) => setRooms(roomHelpers.updateRoom(rooms, roomIndex, "roomType", e.target.value as RoomType))}
+                                >
+                                    {ROOM_TYPES.map((type) => (
+                                        <option key={type} value={type}>{type}</option>
+                                    ))}
+                                </select>
+                            </label>
+                            <button
+                                type="button"
+                                className="red-button"
+                                onClick={() => setRooms(roomHelpers.removeRoom(rooms, roomIndex))}
+                            >
+                                Remove Room
+                            </button>
+
+                            {/* Sections */}
+                            <div style={{gridColumn: "1 / -1"}}>
+                                <h4>Sections</h4>
+                                <button
+                                    type="button"
+                                    className="blue-button"
+                                    onClick={() => setRooms(roomHelpers.addRoomSection(rooms, roomIndex))}
+                                >
+                                    Add Section
+                                </button>
+
+                                {room.roomSections.map((section, sectionIndex) => (
+                                    <div key={sectionIndex} className="edit-form margin-top-20">
+                                        <label className="add-real-estate-label">
+                                            Section Title:
+                                            <input
+                                                className="input-small"
+                                                type="text"
+                                                value={section.roomSectionTitel}
+                                                onChange={(e) => setRooms(roomHelpers.updateRoomSection(rooms, roomIndex, sectionIndex, "roomSectionTitel", e.target.value))}
+                                            />
+                                        </label>
+                                        <label className="add-real-estate-label">
+                                            Length (m):
+                                            <input
+                                                className="input-small"
+                                                type="text"
+                                                value={section.length}
+                                                onChange={(e) => setRooms(roomHelpers.updateRoomSection(rooms, roomIndex, sectionIndex, "length", Number(e.target.value)))}
+                                            />
+                                        </label>
+                                        <label className="add-real-estate-label">
+                                            Width (m):
+                                            <input
+                                                className="input-small"
+                                                type="text"
+                                                value={section.width}
+                                                onChange={(e) => setRooms(roomHelpers.updateRoomSection(rooms, roomIndex, sectionIndex, "width", Number(e.target.value)))}
+                                            />
+                                        </label>
+                                        <label className="add-real-estate-label">
+                                            Height (m):
+                                            <input
+                                                className="input-small"
+                                                type="text"
+                                                value={section.height}
+                                                onChange={(e) => setRooms(roomHelpers.updateRoomSection(rooms, roomIndex, sectionIndex, "height", Number(e.target.value)))}
+                                            />
+                                        </label>
+                                        <button
+                                            type="button"
+                                            className="blue-button"
+                                            onClick={() => setRooms(roomHelpers.removeRoomSection(rooms, roomIndex, sectionIndex))}
+                                        >
+                                            Remove Section
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                </div>
 
                 <div className="margin-top-20">
                     <label>
