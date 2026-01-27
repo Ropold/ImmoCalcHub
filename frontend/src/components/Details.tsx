@@ -46,6 +46,30 @@ export default function Details({user, favorites, toggleFavorite}: Readonly<Deta
                 <p><strong>Anzahl Räume:</strong> {realEstate.rooms.length}</p>
                 <p><strong>Erstellt am:</strong> {new Date(realEstate.createdAt).toLocaleDateString("de-DE")}</p>
 
+                {realEstate.rooms.length > 0 && (
+                    <div className="rooms-section">
+                        <h3>Räume</h3>
+                        {realEstate.rooms.map((room, roomIndex) => (
+                            <div key={roomIndex} className="room-card">
+                                <h4>{room.roomTitel || `Raum ${roomIndex + 1}`}</h4>
+                                <p><strong>Raumtyp:</strong> {room.roomType}</p>
+                                {room.roomSections.length > 0 && (
+                                    <div className="room-sections">
+                                        <p><strong>Abschnitte:</strong></p>
+                                        {room.roomSections.map((section, sectionIndex) => (
+                                            <div key={sectionIndex} className="room-section-card">
+                                                <p>{section.roomSectionTitel || `Abschnitt ${sectionIndex + 1}`}</p>
+                                                <p>Länge: {section.length} m × Breite: {section.width} m × Höhe: {section.height} m</p>
+                                                <p>Fläche: {(section.length * section.width).toFixed(2)} m²</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                )}
+
                 <div className="details-img-container">
                     {realEstate.imageUrl && (
                         <img
@@ -58,7 +82,7 @@ export default function Details({user, favorites, toggleFavorite}: Readonly<Deta
 
                 {user !== "anonymousUser" && (
                     <button
-                        className={`button-group-button margin-top-20 ${isFavorite ? "favorite-on" : "favorite-off"}`}
+                        className={`blue-button margin-top-20 ${isFavorite ? "favorite-on" : "favorite-off"}`}
                         onClick={() => toggleFavorite(realEstate.id)}
                     >
                         ♥

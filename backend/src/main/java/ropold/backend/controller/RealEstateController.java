@@ -63,7 +63,7 @@ public class RealEstateController {
                         realEstateModel.rooms(),
                         realEstateModel.totalFloorArea(),
                         realEstateModel.totalLivingAreaWoFlV(),
-                        realEstateModel.githubId(),
+                        authenticatedUserId,
                         LocalDate.now(),
                         imageUrl
                 )

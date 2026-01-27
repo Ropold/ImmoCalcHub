@@ -2,6 +2,10 @@ import type {RealEstateModel} from "./model/RealEstateModel.ts";
 import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import axios from "axios";
+import {PRICE_TYPES, type PriceType} from "./model/PriceType.ts";
+import RealEstateCard from "./RealEstateCard.tsx";
+import Searchbar from "./Searchbar.tsx";
+import "./styles/AddRealEstateCard.css";
 
 type MyRealEstatesProps = {
     user: string;
@@ -163,8 +167,143 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
 
 
     return (
-        <h2>
-            My Real Estates Component Placeholder
+        <div>
+            {props.isEditing ? (
+                <div>
+                    <h2>Edit Real Estate</h2>
+                    <form onSubmit={handleSaveEdit}>
+                        <div className="edit-form">
+                            <label className="add-real-estate-label">
+                                Title:
+                                <input
+                                    className="input-small"
+                                    type="text"
+                                    value={editData?.realEstateTitle ?? ""}
+                                    onChange={(e) => setEditData({...editData!, realEstateTitle: e.target.value})}
+                                />
+                            </label>
+                            <label className="add-real-estate-label">
+                                Description:
+                                <input
+                                    className="input-small"
+                                    type="text"
+                                    value={editData?.description ?? ""}
+                                    onChange={(e) => setEditData({...editData!, description: e.target.value})}
+                                />
+                            </label>
+                            <label className="add-real-estate-label">
+                                Address:
+                                <input
+                                    className="input-small"
+                                    type="text"
+                                    value={editData?.address ?? ""}
+                                    onChange={(e) => setEditData({...editData!, address: e.target.value})}
+                                />
+                            </label>
+                            <label className="add-real-estate-label">
+                                Price:
+                                <input
+                                    className="input-small"
+                                    type="number"
+                                    value={editData?.price ?? 0}
+                                    onChange={(e) => setEditData({...editData!, price: parseFloat(e.target.value)})}
+                                />
+                            </label>
+                            <label className="add-real-estate-label">
+                                Price Type:
+                                <select
+                                    className="input-small"
+                                    value={editData?.priceType ?? ""}
+                                    onChange={(e) => setEditData({...editData!, priceType: e.target.value as PriceType})}
+                                >
+                                    <option value="" disabled>-- Bitte wählen --</option>
+                                    {PRICE_TYPES.map((type) => (
+                                        <option key={type} value={type}>{type}</option>
+                                    ))}
+                                </select>
+                            </label>
+                            <label className="add-real-estate-label">
+                                Total Floor Area (m²):
+                                <input
+                                    className="input-small"
+                                    type="number"
+                                    value={editData?.totalFloorArea ?? 0}
+                                    onChange={(e) => setEditData({...editData!, totalFloorArea: parseFloat(e.target.value)})}
+                                />
+                            </label>
+                            <label className="add-real-estate-label">
+                                Living Area (m²):
+                                <input
+                                    className="input-small"
+                                    type="number"
+                                    value={editData?.totalLivingAreaWoFlV ?? 0}
+                                    onChange={(e) => setEditData({...editData!, totalLivingAreaWoFlV: parseFloat(e.target.value)})}
+                                />
+                            </label>
+                        </div>
+
+                        {/* TODO: Rooms Edit Section hier einfügen */}
+
+                        <div className="margin-top-20">
+                            <label>
+                                Image:
+                                <input type="file" onChange={onFileChange}/>
+                                {image && (
+                                    <img
+                                        src={URL.createObjectURL(image)}
+                                        alt={editData?.realEstateTitle ?? "Preview"}
+                                        className="image-preview"
+                                    />
+                                )}
+                            </label>
+                            <button className="blue-button" type="button"
+                                    onClick={() => {
+                                        setImage(null);
+                                        setImageChanged(true);
+                                        setImageDeleted(true);
+                                    }}>Remove Image
+                            </button>
+                        </div>
+
+                        <div className="space-between margin-top-20">
+                            <button className="blue-button" type="submit">Save Changes</button>
+                            <button className="blue-button" type="button"
+                                    onClick={() => props.setIsEditing(false)}>Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            ) : (
+                <>
+                    <div>
+                        <Searchbar
+                            searchQuery={searchQuery}
+                            setSearchQuery={setSearchQuery}
+                        />
+                    </div>
+
+                    <div className="real-estate-card-container">
+                        {userRealEstates.length > 0 ? (
+                            filteredRealEstate.map((realEstate) => (
+                                <div key={realEstate.id}>
+                                    <RealEstateCard
+                                        realEstate={realEstate}
+                                        user={props.user}
+                                        favorites={props.favorites}
+                                        toggleFavorite={props.toggleFavorite}
+                                        showButtons={true}
+                                        handleEditToggle={handleEditToggle}
+                                        handleDeleteClick={handleDeleteClick}
+                                        language={props.language}
+                                    />
+                                </div>
+                            ))
+                        ) : (
+                            <p>No Real Estates found for this user.</p>
+                        )}
+                    </div>
+                </>
+            )}
 
             {showPopup && (
                 <div className="popup-overlay">
@@ -178,7 +317,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                     </div>
                 </div>
             )}
-        </h2>
+        </div>
     );
 }
 
