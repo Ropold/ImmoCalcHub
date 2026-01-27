@@ -4,8 +4,7 @@ import axios from "axios";
 import type {RealEstateModel} from "./model/RealEstateModel.ts";
 import {type PriceType, PRICE_TYPES} from "./model/PriceType.ts";
 import type {RoomModel} from "./model/RoomModel.ts";
-import {ROOM_TYPES} from "./model/RoomType.ts";
-import * as roomHelpers from "./utils/roomHelpers.ts";
+import "./styles/AddRealEstateCard.css"
 
 type AddRealEstateCardProps = {
     user:string;
@@ -80,8 +79,98 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
     }
 
     return (
-        <h2>
-            Add Real Estate Card Component Placeholder
-        </h2>
+        <>
+            <h2>Add Real Estate</h2>
+            <form onSubmit={handleSubmit}>
+                <div className="edit-form">
+                    <label className="add-real-estate-label">
+                        Title:
+                        <input
+                            className="input-small"
+                            type="text"
+                            value={realEstateTitle}
+                            onChange={(e) => setRealEstateTitle(e.target.value)}
+                        />
+                    </label>
+                    <label className="add-real-estate-label">
+                        Description:
+                        <input
+                            className="input-small"
+                            type="text"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                    </label>
+                    <label className="add-real-estate-label">
+                        Address:
+                        <input
+                            className="input-small"
+                            type="text"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                        />
+                    </label>
+                    <label className="add-real-estate-label">
+                        Price:
+                        <input
+                            className="input-small"
+                            type="text"
+                            value={price}
+                            onChange={(e) => setPrice(Number(e.target.value))}
+                        />
+                    </label>
+                    <label className="add-real-estate-label">
+                        Price Type:
+                        <select
+                            className="input-small"
+                            value={priceType ?? ""}
+                            onChange={(e) => setPriceType(e.target.value as PriceType)}
+                        >
+                            <option value="" disabled>-- Bitte wählen --</option>
+                            {PRICE_TYPES.map((type) => (
+                                <option key={type} value={type}>{type}</option>
+                            ))}
+                        </select>
+                    </label>
+                    <label className="add-real-estate-label">
+                        Total Floor Area (m²):
+                        <input
+                            className="input-small"
+                            type="text"
+                            value={totalFloorArea}
+                            onChange={(e) => setTotalFloorArea(Number(e.target.value))}
+                        />
+                    </label>
+                    <label className="add-real-estate-label">
+                        Living Area (m²):
+                        <input
+                            className="input-small"
+                            type="text"
+                            value={totalLivingAreaWoFlV}
+                            onChange={(e) => setTotalLivingAreaWoFlV(Number(e.target.value))}
+                        />
+                    </label>
+                </div>
+
+                {/* TODO: Rooms Section hier einfügen */}
+
+                <div className="margin-top-20">
+                    <label>
+                        Image:
+                        <input type="file" onChange={onFileChange}/>
+                        {image && (
+                            <img
+                                src={URL.createObjectURL(image)}
+                                alt={"image-preview"}
+                                className="image-preview"
+                            />
+                        )}
+                    </label>
+                </div>
+
+                <button className="blue-button margin-top-50" type="submit">Save Real Estate</button>
+
+            </form>
+        </>
     );
 }
