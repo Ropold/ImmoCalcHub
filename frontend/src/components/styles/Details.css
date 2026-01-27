@@ -59,3 +59,17 @@
 .room-section-card p {
     margin: 0.25rem 0;
 }
+
+@media (prefers-color-scheme: dark) {
+    .room-card {
+        background-color: #333;
+        border-color: #555;
+        color: #fff;
+    }
+
+    .room-section-card {
+        background-color: #444;
+        border-color: #555;
+        color: #fff;
+    }
+}

@@ -52,14 +52,12 @@ export default function Details({user, favorites, toggleFavorite}: Readonly<Deta
                         <h3>Räume</h3>
                         {realEstate.rooms.map((room, roomIndex) => (
                             <div key={roomIndex} className="room-card">
-                                <h4>{room.roomTitel || `Raum ${roomIndex + 1}`}</h4>
-                                <p><strong>Raumtyp:</strong> {room.roomType}</p>
+                                <p><strong>Raumtitel:</strong> {room.roomTitel || `Raum ${roomIndex + 1}`} | <strong>Raumtyp:</strong> {room.roomType}</p>
                                 {room.roomSections.length > 0 && (
                                     <div className="room-sections">
-                                        <p><strong>Abschnitte:</strong></p>
                                         {room.roomSections.map((section, sectionIndex) => (
                                             <div key={sectionIndex} className="room-section-card">
-                                                <p>{section.roomSectionTitel || `Abschnitt ${sectionIndex + 1}`}</p>
+                                                {section.roomSectionTitel && <p><strong>Sektion-Titel:</strong> {section.roomSectionTitel}</p>}
                                                 <p>Länge: {section.length} m × Breite: {section.width} m × Höhe: {section.height} m</p>
                                                 <p>Fläche: {(section.length * section.width).toFixed(2)} m²</p>
                                             </div>
