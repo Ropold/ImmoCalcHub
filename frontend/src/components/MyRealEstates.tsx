@@ -28,13 +28,12 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
 
     const location = useLocation();
 
-    function filterRealEstates(realEstates: RealEstateModel[], query: string, language: string): RealEstateModel[] {
+    function filterRealEstates(realEstates: RealEstateModel[], query: string): RealEstateModel[] {
         const lowerQuery = query.toLowerCase();
-        return realEstates.filter(country => {
-            const name = translatedCountryNames[country.countryName]?.[language]?.toLowerCase() || "";
-            const capital = translatedCapitalCities[country.capitalCity]?.[language]?.toLowerCase() || "";
-            return name.includes(lowerQuery) || capital.includes(lowerQuery);
-        });
+        return realEstates.filter(realEstate =>
+            realEstate.realEstateTitle.toLowerCase().includes(lowerQuery) ||
+            realEstate.address.toLowerCase().includes(lowerQuery)
+        );
     }
 
     useEffect(() => {
