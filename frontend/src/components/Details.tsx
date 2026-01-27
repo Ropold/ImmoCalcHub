@@ -47,28 +47,6 @@ export default function Details({user, favorites, toggleFavorite}: Readonly<Deta
                 <p><strong>Anzahl Räume:</strong> {realEstate.rooms.length}</p>
                 <p><strong>Erstellt am:</strong> {new Date(realEstate.createdAt).toLocaleDateString("de-DE")}</p>
 
-                {realEstate.rooms.length > 0 && (
-                    <div className="rooms-section">
-                        <h3>Räume</h3>
-                        {realEstate.rooms.map((room, roomIndex) => (
-                            <div key={roomIndex} className="room-card">
-                                <p><strong>Raumtitel:</strong> {room.roomTitel || `Raum ${roomIndex + 1}`} | <strong>Raumtyp:</strong> {room.roomType}</p>
-                                {room.roomSections.length > 0 && (
-                                    <div className="room-sections">
-                                        {room.roomSections.map((section, sectionIndex) => (
-                                            <div key={sectionIndex} className="room-section-card">
-                                                {section.roomSectionTitel && <p><strong>Sektion-Titel:</strong> {section.roomSectionTitel}</p>}
-                                                <p>Länge: {section.length} m × Breite: {section.width} m × Höhe: {section.height} m</p>
-                                                <p>Fläche: {(section.length * section.width).toFixed(2)} m²</p>
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                )}
-
                 <div className="details-img-container">
                     {realEstate.imageUrl && (
                         <img
@@ -87,6 +65,31 @@ export default function Details({user, favorites, toggleFavorite}: Readonly<Deta
                         ♥
                     </button>
                 )}
+
+                {realEstate.rooms.length > 0 && (
+                    <div className="rooms-section">
+                        <h3 className="rooms-section-title">Räume</h3>
+                        <div className="rooms-grid">
+                        {realEstate.rooms.map((room, roomIndex) => (
+                            <div key={roomIndex} className="room-card">
+                                <p><strong>Raumtitel:</strong> {room.roomTitel || `Raum ${roomIndex + 1}`} | <strong>Raumtyp:</strong> {room.roomType}</p>
+                                {room.roomSections.length > 0 && (
+                                    <div className="room-sections">
+                                        {room.roomSections.map((section, sectionIndex) => (
+                                            <div key={sectionIndex} className="room-section-card">
+                                                {section.roomSectionTitel && <p><strong>Sektion-Titel:</strong> {section.roomSectionTitel}</p>}
+                                                <p>Länge: {section.length} m × Breite: {section.width} m × Höhe: {section.height} m</p>
+                                                <p>Fläche: {(section.length * section.width).toFixed(2)} m²</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                        </div>
+                    </div>
+                )}
+
             </div>
 
 

@@ -30,6 +30,16 @@
     margin-top: 2rem;
 }
 
+.rooms-section-title {
+    margin-bottom: 1rem;
+}
+
+.rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
 .room-card {
     background-color: #f5f5f5;
     border: 1px solid #ddd;
