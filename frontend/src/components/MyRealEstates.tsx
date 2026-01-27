@@ -3,6 +3,8 @@ import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import axios from "axios";
 import {PRICE_TYPES, type PriceType} from "./model/PriceType.ts";
+import {type RoomType, ROOM_TYPES} from "./model/RoomType.ts";
+import * as roomHelpers from "./utils/roomHelpers.ts";
 import RealEstateCard from "./RealEstateCard.tsx";
 import Searchbar from "./Searchbar.tsx";
 import "./styles/AddRealEstateCard.css";
@@ -242,7 +244,114 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                             </label>
                         </div>
 
-                        {/* TODO: Rooms Edit Section hier einfügen */}
+                        {/* Rooms Section */}
+                        <div className="margin-top-20">
+                            <h3>Rooms</h3>
+                            <button
+                                type="button"
+                                className="blue-button"
+                                onClick={() => setEditData({...editData!, rooms: roomHelpers.addRoom(editData?.rooms ?? [])})}
+                            >
+                                Add Room
+                            </button>
+
+                            {editData?.rooms.map((room, roomIndex) => (
+                                <div key={roomIndex} className="edit-form margin-top-20">
+                                    <label className="add-real-estate-label">
+                                        Room Title:
+                                        <input
+                                            className="input-small"
+                                            type="text"
+                                            value={room.roomTitel}
+                                            onChange={(e) => setEditData({...editData!, rooms: roomHelpers.updateRoom(editData!.rooms, roomIndex, "roomTitel", e.target.value)})}
+                                        />
+                                    </label>
+                                    <label className="add-real-estate-label">
+                                        Room Type:
+                                        <select
+                                            className="input-small"
+                                            value={room.roomType}
+                                            onChange={(e) => setEditData({...editData!, rooms: roomHelpers.updateRoom(editData!.rooms, roomIndex, "roomType", e.target.value as RoomType)})}
+                                        >
+                                            {ROOM_TYPES.map((type) => (
+                                                <option key={type} value={type}>{type}</option>
+                                            ))}
+                                        </select>
+                                    </label>
+                                    <button
+                                        type="button"
+                                        id="room-section-button"
+                                        className="red-button"
+                                        onClick={() => setEditData({...editData!, rooms: roomHelpers.removeRoom(editData!.rooms, roomIndex)})}
+                                    >
+                                        Remove Room
+                                    </button>
+                                    <button
+                                        type="button"
+                                        id="room-section-button"
+                                        className="green-button"
+                                        onClick={() => setEditData({...editData!, rooms: roomHelpers.addRoomSection(editData!.rooms, roomIndex)})}
+                                    >
+                                        Add new Section
+                                    </button>
+
+                                    {/* Sections */}
+                                    <div style={{gridColumn: "1 / -1"}}>
+                                        {room.roomSections.map((section, sectionIndex) => (
+                                            <div key={sectionIndex} className="edit-form margin-top-20">
+                                                <label className="add-real-estate-label">
+                                                    Section Title:
+                                                    <input
+                                                        className="input-small"
+                                                        type="text"
+                                                        value={section.roomSectionTitel}
+                                                        onChange={(e) => setEditData({...editData!, rooms: roomHelpers.updateRoomSection(editData!.rooms, roomIndex, sectionIndex, "roomSectionTitel", e.target.value)})}
+                                                    />
+                                                </label>
+                                                <label className="add-real-estate-label">
+                                                    Length (m):
+                                                    <input
+                                                        className="input-small"
+                                                        type="text"
+                                                        value={section.length}
+                                                        onChange={(e) => setEditData({...editData!, rooms: roomHelpers.updateRoomSection(editData!.rooms, roomIndex, sectionIndex, "length", Number(e.target.value))})}
+                                                    />
+                                                </label>
+                                                <label className="add-real-estate-label">
+                                                    Width (m):
+                                                    <input
+                                                        className="input-small"
+                                                        type="text"
+                                                        value={section.width}
+                                                        onChange={(e) => setEditData({...editData!, rooms: roomHelpers.updateRoomSection(editData!.rooms, roomIndex, sectionIndex, "width", Number(e.target.value))})}
+                                                    />
+                                                </label>
+                                                <label className="add-real-estate-label">
+                                                    Height (m):
+                                                    <input
+                                                        className="input-small"
+                                                        type="number"
+                                                        min="1"
+                                                        max="4"
+                                                        step="0.5"
+                                                        value={section.height}
+                                                        onChange={(e) => setEditData({...editData!, rooms: roomHelpers.updateRoomSection(editData!.rooms, roomIndex, sectionIndex, "height", Number(e.target.value))})}
+                                                    />
+                                                </label>
+                                                <button
+                                                    type="button"
+                                                    className="red-button"
+                                                    id="room-section-button"
+                                                    onClick={() => setEditData({...editData!, rooms: roomHelpers.removeRoomSection(editData!.rooms, roomIndex, sectionIndex)})}
+                                                >
+                                                    Remove Section
+                                                </button>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
 
                         <div className="margin-top-20">
                             <label>

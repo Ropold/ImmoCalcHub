@@ -86,18 +86,18 @@ export default function MapBoxButton(props: Readonly<MapBoxAllProps>) {
                             const [longitude, latitude] = coordinates;
 
                             const isFavorite = props.favorites.includes(realEstate.id);
+                            console.log("RealEstate data:", realEstate);
 
                             const popup = new mapboxgl.Popup({ offset: 25 })
                                 .setHTML(`
-                                <div style="text-align: center; max-width: 200px;">
+                                <div style="text-align: center; max-width: 200px; color: #333;">
                                     <h4>
                                         <a href="/real-estate/${realEstate.id}" style="text-decoration: none; color: #007bff;">
                                             ${realEstate.realEstateTitle}
                                         </a>
                                     </h4>
-                                    <img src="${realEstate.imageUrl}" alt="${realEstate.realEstateTitle}" style="width: 100%; height: auto; border-radius: 8px;"/>
-                                    <p>${realEstate.description}</p>
-                                    <p><strong>Address:</strong> ${realEstate.address}</p>
+                                    ${realEstate.imageUrl ? `<img src="${realEstate.imageUrl}" alt="${realEstate.realEstateTitle}" style="width: 100%; height: auto; border-radius: 8px;"/>` : ''}
+                                    <p><strong>Adresse:</strong> ${realEstate.address}</p>
                                 </div>
                             `);
 
