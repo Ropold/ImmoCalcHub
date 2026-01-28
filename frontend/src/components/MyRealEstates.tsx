@@ -2,13 +2,14 @@ import type {RealEstateModel} from "./model/RealEstateModel.ts";
 import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import axios from "axios";
-import {PRICE_TYPES, type PriceType} from "./model/PriceType.ts";
-import {type RoomType, ROOM_TYPES} from "./model/RoomType.ts";
+import {PRICE_TYPES, type PriceType, translatedPriceType} from "./model/PriceType.ts";
+import {type RoomType, ROOM_TYPES, translatedRoomType} from "./model/RoomType.ts";
 import * as roomHelpers from "./utils/roomHelpers.ts";
 import {calculateAreas} from "./utils/roomHelpers.ts";
 import RealEstateCard from "./RealEstateCard.tsx";
 import Searchbar from "./Searchbar.tsx";
 import "./styles/AddRealEstateCard.css";
+import {translatedInfo} from "./utils/TranslatedInfo.ts";
 
 type MyRealEstatesProps = {
     user: string;
@@ -135,7 +136,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
             })
             .catch((error) => {
                 console.error("Error saving Real Estate edits:", error);
-                alert("An unexpected error occurred. Please try again.");
+                alert(translatedInfo["An unexpected error occurred. Please try again."][props.language]);
             });
     }
 
@@ -168,7 +169,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                 })
                 .catch((error) => {
                     console.error("Error deleting real estate:", error);
-                    alert("An unexpected error occurred. Please try again.");
+                    alert(translatedInfo["An unexpected error occurred. Please try again."][props.language]);
                 })
                 .finally(() => {
                     setRealEstateToDelete(null);
@@ -183,11 +184,11 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
         <div>
             {props.isEditing ? (
                 <div>
-                    <h2>Edit Real Estate</h2>
+                    <h2>{translatedInfo["Edit Real Estate"][props.language]}</h2>
                     <form onSubmit={handleSaveEdit}>
                         <div className="edit-form">
                             <label className="add-real-estate-label">
-                                Title:
+                                {translatedInfo["Title"][props.language]}:
                                 <input
                                     className="input-small"
                                     type="text"
@@ -196,7 +197,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                 />
                             </label>
                             <label className="add-real-estate-label">
-                                Description:
+                                {translatedInfo["Description"][props.language]}:
                                 <input
                                     className="input-small"
                                     type="text"
@@ -205,7 +206,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                 />
                             </label>
                             <label className="add-real-estate-label">
-                                Address:
+                                {translatedInfo["Address"][props.language]}:
                                 <input
                                     className="input-small"
                                     type="text"
@@ -214,7 +215,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                 />
                             </label>
                             <label className="add-real-estate-label">
-                                Price:
+                                {translatedInfo["Price"][props.language]}:
                                 <input
                                     className="input-small"
                                     type="number"
@@ -223,20 +224,20 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                 />
                             </label>
                             <label className="add-real-estate-label">
-                                Price Type:
+                                {translatedInfo["Price Type"][props.language]}:
                                 <select
                                     className="input-small"
                                     value={editData?.priceType ?? ""}
                                     onChange={(e) => setEditData({...editData!, priceType: e.target.value as PriceType})}
                                 >
-                                    <option value="" disabled>-- Bitte wählen --</option>
+                                    <option value="" disabled>{translatedInfo["-- Please select --"][props.language]}</option>
                                     {PRICE_TYPES.map((type) => (
-                                        <option key={type} value={type}>{type}</option>
+                                        <option key={type} value={type}>{translatedPriceType[type][props.language]}</option>
                                     ))}
                                 </select>
                             </label>
                             <label className="add-real-estate-label">
-                                Total Floor Area (m²):
+                                {translatedInfo["Total Floor Area (m²)"][props.language]}:
                                 <input
                                     className="input-small"
                                     type="text"
@@ -245,7 +246,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                 />
                             </label>
                             <label className="add-real-estate-label">
-                                Living Area WoFlV (m²):
+                                {translatedInfo["Living Area WoFlV (m²)"][props.language]}:
                                 <input
                                     className="input-small"
                                     type="text"
@@ -257,19 +258,19 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
 
                         {/* Rooms Section */}
                         <div className="margin-top-20">
-                            <h3>Rooms</h3>
+                            <h3>{translatedInfo["Rooms"][props.language]}</h3>
                             <button
                                 type="button"
                                 className="blue-button"
                                 onClick={() => setEditData({...editData!, rooms: roomHelpers.addRoom(editData?.rooms ?? [])})}
                             >
-                                Add Room
+                                {translatedInfo["Add Room"][props.language]}
                             </button>
 
                             {editData?.rooms.map((room, roomIndex) => (
                                 <div key={roomIndex} className="edit-form margin-top-20">
                                     <label className="add-real-estate-label">
-                                        Room Title:
+                                        {translatedInfo["Room Title"][props.language]}:
                                         <input
                                             className="input-small"
                                             type="text"
@@ -278,14 +279,14 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                         />
                                     </label>
                                     <label className="add-real-estate-label">
-                                        Room Type:
+                                        {translatedInfo["Room Type"][props.language]}:
                                         <select
                                             className="input-small"
                                             value={room.roomType}
                                             onChange={(e) => setEditData({...editData!, rooms: roomHelpers.updateRoom(editData!.rooms, roomIndex, "roomType", e.target.value as RoomType)})}
                                         >
                                             {ROOM_TYPES.map((type) => (
-                                                <option key={type} value={type}>{type}</option>
+                                                <option key={type} value={type}>{translatedRoomType[type][props.language]}</option>
                                             ))}
                                         </select>
                                     </label>
@@ -295,7 +296,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                         className="red-button"
                                         onClick={() => setEditData({...editData!, rooms: roomHelpers.removeRoom(editData!.rooms, roomIndex)})}
                                     >
-                                        Remove Room
+                                        {translatedInfo["Remove Room"][props.language]}
                                     </button>
                                     <button
                                         type="button"
@@ -303,7 +304,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                         className="green-button"
                                         onClick={() => setEditData({...editData!, rooms: roomHelpers.addRoomSection(editData!.rooms, roomIndex)})}
                                     >
-                                        Add new Section
+                                        {translatedInfo["Add New Section"][props.language]}
                                     </button>
 
                                     {/* Sections */}
@@ -311,7 +312,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                         {room.roomSections.map((section, sectionIndex) => (
                                             <div key={sectionIndex} className="edit-form margin-top-20">
                                                 <label className="add-real-estate-label">
-                                                    Section Title:
+                                                    {translatedInfo["Section Title"][props.language]}:
                                                     <input
                                                         className="input-small"
                                                         type="text"
@@ -320,7 +321,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                                     />
                                                 </label>
                                                 <label className="add-real-estate-label">
-                                                    Length (m):
+                                                    {translatedInfo["Length (m)"][props.language]}:
                                                     <input
                                                         className="input-small"
                                                         type="text"
@@ -329,7 +330,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                                     />
                                                 </label>
                                                 <label className="add-real-estate-label">
-                                                    Width (m):
+                                                    {translatedInfo["Width (m)"][props.language]}:
                                                     <input
                                                         className="input-small"
                                                         type="text"
@@ -338,7 +339,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                                     />
                                                 </label>
                                                 <label className="add-real-estate-label">
-                                                    Height (m):
+                                                    {translatedInfo["Height (m)"][props.language]}:
                                                     <input
                                                         className="input-small"
                                                         type="number"
@@ -355,7 +356,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                                     id="room-section-button"
                                                     onClick={() => setEditData({...editData!, rooms: roomHelpers.removeRoomSection(editData!.rooms, roomIndex, sectionIndex)})}
                                                 >
-                                                    Remove Section
+                                                    {translatedInfo["Remove Section"][props.language]}
                                                 </button>
                                             </div>
                                         ))}
@@ -366,7 +367,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
 
                         <div className="margin-top-20">
                             <label>
-                                Image:
+                                {translatedInfo["Image"][props.language]}:
                                 <input type="file" onChange={onFileChange}/>
                                 {image && (
                                     <img
@@ -381,14 +382,14 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                         setImage(null);
                                         setImageChanged(true);
                                         setImageDeleted(true);
-                                    }}>Remove Image
+                                    }}>{translatedInfo["Remove Image"][props.language]}
                             </button>
                         </div>
 
                         <div className="space-between margin-top-20">
-                            <button className="blue-button" type="submit">Save Changes</button>
+                            <button className="blue-button" type="submit">{translatedInfo["Save Changes"][props.language]}</button>
                             <button className="blue-button" type="button"
-                                    onClick={() => props.setIsEditing(false)}>Cancel
+                                    onClick={() => props.setIsEditing(false)}>{translatedInfo["Cancel"][props.language]}
                             </button>
                         </div>
                     </form>
@@ -420,7 +421,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                 </div>
                             ))
                         ) : (
-                            <p>No Real Estates found for this user.</p>
+                            <p>{translatedInfo["No Real Estates found for this user."][props.language]}</p>
                         )}
                     </div>
                 </>
@@ -429,11 +430,11 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
             {showPopup && (
                 <div className="popup-overlay">
                     <div className="popup-content">
-                        <h3>Confirm Deletion</h3>
-                        <p>Are you sure you want to delete this real estate?</p>
+                        <h3>{translatedInfo["Confirm Deletion"][props.language]}</h3>
+                        <p>{translatedInfo["Are you sure you want to delete this real estate?"][props.language]}</p>
                         <div className="popup-actions">
-                            <button onClick={handleConfirmDelete} className="popup-confirm">Yes, Delete</button>
-                            <button onClick={handleCancel} className="popup-cancel">Cancel</button>
+                            <button onClick={handleConfirmDelete} className="popup-confirm">{translatedInfo["Yes, Delete"][props.language]}</button>
+                            <button onClick={handleCancel} className="popup-cancel">{translatedInfo["Cancel"][props.language]}</button>
                         </div>
                     </div>
                 </div>

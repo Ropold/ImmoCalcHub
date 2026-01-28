@@ -544,6 +544,168 @@ export const translatedInfo: Record<string, Record<string, string>> = {
         "fr": "Aucun emplacement fourni",
         "it": "Nessuna posizione fornita",
         "ru": "Местоположение не указано"
+    },
+    "Title": {
+        "en": "Title",
+        "de": "Titel",
+        "pl": "Tytuł",
+        "es": "Título",
+        "fr": "Titre",
+        "it": "Titolo",
+        "ru": "Название"
+    },
+    "Price Type": {
+        "en": "Price Type",
+        "de": "Preisart",
+        "pl": "Typ ceny",
+        "es": "Tipo de precio",
+        "fr": "Type de prix",
+        "it": "Tipo di prezzo",
+        "ru": "Тип цены"
+    },
+    "-- Please select --": {
+        "en": "-- Please select --",
+        "de": "-- Bitte wählen --",
+        "pl": "-- Proszę wybrać --",
+        "es": "-- Por favor seleccione --",
+        "fr": "-- Veuillez sélectionner --",
+        "it": "-- Si prega di selezionare --",
+        "ru": "-- Пожалуйста, выберите --"
+    },
+    "Please select PriceType": {
+        "en": "Please select PriceType",
+        "de": "Bitte Preisart wählen",
+        "pl": "Proszę wybrać typ ceny",
+        "es": "Por favor seleccione el tipo de precio",
+        "fr": "Veuillez sélectionner le type de prix",
+        "it": "Si prega di selezionare il tipo di prezzo",
+        "ru": "Пожалуйста, выберите тип цены"
+    },
+    "Total Floor Area (m²)": {
+        "en": "Total Floor Area (m²)",
+        "de": "Gesamtfläche (m²)",
+        "pl": "Całkowita powierzchnia (m²)",
+        "es": "Superficie total (m²)",
+        "fr": "Surface totale (m²)",
+        "it": "Superficie totale (m²)",
+        "ru": "Общая площадь (м²)"
+    },
+    "Living Area WoFlV (m²)": {
+        "en": "Living Area WoFlV (m²)",
+        "de": "Wohnfläche WoFlV (m²)",
+        "pl": "Powierzchnia mieszkalna WoFlV (m²)",
+        "es": "Área habitable WoFlV (m²)",
+        "fr": "Surface habitable WoFlV (m²)",
+        "it": "Superficie abitabile WoFlV (m²)",
+        "ru": "Жилая площадь WoFlV (м²)"
+    },
+    "Remove Section": {
+        "en": "Remove Section",
+        "de": "Sektion entfernen",
+        "pl": "Usuń sekcję",
+        "es": "Eliminar sección",
+        "fr": "Supprimer la section",
+        "it": "Rimuovi sezione",
+        "ru": "Удалить раздел"
+    },
+    "An unexpected error occurred. Please try again.": {
+        "en": "An unexpected error occurred. Please try again.",
+        "de": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+        "pl": "Wystąpił nieoczekiwany błąd. Proszę spróbować ponownie.",
+        "es": "Ocurrió un error inesperado. Por favor, inténtelo de nuevo.",
+        "fr": "Une erreur inattendue s'est produite. Veuillez réessayer.",
+        "it": "Si è verificato un errore imprevisto. Riprova.",
+        "ru": "Произошла непредвиденная ошибка. Пожалуйста, попробуйте снова."
+    },
+    "Length (m)": {
+        "en": "Length (m)",
+        "de": "Länge (m)",
+        "pl": "Długość (m)",
+        "es": "Longitud (m)",
+        "fr": "Longueur (m)",
+        "it": "Lunghezza (m)",
+        "ru": "Длина (м)"
+    },
+    "Width (m)": {
+        "en": "Width (m)",
+        "de": "Breite (m)",
+        "pl": "Szerokość (m)",
+        "es": "Ancho (m)",
+        "fr": "Largeur (m)",
+        "it": "Larghezza (m)",
+        "ru": "Ширина (м)"
+    },
+    "Height (m)": {
+        "en": "Height (m)",
+        "de": "Höhe (m)",
+        "pl": "Wysokość (m)",
+        "es": "Altura (m)",
+        "fr": "Hauteur (m)",
+        "it": "Altezza (m)",
+        "ru": "Высота (м)"
+    },
+    "Edit Real Estate": {
+        "en": "Edit Real Estate",
+        "de": "Immobilie bearbeiten",
+        "pl": "Edytuj nieruchomość",
+        "es": "Editar propiedad",
+        "fr": "Modifier le bien immobilier",
+        "it": "Modifica immobile",
+        "ru": "Редактировать недвижимость"
+    },
+    "Save Changes": {
+        "en": "Save Changes",
+        "de": "Änderungen speichern",
+        "pl": "Zapisz zmiany",
+        "es": "Guardar cambios",
+        "fr": "Enregistrer les modifications",
+        "it": "Salva modifiche",
+        "ru": "Сохранить изменения"
+    },
+    "Remove Image": {
+        "en": "Remove Image",
+        "de": "Bild entfernen",
+        "pl": "Usuń obraz",
+        "es": "Eliminar imagen",
+        "fr": "Supprimer l'image",
+        "it": "Rimuovi immagine",
+        "ru": "Удалить изображение"
+    },
+    "No Real Estates found for this user.": {
+        "en": "No Real Estates found for this user.",
+        "de": "Keine Immobilien für diesen Benutzer gefunden.",
+        "pl": "Nie znaleziono nieruchomości dla tego użytkownika.",
+        "es": "No se encontraron propiedades para este usuario.",
+        "fr": "Aucun bien immobilier trouvé pour cet utilisateur.",
+        "it": "Nessun immobile trovato per questo utente.",
+        "ru": "Недвижимость для этого пользователя не найдена."
+    },
+    "Confirm Deletion": {
+        "en": "Confirm Deletion",
+        "de": "Löschen bestätigen",
+        "pl": "Potwierdź usunięcie",
+        "es": "Confirmar eliminación",
+        "fr": "Confirmer la suppression",
+        "it": "Conferma eliminazione",
+        "ru": "Подтвердить удаление"
+    },
+    "Are you sure you want to delete this real estate?": {
+        "en": "Are you sure you want to delete this real estate?",
+        "de": "Sind Sie sicher, dass Sie diese Immobilie löschen möchten?",
+        "pl": "Czy na pewno chcesz usunąć tę nieruchomość?",
+        "es": "¿Está seguro de que desea eliminar esta propiedad?",
+        "fr": "Êtes-vous sûr de vouloir supprimer ce bien immobilier ?",
+        "it": "Sei sicuro di voler eliminare questo immobile?",
+        "ru": "Вы уверены, что хотите удалить эту недвижимость?"
+    },
+    "Yes, Delete": {
+        "en": "Yes, Delete",
+        "de": "Ja, löschen",
+        "pl": "Tak, usuń",
+        "es": "Sí, eliminar",
+        "fr": "Oui, supprimer",
+        "it": "Sì, elimina",
+        "ru": "Да, удалить"
     }
 
 }
