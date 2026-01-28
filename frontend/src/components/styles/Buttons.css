@@ -78,3 +78,13 @@
     height: fit-content;
     margin-top: 23px;
 }
+
+#button-favorite-real-estate-card {
+    position: absolute;
+    top: -8px;
+    left: -15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    outline: none;
+}

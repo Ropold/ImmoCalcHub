@@ -9,8 +9,8 @@
 
 .real-estate-card {
     cursor: pointer;
-    height: 150px;
-    width: 150px;
+    height: 200px;
+    width: 200px;
     border: 2px solid #66b3ff; /* Schwarze, 5px dicke Border */
     border-radius: 12px;
     padding: 10px;
