@@ -252,6 +252,21 @@ class AppUserControllerTest {
     }
 
     @Test
+    void testGetPreferredLanguage_shouldReturnLanguage() throws Exception {
+        OAuth2User mockUser = mock(OAuth2User.class);
+        when(mockUser.getName()).thenReturn("user");
+
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
+        Authentication authentication = new UsernamePasswordAuthenticationToken(mockUser, null, mockUser.getAuthorities());
+        context.setAuthentication(authentication);
+        SecurityContextHolder.setContext(context);
+
+        mockMvc.perform(get("/api/users/me/language"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("en"));
+    }
+
+    @Test
     void testSetPreferredLanguage_shouldUpdateLanguage() throws Exception {
         OAuth2User mockUser = mock(OAuth2User.class);
         when(mockUser.getName()).thenReturn("user");

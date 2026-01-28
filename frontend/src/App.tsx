@@ -56,6 +56,16 @@ export default function App() {
             });
     }
 
+    function getPreferredLanguage() {
+        axios.get("/api/users/me/language")
+            .then((response) => {
+                setLanguage(response.data.toString());
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
     useEffect(() => {
         getUser();
         getAllRealEstates();
@@ -66,6 +76,7 @@ export default function App() {
             getUserDetails();
             getUserRoles();
             getAppUserFavorites();
+            getPreferredLanguage();
         }
     }, [user]);
 

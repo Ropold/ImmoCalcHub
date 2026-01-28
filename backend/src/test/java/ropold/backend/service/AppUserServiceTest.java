@@ -137,5 +137,29 @@ class AppUserServiceTest {
         ));
     }
 
+    @Test
+    void getPreferredLanguage_ReturnsLanguage() {
+        String userId = "user";
+        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", "de", UserRole.USER, List.of());
+        when(appUserRepository.findById(userId)).thenReturn(Optional.of(user));
+
+        String result = appUserService.getPreferredLanguage(userId);
+
+        assertEquals("de", result);
+        verify(appUserRepository, times(1)).findById(userId);
+    }
+
+    @Test
+    void getPreferredLanguage_ReturnsDefaultWhenNull() {
+        String userId = "user";
+        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", null, UserRole.USER, List.of());
+        when(appUserRepository.findById(userId)).thenReturn(Optional.of(user));
+
+        String result = appUserService.getPreferredLanguage(userId);
+
+        assertEquals("de", result);
+        verify(appUserRepository, times(1)).findById(userId);
+    }
+
 }
 

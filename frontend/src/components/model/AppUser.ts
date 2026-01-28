@@ -6,6 +6,7 @@ export type AppUser = {
     name: string;
     avatarUrl: string;
     githubUrl: string;
+    preferredLanguage: string;
     role: UserRole;
     favoriteRealEstates: string[];
 };

@@ -67,6 +67,11 @@ public class AppUserService {
         appUserRepository.save(updatedUser);
     }
 
+    public String getPreferredLanguage(String userId) {
+        AppUser user = getUserById(userId);
+        return user.preferredLanguage() != null ? user.preferredLanguage() : "de";
+    }
+
     public void setPreferredLanguage(String userId, String languageIso) {
         AppUser user = getUserById(userId);
         AppUser updatedUser = new AppUser(
