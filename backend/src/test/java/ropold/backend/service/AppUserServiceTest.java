@@ -33,7 +33,7 @@ class AppUserServiceTest {
     @Test
     void getUserById_UserExists_ReturnsUser() {
         String userId = "user";
-        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", UserRole.USER, List.of());
+        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", "en", UserRole.USER, List.of());
         when(appUserRepository.findById(userId)).thenReturn(Optional.of(user));
 
         AppUser result = appUserService.getUserById(userId);
@@ -56,7 +56,7 @@ class AppUserServiceTest {
     void getUserFavorites_ReturnsFavorites() {
         String userId = "user";
         List<String> favorites = List.of("1", "2");
-        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", UserRole.USER, favorites);
+        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", "en", UserRole.USER, favorites);
         when(appUserRepository.findById(userId)).thenReturn(Optional.of(user));
 
         List<String> result = appUserService.getUserFavoriteRealEstates(userId);
@@ -69,7 +69,7 @@ class AppUserServiceTest {
     @Test
     void getUserRole_ReturnsUserRole() {
         String userId = "user";
-        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", UserRole.USER, List.of());
+        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", "en", UserRole.USER, List.of());
         when(appUserRepository.findById(userId)).thenReturn(Optional.of(user));
 
         String result = appUserService.getUserRole(userId);
@@ -84,7 +84,7 @@ class AppUserServiceTest {
         String userId = "user";
         String realEstateId = "1";
         List<String> favorites = List.of("2");
-        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", UserRole.USER, favorites);
+        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", "en", UserRole.USER, favorites);
         when(appUserRepository.findById(userId)).thenReturn(Optional.of(user));
 
         appUserService.addRealEstateToFavoriteRealEstates(userId, realEstateId);
@@ -98,7 +98,7 @@ class AppUserServiceTest {
         String userId = "user";
         String realEstateId = "1";
         List<String> favorites = List.of("1", "2");
-        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", UserRole.USER, favorites);
+        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", "en", UserRole.USER, favorites);
         when(appUserRepository.findById(userId)).thenReturn(Optional.of(user));
 
         appUserService.addRealEstateToFavoriteRealEstates(userId, realEstateId);
@@ -112,13 +112,53 @@ class AppUserServiceTest {
         String userId = "user";
         String realEstateId = "1";
         List<String> favorites = List.of("1", "2");
-        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", UserRole.USER, favorites);
+        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", "en", UserRole.USER, favorites);
         when(appUserRepository.findById(userId)).thenReturn(Optional.of(user));
 
         appUserService.removeRealEstateFromFavoriteRealEstates(userId, realEstateId);
 
         verify(appUserRepository, times(1)).findById(userId);
         verify(appUserRepository, times(1)).save(any(AppUser.class));
+    }
+
+    @Test
+    void setPreferredLanguage_UpdatesLanguage() {
+        String userId = "user";
+        String newLanguage = "de";
+        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", "en", UserRole.USER, List.of());
+        when(appUserRepository.findById(userId)).thenReturn(Optional.of(user));
+
+        appUserService.setPreferredLanguage(userId, newLanguage);
+
+        verify(appUserRepository, times(1)).findById(userId);
+        verify(appUserRepository, times(1)).save(argThat(savedUser ->
+                savedUser.preferredLanguage().equals("de") &&
+                savedUser.id().equals(userId)
+        ));
+    }
+
+    @Test
+    void getPreferredLanguage_ReturnsLanguage() {
+        String userId = "user";
+        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", "de", UserRole.USER, List.of());
+        when(appUserRepository.findById(userId)).thenReturn(Optional.of(user));
+
+        String result = appUserService.getPreferredLanguage(userId);
+
+        assertEquals("de", result);
+        verify(appUserRepository, times(1)).findById(userId);
+    }
+
+    @Test
+    void getPreferredLanguage_ReturnsDefaultWhenNull() {
+        String userId = "user";
+        AppUser user = new AppUser(userId, "username", "name", "avatarUrl", "githubUrl", null, UserRole.USER, List.of());
+        when(appUserRepository.findById(userId)).thenReturn(Optional.of(user));
+
+        String result = appUserService.getPreferredLanguage(userId);
+
+        assertEquals("de", result);
+        verify(appUserRepository, times(1)).findById(userId);
     }
 
 }

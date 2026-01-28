@@ -16,7 +16,7 @@
     padding: 10px;
     margin: 15px;
     display: grid;
-    grid-template-rows: 10% 20% 40% 30%;
+    grid-template-rows: 10% 17% 38% 35%;
     gap: 5px;
     position: relative;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);

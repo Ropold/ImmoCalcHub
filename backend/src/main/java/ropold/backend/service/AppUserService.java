@@ -41,6 +41,7 @@ public class AppUserService {
                     user.name(),
                     user.avatarUrl(),
                     user.githubUrl(),
+                    user.preferredLanguage(),
                     user.role(),
                     favoriteRealEstates
             );
@@ -59,8 +60,29 @@ public class AppUserService {
                 user.name(),
                 user.avatarUrl(),
                 user.githubUrl(),
+                user.preferredLanguage(),
                 user.role(),
                 favoriteRealEstates
+        );
+        appUserRepository.save(updatedUser);
+    }
+
+    public String getPreferredLanguage(String userId) {
+        AppUser user = getUserById(userId);
+        return user.preferredLanguage() != null ? user.preferredLanguage() : "de";
+    }
+
+    public void setPreferredLanguage(String userId, String languageIso) {
+        AppUser user = getUserById(userId);
+        AppUser updatedUser = new AppUser(
+                user.id(),
+                user.username(),
+                user.name(),
+                user.avatarUrl(),
+                user.githubUrl(),
+                languageIso,
+                user.role(),
+                user.favoriteRealEstates()
         );
         appUserRepository.save(updatedUser);
     }

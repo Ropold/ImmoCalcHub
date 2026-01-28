@@ -1,6 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import type {RealEstateModel} from "./model/RealEstateModel.ts";
 import "./styles/RealEstateCard.css"
+import {translatedInfo} from "./utils/TranslatedInfo.ts";
 
 type RealEstateCardProps = {
     realEstate: RealEstateModel;
@@ -65,7 +66,7 @@ export default function RealEstateCard(props: Readonly<RealEstateCardProps>){
                                 props.handleEditToggle?.(props.realEstate.id);
                             }}
                         >
-                            Edit
+                            {translatedInfo["Edit"][props.language]}
                         </button>
                         <button
                             className="red-button"
@@ -74,7 +75,7 @@ export default function RealEstateCard(props: Readonly<RealEstateCardProps>){
                                 props.handleDeleteClick?.(props.realEstate.id);
                             }}
                         >
-                            Delete
+                            {translatedInfo["Delete"][props.language]}
                         </button>
                     </div>
                 )}

@@ -1,8 +1,10 @@
 import "./styles/Searchbar.css"
+import {translatedInfo} from "./utils/TranslatedInfo.ts";
 
 type SearchBarProps = {
     searchQuery: string;
     setSearchQuery: (value: string) => void;
+    language: string;
 }
 
 export default function Searchbar(props: Readonly<SearchBarProps>) {
@@ -14,7 +16,7 @@ export default function Searchbar(props: Readonly<SearchBarProps>) {
         <div className="search-bar">
             <input
                 type="text"
-                placeholder="Search by Real Estate Name or other fields..."
+                placeholder={translatedInfo["Search by Real Estate Name or others Field"][props.language]}
                 value={props.searchQuery}
                 onChange={(e) => props.setSearchQuery(e.target.value)}
                 className="search-input"
@@ -24,7 +26,7 @@ export default function Searchbar(props: Readonly<SearchBarProps>) {
                 onClick={handleReset}
                 className={`${props.searchQuery ? "blue-button" : "button-grey"}`}
             >
-                Reset Filters
+                {translatedInfo["Reset"][props.language]}
             </button>
         </div>
     );

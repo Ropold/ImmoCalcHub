@@ -1,8 +1,13 @@
+import {translatedInfo} from "./utils/TranslatedInfo.ts";
 
-export default function Footer(){
+type FooterProps = {
+    language: string;
+}
+
+export default function Footer(props: Readonly<FooterProps>) {
     return (
         <footer className="footer">
-            <p>Immo Calc Hub 🧮 2025 🏠 by GSO-FI507</p>
+            <p>Immo Calc Hub 🧮 2025 🏠{translatedInfo["by"][props.language]} GSO-FI507</p>
         </footer>
     )
 }

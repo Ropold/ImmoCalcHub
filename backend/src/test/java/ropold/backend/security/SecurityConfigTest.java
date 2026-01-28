@@ -68,7 +68,7 @@ class SecurityConfigTest {
         when(mockUserService.loadUser(userRequest)).thenReturn(mockOAuth2User);
 
         AppUser existingUser = new AppUser("existingUser", "existingUser", "Existing User",
-                "https://github.com/avatar", "https://github.com/existingUser", UserRole.USER, Collections.emptyList());
+                "https://github.com/avatar", "https://github.com/existingUser","de" ,UserRole.USER, Collections.emptyList());
         when(appUserRepository.findById("existingUser")).thenReturn(Optional.of(existingUser));
 
         OAuth2UserService<OAuth2UserRequest, OAuth2User> oauth2UserService = new SecurityConfig(appUserRepository) {

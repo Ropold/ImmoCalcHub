@@ -5,11 +5,13 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import "./styles/Mapbox.css";
 import "./styles/Searchbar.css";
 import type { RealEstateModel } from "./model/RealEstateModel.ts";
+import {translatedInfo} from "./utils/TranslatedInfo.ts";
 
 type MapBoxAllProps = {
     favorites: string[];
     allRealEstates: RealEstateModel[];
     toggleFavorite: (realEstateId: string) => void;
+    language: string;
 };
 
 export default function MapBoxButton(props: Readonly<MapBoxAllProps>) {
@@ -87,7 +89,6 @@ export default function MapBoxButton(props: Readonly<MapBoxAllProps>) {
                             const [longitude, latitude] = coordinates;
 
                             const isFavorite = props.favorites.includes(realEstate.id);
-                            console.log("RealEstate data:", realEstate);
 
                             const popup = new mapboxgl.Popup({ offset: 25 })
                                 .setHTML(`
@@ -170,17 +171,17 @@ export default function MapBoxButton(props: Readonly<MapBoxAllProps>) {
                     className="search-input"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search for a place..."
+                    placeholder={translatedInfo["Search for a place..."][props.language]}
                     onKeyDown={(e) => {
                         if (e.key === "Enter") {
                             handleSearch();
                         }
                     }}
                 />
-                <button className="blue-button search-map-box" onClick={handleSearch}>Search</button>
+                <button className="blue-button search-map-box" onClick={handleSearch}>{translatedInfo["Search"][props.language]}</button>
             </div>
             <div>
-                <h3>Cologne ist set to Default-City</h3>
+                <h3>{translatedInfo["Cologne ist set to Default-City"][props.language]}</h3>
                 {geocodeError && <div>{geocodeError}</div>}
                 <div ref={mapContainerRef} style={{ width: "100%", height: "600px" }} />
             </div>

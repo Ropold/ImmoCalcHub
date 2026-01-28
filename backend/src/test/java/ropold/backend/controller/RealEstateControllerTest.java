@@ -64,6 +64,7 @@ public class RealEstateControllerTest {
                 "Max Mustermann",
                 "https://github.com/avatar",
                 "https://github.com/mustermann",
+                "en",
                 UserRole.USER,
                 List.of("2")
         );
