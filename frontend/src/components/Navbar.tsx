@@ -40,6 +40,17 @@ export default function Navbar(props: Readonly<NavbarProps>) {
             });
     }
 
+    function setPreferredLanguage(languageIso: string) {
+        axios.post(`/api/users/me/language/${languageIso}`)
+            .then(() => {
+                console.log("Language updated successfully");
+            })
+            .catch((error) => {
+                console.error("Error updating language:", error);
+            });
+    }
+
+
     return (
         <nav className="navbar">
             <button className="blue-button" onClick={() => navigate("/")}>{translatedInfo["Home"][props.language]}</button>
@@ -88,6 +99,7 @@ export default function Navbar(props: Readonly<NavbarProps>) {
                                     className="language-option-button"
                                     onClick={() => {
                                         props.setLanguage(lang);
+                                        setPreferredLanguage(props.language);
                                         setShowLanguagePopup(false);
                                     }}
                                 >
