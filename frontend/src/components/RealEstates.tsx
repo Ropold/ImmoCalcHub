@@ -42,6 +42,7 @@ export default function RealEstates(props: Readonly<RealEstatesProps>) {
             <SearchBar
                 searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery}
+                language={props.language}
             />
             <div className="real-estate-card-container">
                 {filteredRealEstates.map((realEstate: RealEstateModel) => (

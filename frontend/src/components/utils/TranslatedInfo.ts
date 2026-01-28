@@ -81,14 +81,14 @@ export const translatedInfo: Record<string, Record<string, string>> = {
         "it": "Cerca per nome immobile o altri campi",
         "ru": "Поиск по названию недвижимости или другим полям"
     },
-    "Reset Filters": {
-        "en": "Reset Filters",
-        "de": "Filter zurücksetzen",
-        "pl": "Resetuj filtry",
-        "es": "Restablecer filtros",
-        "fr": "Réinitialiser les filtres",
-        "it": "Reimpostare i filtri",
-        "ru": "Сбросить фильтры"
+    "Reset": {
+        "en": "Reset",
+        "de": "Zurücksetzen",
+        "pl": "Resetuj",
+        "es": "Restablecer",
+        "fr": "Réinitialiser",
+        "it": "Reimpostare",
+        "ru": "Сбросить"
     },
     "Search": {
         "en": "Search",
@@ -154,6 +154,25 @@ export const translatedInfo: Record<string, Record<string, string>> = {
         "it": "Prezzo",
         "ru": "Цена"
     },
+    "Purchase": {
+        "en": "Purchase",
+        "de": "Kauf",
+        "pl": "Zakup",
+        "es": "Compra",
+        "fr": "Achat",
+        "it": "Acquisto",
+        "ru": "Покупка"
+    },
+    "Rent": {
+        "en": "Rent",
+        "de": "Miete",
+        "pl": "Wynajem",
+        "es": "Alquiler",
+        "fr": "Louer",
+        "it": "Affitto",
+        "ru": "Аренда"
+    },
+
     "Total Floor Area": {
         "en": "Total Floor Area",
         "de": "Gesamtfläche",
@@ -181,7 +200,44 @@ export const translatedInfo: Record<string, Record<string, string>> = {
         "it": "Numero di stanze",
         "ru": "Количество комнат"
     },
-    "Created At": {
+
+    "Room Title": {
+        "en": "Room Title",
+        "de": "Raumtitel",
+        "pl": "Tytuł pokoju",
+        "es": "Título de la habitación",
+        "fr": "Titre de la pièce",
+        "it": "Titolo della stanza",
+        "ru": "Название комнаты"
+    },
+    "Room Type": {
+        "en": "Room Type",
+        "de": "Raumtyp",
+        "pl": "Typ pokoju",
+        "es": "Tipo de habitación",
+        "fr": "Type de pièce",
+        "it": "Tipo di stanza",
+        "ru": "Тип комнаты"
+    },
+    "Area": {
+        "en": "Area",
+        "de": "Fläche",
+        "pl": "Powierzchnia",
+        "es": "Área",
+        "fr": "Zone",
+        "it": "Area",
+        "ru": "Площадь"
+    },
+    "Select Language": {
+        "en": "Select Language",
+        "de": "Sprache auswählen",
+        "pl": "Wybierz język",
+        "es": "Seleccionar idioma",
+        "fr": "Choisir la langue",
+        "it": "Seleziona lingua",
+        "ru": "Выберите язык"
+    },
+        "Created At": {
         "en": "Created At",
         "de": "Erstellt am",
         "pl": "Utworzono dnia",
@@ -207,6 +263,15 @@ export const translatedInfo: Record<string, Record<string, string>> = {
         "fr": "Utilisateur Github",
         "it": "Utente Github",
         "ru": "Пользователь Github"
+    },
+    "GitHub Profile": {
+        "en": "GitHub Profile",
+        "de": "GitHub-Profil",
+        "pl": "Profil GitHub",
+        "es": "Perfil de GitHub",
+        "fr": "Profil GitHub",
+        "it": "Profilo GitHub",
+        "ru": "Профиль GitHub"
     },
     "Visit Profile":{
         "en": "Visit Profile",

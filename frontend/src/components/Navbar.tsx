@@ -42,14 +42,14 @@ export default function Navbar(props: Readonly<NavbarProps>) {
 
     return (
         <nav className="navbar">
-            <button className="blue-button" onClick={() => navigate("/")}>Home</button>
+            <button className="blue-button" onClick={() => navigate("/")}>{translatedInfo["Home"][props.language]}</button>
             <div
                 className="green-button clickable-header"
                 onClick={() => {
                     navigate("/real-estates");
                 }}
             >
-                <h2 className="header-title">Real Estates</h2>
+                <h2 className="header-title">{translatedInfo["Real Estates"][props.language]}</h2>
                 <img src={headerLogo} alt="Immo Calc Hub Logo" className="logo-image" />
             </div>
 
@@ -59,7 +59,7 @@ export default function Navbar(props: Readonly<NavbarProps>) {
                     navigate("/map-box");
                      }}
                 >
-                <h2 className="header-title">Map</h2>
+                <h2 className="header-title">{translatedInfo["Map"][props.language]}</h2>
                 <img src={worldLogo} alt="World Logo" className="logo-image" />
             </div>
 
@@ -80,7 +80,7 @@ export default function Navbar(props: Readonly<NavbarProps>) {
                         className="popup-content"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <h2>Select Language</h2>
+                        <h2>{translatedInfo["Select Language"][props.language]}</h2>
                         <div className="popup-language-options">
                             {["en", "de", "pl", "es", "fr", "it", "ru"].map((lang) => (
                                 <button
@@ -104,21 +104,19 @@ export default function Navbar(props: Readonly<NavbarProps>) {
                             className="popup-cancel margin-top-20"
                             onClick={() => setShowLanguagePopup(false)}
                         >
-                            Cancel
+                            {translatedInfo["Cancel"][props.language]}
                         </button>
                     </div>
                 </div>
             )}
 
-
-
             {props.user !== "anonymousUser" ? (
                 <>
-                    <button className="purple-button" onClick={() => navigate("/profile")}>Profile</button>
-                    <button className="blue-button" onClick={logoutFromGithub}>Logout</button>
+                    <button className="purple-button" onClick={() => navigate("/profile")}>{translatedInfo["Profile"][props.language]}</button>
+                    <button className="blue-button" onClick={logoutFromGithub}>{translatedInfo["Logout"][props.language]}</button>
                 </>
             ) : (
-                <button className="blue-button" onClick={loginWithGithub}>Login with GitHub</button>
+                <button className="blue-button" onClick={loginWithGithub}>{translatedInfo["Login with GitHub"][props.language]}</button>
             )}
         </nav>
     );

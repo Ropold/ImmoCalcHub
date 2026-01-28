@@ -399,6 +399,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                         <Searchbar
                             searchQuery={searchQuery}
                             setSearchQuery={setSearchQuery}
+                            language={props.language}
                         />
                     </div>
 
