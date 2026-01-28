@@ -6,7 +6,7 @@ import * as React from "react";
 import headerLogo from "../assets/gso-logo.png";
 import worldLogo from "../assets/world-quartet-logo.png";
 import {LanguagesImages} from "./utils/FlagImages.ts";
-import {translatedGameInfo} from "./utils/TranslatedGameInfo.ts";
+import {translatedInfo} from "./utils/TranslatedInfo.ts";
 import "./styles/Buttons.css"
 
 type NavbarProps = {
@@ -67,7 +67,7 @@ export default function Navbar(props: Readonly<NavbarProps>) {
                 className="clickable-header"
                 onClick={() => setShowLanguagePopup(true)}
             >
-                <h2 className="header-title">{translatedGameInfo["getLanguageName"][props.language]}</h2>
+                <h2 className="header-title">{translatedInfo["getLanguageName"][props.language]}</h2>
                 <img src={LanguagesImages[props.language]} alt="Language Logo" className="logo-image" />
             </div>
 
@@ -96,7 +96,7 @@ export default function Navbar(props: Readonly<NavbarProps>) {
                                         alt={lang}
                                         className="language-flag"
                                     />
-                                    {translatedGameInfo["getLanguageName"][lang]}
+                                    {translatedInfo["getLanguageName"][lang]}
                                 </button>
                             ))}
                         </div>

@@ -87,7 +87,6 @@ export default function MapBoxButton(props: Readonly<MapBoxAllProps>) {
                             const [longitude, latitude] = coordinates;
 
                             const isFavorite = props.favorites.includes(realEstate.id);
-                            console.log("RealEstate data:", realEstate);
 
                             const popup = new mapboxgl.Popup({ offset: 25 })
                                 .setHTML(`
