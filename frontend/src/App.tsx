@@ -10,17 +10,17 @@ import NotFound from "./components/NotFound.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import Profile from "./components/Profile.tsx";
 import Footer from "./components/Footer.tsx";
-import Items from "./components/Items.tsx";
-import MapBoxAll from "./components/MapBoxAll.tsx";
+import RealEstates from "./components/RealEstates.tsx";
+import MapBoxButton from "./components/MapBoxButton.tsx";
+import Details from "./components/Details.tsx";
 
 export default function App() {
     const [user, setUser] = useState<string>("anonymousUser");
     const [role, setRole] = useState<string>("anonymousRole");
-    const displayRole = user === "anonymousUser" ? "anonymousRole" : role;
     const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
     const [language, setLanguage] = useState<string>("de");
     const [favorites, setFavorites] = useState<string[]>([]);
-    const [realEstates, setRealEstates] = useState<RealEstateModel[]>([]);
+    const [allRealEstates, setAllRealEstates] = useState<RealEstateModel[]>([]);
 
 
     function getUser() {
@@ -83,7 +83,7 @@ export default function App() {
     function getAllRealEstates() {
         axios.get<RealEstateModel[]>(`/api/immo-calc-hub`)
             .then((response) => {
-                setRealEstates(response.data);
+                setAllRealEstates(response.data);
             })
             .catch((error) => {
                 console.error("Error fetching real estates:", error);
@@ -110,17 +110,35 @@ export default function App() {
         }
     }
 
+    function handleNewRealEstateSubmit(newRealEstate: RealEstateModel) {
+        setAllRealEstates((prev) => [...prev, newRealEstate]);
+    }
+
+    function handleUpdateRealEstate(updatedRealEstate: RealEstateModel) {
+        setAllRealEstates((prev) =>
+            prev.map((realEstate) =>
+                realEstate.id === updatedRealEstate.id ? updatedRealEstate : realEstate
+            )
+        );
+    }
+
+    function handleDeleteRealEstate(deletedId: string) {
+        setAllRealEstates((prev) =>
+            prev.filter((realEstate) => realEstate.id !== deletedId)
+        );
+    }
 
   return (
     <>
         <Navbar user={user} getUser={getUser} getUserDetails={getUserDetails} language={language} setLanguage={setLanguage}/>
         <Routes>
             <Route path="*" element={<NotFound />} />
-            <Route path="/" element={<Welcome role={displayRole}/>}/>
-            <Route path="/items" element={<Items />}/>
-            <Route path="/mapbox-all" element={<MapBoxAll favorites={favorites} realEstates={realEstates} toggleFavorite={toggleFavorite} />} />
+            <Route path="/" element={<Welcome />}/>
+            <Route path="/real-estates" element={<RealEstates user={user} favorites={favorites} toggleFavorite={toggleFavorite} allRealEstates={allRealEstates} getAllRealEstates={getAllRealEstates} language={language}/>}/>
+            <Route path="/map-box" element={<MapBoxButton favorites={favorites} allRealEstates={allRealEstates} toggleFavorite={toggleFavorite} />} />
+            <Route path="/real-estate/:id" element={<Details user={user} favorites={favorites} toggleFavorite={toggleFavorite} language={language}/>} />
             <Route element={<ProtectedRoute user={user}/>}>
-                <Route path="/profile/*" element={<Profile user={user} userDetails={userDetails} language={language}/>} />
+                <Route path="/profile/*" element={<Profile user={user} userDetails={userDetails} handleNewRealEstateSubmit={handleNewRealEstateSubmit} handleUpdateRealEstate={handleUpdateRealEstate} handleDeleteRealEstate={handleDeleteRealEstate} favorites={favorites} toggleFavorite={toggleFavorite} role={role} language={language}/>} />
             </Route>
         </Routes>
         <Footer/>

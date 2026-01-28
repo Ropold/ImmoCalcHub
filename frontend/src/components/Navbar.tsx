@@ -1,8 +1,10 @@
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import "./styles/Navbar.css";
+import "./styles/Popup.css";
 import * as React from "react";
 import headerLogo from "../assets/gso-logo.png";
+import worldLogo from "../assets/world-quartet-logo.png";
 import {LanguagesImages} from "./utils/FlagImages.ts";
 import {translatedGameInfo} from "./utils/TranslatedGameInfo.ts";
 import "./styles/Buttons.css"
@@ -44,23 +46,30 @@ export default function Navbar(props: Readonly<NavbarProps>) {
             <div
                 className="green-button clickable-header"
                 onClick={() => {
-                    navigate("/items");
+                    navigate("/real-estates");
                 }}
             >
-                <h2 className="header-title">Items</h2>
+                <h2 className="header-title">Real Estates</h2>
                 <img src={headerLogo} alt="Immo Calc Hub Logo" className="logo-image" />
             </div>
 
             <div
-                className="green-button clickable-header"
+                className="orange-button clickable-header"
                 onClick={() => {
-                    navigate("/mapbox-all");
+                    navigate("/map-box");
                      }}
                 >
                 <h2 className="header-title">Map</h2>
-                <img src={headerLogo} alt="Immo Calc Hub Logo" className="logo-image" />
+                <img src={worldLogo} alt="World Logo" className="logo-image" />
             </div>
 
+            <div
+                className="clickable-header"
+                onClick={() => setShowLanguagePopup(true)}
+            >
+                <h2 className="header-title">{translatedGameInfo["getLanguageName"][props.language]}</h2>
+                <img src={LanguagesImages[props.language]} alt="Language Logo" className="logo-image" />
+            </div>
 
             {showLanguagePopup && (
                 <div

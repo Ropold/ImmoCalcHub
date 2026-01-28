@@ -88,3 +88,10 @@
     object-fit: cover;
 }
 
+@media (prefers-color-scheme: dark) {
+    .popup-content {
+        background: #1e1e1e;
+        color: white;
+    }
+}
+

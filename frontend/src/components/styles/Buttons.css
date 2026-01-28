@@ -22,6 +22,69 @@
     background-color: #388e3c;
 }
 
+.orange-button {
+    background-color: #ff9e00;
+}
+
+.orange-button:hover {
+    background-color: #e67e00;
+}
+
 .margin-top-20{
     margin-top: 20px;
+}
+
+.active-profile-button{
+    background-color: #999;
+}
+.active-profile-button:hover{
+    cursor: default;
+}
+
+.space-between{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    margin: 10px 5px;
+}
+.margin-top-50{
+    margin-top: 50px;
+}
+
+.favorite-on {
+    color: red;
+}
+
+.favorite-off {
+    color: #999;
+}
+
+.red-button {
+    background-color: #ff9999;
+}
+
+.red-button:hover {
+    background-color: #d32f2f;
+}
+
+.margin-top-50{
+    margin-top: 50px;
+}
+
+#room-section-button {
+    align-self: start;
+    height: fit-content;
+    margin-top: 23px;
+}
+
+#button-favorite-real-estate-card {
+    position: absolute;
+    top: -8px;
+    left: -15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    outline: none;
 }

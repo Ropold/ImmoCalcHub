@@ -5,7 +5,7 @@ import java.util.List;
 
 public record RealEstateModel(
         String id,
-        String title,
+        String realEstateTitle,
         String description,
         String address,
         double price,

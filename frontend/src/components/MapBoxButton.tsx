@@ -2,22 +2,24 @@ import { useRef, useEffect, useState } from "react";
 import axios from "axios";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import "./styles/Mapbox.css";
+import "./styles/Searchbar.css";
 import type { RealEstateModel } from "./model/RealEstateModel.ts";
 
 type MapBoxAllProps = {
     favorites: string[];
-    realEstates: RealEstateModel[];
+    allRealEstates: RealEstateModel[];
     toggleFavorite: (realEstateId: string) => void;
 };
 
-export default function MapBoxAll(props: Readonly<MapBoxAllProps>) {
+export default function MapBoxButton(props: Readonly<MapBoxAllProps>) {
     const mapRef = useRef<mapboxgl.Map | null>(null); // Referenz für die Karte
     const mapContainerRef = useRef<HTMLDivElement | null>(null); // Referenz für den Map Container
     const [geocodeError, setGeocodeError] = useState<string | null>(null); // Fehlerzustand für Geocoding
     const [mapboxConfig, setMapboxConfig] = useState<string | null>(null); // Zustand für das Mapbox-Token
     const [searchQuery, setSearchQuery] = useState<string>(""); // Zustand für die Suchabfrage
 
-    // Funktion zum Abrufen des MapBox-Konfigurationstokens
+    // Funktion zum Abrufen des MapBoxButton-Konfigurationstokens
     function fetchMapBoxConfig() {
         axios
             .get("/api/mbox/72c81498-f6b2-4a8a-911c-cd217a65e0da")
@@ -27,8 +29,8 @@ export default function MapBoxAll(props: Readonly<MapBoxAllProps>) {
                 mapboxgl.accessToken = resp; // Mapbox-Access-Token setzen
             })
             .catch((error) => {
-                console.error("Error fetching MapBox configuration:", error);
-                setGeocodeError("Failed to fetch MapBox configuration");
+                console.error("Error fetching MapBoxButton configuration:", error);
+                setGeocodeError("Failed to fetch MapBoxButton configuration");
             });
     }
 
@@ -62,7 +64,7 @@ export default function MapBoxAll(props: Readonly<MapBoxAllProps>) {
 
     // In useEffect, bevor wir die Karte manipulieren
     useEffect(() => {
-        if (!mapboxConfig || !props.realEstates.length) return; // Wenn kein Mapbox-Token oder keine Immobilien vorhanden sind, nichts tun
+        if (!mapboxConfig || !props.allRealEstates.length) return; // Wenn kein Mapbox-Token oder keine Immobilien vorhanden sind, nichts tun
 
         // Karte initialisieren
         if (mapContainerRef.current) {
@@ -79,24 +81,24 @@ export default function MapBoxAll(props: Readonly<MapBoxAllProps>) {
             // Sicherstellen, dass mapRef.current nicht null ist, bevor es verwendet wird
             if (mapRef.current) {
                 // Marker für jede Immobilie hinzufügen
-                props.realEstates.forEach((realEstate) => {
+                props.allRealEstates.forEach((realEstate) => {
                     geocodeAddress(realEstate.address).then((coordinates) => {
                         if (coordinates) {
                             const [longitude, latitude] = coordinates;
 
                             const isFavorite = props.favorites.includes(realEstate.id);
+                            console.log("RealEstate data:", realEstate);
 
                             const popup = new mapboxgl.Popup({ offset: 25 })
                                 .setHTML(`
-                                <div style="text-align: center; max-width: 200px;">
+                                <div style="text-align: center; max-width: 200px; color: #333;">
                                     <h4>
                                         <a href="/real-estate/${realEstate.id}" style="text-decoration: none; color: #007bff;">
-                                            ${realEstate.title}
+                                            ${realEstate.realEstateTitle}
                                         </a>
                                     </h4>
-                                    <img src="${realEstate.imageUrl}" alt="${realEstate.title}" style="width: 100%; height: auto; border-radius: 8px;"/>
-                                    <p>${realEstate.description}</p>
-                                    <p><strong>Address:</strong> ${realEstate.address}</p>
+                                    ${realEstate.imageUrl ? `<img src="${realEstate.imageUrl}" alt="${realEstate.realEstateTitle}" style="width: 100%; height: auto; border-radius: 8px;"/>` : ''}
+                                    <p><strong>Adresse:</strong> ${realEstate.address}</p>
                                 </div>
                             `);
 
@@ -137,11 +139,16 @@ export default function MapBoxAll(props: Readonly<MapBoxAllProps>) {
                 mapRef.current.remove();
             }
         };
-    }, [props.realEstates, mapboxConfig, props.favorites]);
+    }, [props.allRealEstates, mapboxConfig, props.favorites]);
 
 
     // Funktion zum Suchen eines Ortes und die Karte darauf zu zentrieren
     const handleSearch = () => {
+        if (searchQuery.length < 3) {
+            setGeocodeError("Bitte mindestens 3 Zeichen eingeben.");
+            return;
+        }
+        setGeocodeError(null);
         geocodeAddress(searchQuery).then((coordinates) => {
             if (coordinates && mapRef.current) {
                 const [longitude, latitude] = coordinates;
@@ -157,25 +164,25 @@ export default function MapBoxAll(props: Readonly<MapBoxAllProps>) {
 
     return (
         <>
-            <div className="mapbox-all-search-field">
-                {/* Suchfeld */}
+            <div className="search-bar">
                 <input
                     type="text"
+                    className="search-input"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search for a place..."
                     onKeyDown={(e) => {
                         if (e.key === "Enter") {
-                            handleSearch(); // Ruft handleSearch auf, wenn Enter gedrückt wird
+                            handleSearch();
                         }
                     }}
                 />
-                <button onClick={handleSearch}>Search</button>
+                <button className="blue-button search-map-box" onClick={handleSearch}>Search</button>
             </div>
             <div>
                 <h3>Cologne ist set to Default-City</h3>
                 {geocodeError && <div>{geocodeError}</div>}
-                <div id="map-container" ref={mapContainerRef} style={{ width: "100%", height: "600px" }} />
+                <div ref={mapContainerRef} style={{ width: "100%", height: "600px" }} />
             </div>
         </>
     );

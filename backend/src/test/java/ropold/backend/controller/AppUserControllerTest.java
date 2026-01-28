@@ -202,7 +202,7 @@ class AppUserControllerTest {
         mockMvc.perform(get("/api/users/favorites"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value("2"))
-                .andExpect(jsonPath("$[0].title").value("Moderne Wohnung"));
+                .andExpect(jsonPath("$[0].realEstateTitle").value("Moderne Wohnung"));
     }
 
     @Test
@@ -210,8 +210,8 @@ class AppUserControllerTest {
         mockMvc.perform(get("/api/users/me/my-real-estates/user"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
-                .andExpect(jsonPath("$[0].title").value("Schönes Einfamilienhaus"))
-                .andExpect(jsonPath("$[1].title").value("Moderne Wohnung"));
+                .andExpect(jsonPath("$[0].realEstateTitle").value("Schönes Einfamilienhaus"))
+                .andExpect(jsonPath("$[1].realEstateTitle").value("Moderne Wohnung"));
     }
 
     @Test

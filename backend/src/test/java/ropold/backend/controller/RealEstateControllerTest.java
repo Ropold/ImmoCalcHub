@@ -106,15 +106,15 @@ public class RealEstateControllerTest {
     void testGetAllRealEstates_shouldReturnAllRealEstates() throws Exception {
         mockMvc.perform(get("/api/immo-calc-hub"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].title").value("Schönes Einfamilienhaus"))
-                .andExpect(jsonPath("$[1].title").value("Moderne Wohnung"));
+                .andExpect(jsonPath("$[0].realEstateTitle").value("Schönes Einfamilienhaus"))
+                .andExpect(jsonPath("$[1].realEstateTitle").value("Moderne Wohnung"));
     }
 
     @Test
     void testGetRealEstateById_shouldReturnRealEstate() throws Exception {
         mockMvc.perform(get("/api/immo-calc-hub/1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("Schönes Einfamilienhaus"));
+                .andExpect(jsonPath("$.realEstateTitle").value("Schönes Einfamilienhaus"));
     }
 
     @Test
@@ -136,7 +136,7 @@ public class RealEstateControllerTest {
                         .file(new MockMultipartFile("image", "image.jpg", "image/jpeg", "image".getBytes()))
                         .file(new MockMultipartFile("realEstateModel", "", "application/json", """
                         {
-                          "title": "Luxusvilla",
+                          "realEstateTitle": "Luxusvilla",
                           "description": "Villa mit Pool",
                           "address": "Seestraße 5, 50670 Köln",
                           "price": 850000.0,
@@ -193,7 +193,7 @@ public class RealEstateControllerTest {
                         .file(new MockMultipartFile("realEstateModel", "", "application/json", """
                         {
                           "id": "1",
-                          "title": "Renoviertes Einfamilienhaus",
+                          "realEstateTitle": "Renoviertes Einfamilienhaus",
                           "description": "Frisch renoviertes Haus",
                           "address": "Musterstraße 1, 50667 Köln",
                           "price": 480000.0,
@@ -211,12 +211,12 @@ public class RealEstateControllerTest {
                             return request;
                         }))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("Renoviertes Einfamilienhaus"))
+                .andExpect(jsonPath("$.realEstateTitle").value("Renoviertes Einfamilienhaus"))
                 .andExpect(jsonPath("$.price").value(480000.0))
                 .andExpect(jsonPath("$.imageUrl").value("https://example.com/updated-image.jpg"));
 
         RealEstateModel updated = realEstateRepository.findById("1").orElseThrow();
-        Assertions.assertEquals("Renoviertes Einfamilienhaus", updated.title());
+        Assertions.assertEquals("Renoviertes Einfamilienhaus", updated.realEstateTitle());
         Assertions.assertEquals(480000.0, updated.price());
         Assertions.assertEquals("https://example.com/updated-image.jpg", updated.imageUrl());
     }
@@ -291,7 +291,7 @@ public class RealEstateControllerTest {
                         .contentType("application/json")
                         .content("""
                         {
-                          "title": "Testimmobilie",
+                          "realEstateTitle": "Testimmobilie",
                           "description": "Beschreibung der Testimmobilie",
                           "address": "Teststraße 123, 12345 Teststadt",
                           "price": 250000.0,
@@ -302,7 +302,7 @@ public class RealEstateControllerTest {
                         }
                     """))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.title").value("Testimmobilie"))
+                .andExpect(jsonPath("$.realEstateTitle").value("Testimmobilie"))
                 .andExpect(jsonPath("$.description").value("Beschreibung der Testimmobilie"))
                 .andExpect(jsonPath("$.address").value("Teststraße 123, 12345 Teststadt"))
                 .andExpect(jsonPath("$.price").value(250000.0))
@@ -315,7 +315,7 @@ public class RealEstateControllerTest {
         Assertions.assertEquals(1, allRealEstates.size());
 
         RealEstateModel savedRealEstate = allRealEstates.getFirst();
-        Assertions.assertEquals("Testimmobilie", savedRealEstate.title());
+        Assertions.assertEquals("Testimmobilie", savedRealEstate.realEstateTitle());
         Assertions.assertEquals("anonymous", savedRealEstate.githubId());
         Assertions.assertNotNull(savedRealEstate.createdAt());
         Assertions.assertNull(savedRealEstate.imageUrl());
