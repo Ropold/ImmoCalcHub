@@ -66,4 +66,13 @@ public class UserController {
         String authenticatedUserId = authentication.getName();
         appUserService.removeRealEstateFromFavoriteRealEstates(authenticatedUserId, realEstateId);
     }
+
+    @PostMapping("/me/language/{languageIso}")
+    @ResponseStatus(HttpStatus.OK)
+    public void setPreferredLanguage(@PathVariable String languageIso, @AuthenticationPrincipal OAuth2User authentication) {
+        if (authentication == null) {
+            throw new RuntimeException("User not authenticated");
+        }
+        appUserService.setPreferredLanguage(authentication.getName(), languageIso);
+    }
 }

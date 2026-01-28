@@ -79,6 +79,7 @@ public class SecurityConfig {
                                 githubUser.getAttribute("name"),
                                 githubUser.getAttribute("avatar_url"),
                                 githubUser.getAttribute("html_url"),
+                                "de",
                                 UserRole.USER,
                                 Collections.emptyList()
                         );
