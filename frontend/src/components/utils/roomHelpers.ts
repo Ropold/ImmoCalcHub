@@ -1,17 +1,27 @@
 import type {RoomModel} from "../model/RoomModel.ts";
 import type {RoomSectionModel} from "../model/RoomSectionModel.ts";
+import type {RoomType} from "../model/RoomType.ts";
 
 export type AreaCalculation = {
     totalFloorArea: number;
     totalLivingAreaWoFlV: number;
 };
 
+// Raumtypen die 0% zur Wohnfläche zählen
+const ZERO_PERCENT_ROOMS: RoomType[] = ["BASEMENT", "STORAGE"];
+
+// Raumtypen die 25% zur Wohnfläche zählen (Balkon, Terrasse)
+const QUARTER_PERCENT_ROOMS: RoomType[] = ["BALCONY", "TERRACE"];
+
 /**
  * Berechnet Grundfläche und Wohnfläche nach WoFlV aus den Räumen.
  * WoFlV-Regeln:
- * - Höhe >= 2m: 100% der Fläche
- * - Höhe >= 1m und < 2m: 50% der Fläche
- * - Höhe < 1m: 0% der Fläche
+ * - BASEMENT, STORAGE: 0%
+ * - BALCONY, TERRACE: 25%
+ * - Alle anderen Räume nach Höhe:
+ *   - Höhe >= 2m: 100%
+ *   - Höhe >= 1m und < 2m: 50%
+ *   - Höhe < 1m: 0%
  */
 export function calculateAreas(rooms: RoomModel[]): AreaCalculation {
     let totalFloorArea = 0;
@@ -22,13 +32,21 @@ export function calculateAreas(rooms: RoomModel[]): AreaCalculation {
             const sectionArea = section.length * section.width;
             totalFloorArea += sectionArea;
 
-            // WoFlV-Berechnung basierend auf Höhe
-            if (section.height >= 2) {
-                totalLivingAreaWoFlV += sectionArea;
-            } else if (section.height >= 1) {
-                totalLivingAreaWoFlV += sectionArea * 0.5;
+            // WoFlV-Berechnung basierend auf Raumtyp
+            if (ZERO_PERCENT_ROOMS.includes(room.roomType)) {
+                // Keller, Abstellraum: 0%
+            } else if (QUARTER_PERCENT_ROOMS.includes(room.roomType)) {
+                // Balkon, Terrasse: 25%
+                totalLivingAreaWoFlV += sectionArea * 0.25;
+            } else {
+                // Normale Wohnräume: nach Höhe
+                if (section.height >= 2) {
+                    totalLivingAreaWoFlV += sectionArea;
+                } else if (section.height >= 1) {
+                    totalLivingAreaWoFlV += sectionArea * 0.5;
+                }
+                // Höhe < 1m: 0%
             }
-            // Höhe < 1m: 0% wird nicht addiert
         }
     }
 

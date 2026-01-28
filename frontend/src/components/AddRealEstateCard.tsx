@@ -148,16 +148,16 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                             className="input-small"
                             type="text"
                             value={totalFloorArea}
-                            onChange={(e) => setTotalFloorArea(Number(e.target.value))}
+                            readOnly
                         />
                     </label>
                     <label className="add-real-estate-label">
-                        Living Area (m²):
+                        Living Area WoFlV (m²):
                         <input
                             className="input-small"
                             type="text"
                             value={totalLivingAreaWoFlV}
-                            onChange={(e) => setTotalLivingAreaWoFlV(Number(e.target.value))}
+                            readOnly
                         />
                     </label>
                 </div>

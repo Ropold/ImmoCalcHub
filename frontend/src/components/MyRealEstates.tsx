@@ -239,18 +239,18 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                 Total Floor Area (m²):
                                 <input
                                     className="input-small"
-                                    type="number"
+                                    type="text"
                                     value={editData?.totalFloorArea ?? 0}
-                                    onChange={(e) => setEditData({...editData!, totalFloorArea: parseFloat(e.target.value)})}
+                                    readOnly
                                 />
                             </label>
                             <label className="add-real-estate-label">
-                                Living Area (m²):
+                                Living Area WoFlV (m²):
                                 <input
                                     className="input-small"
-                                    type="number"
+                                    type="text"
                                     value={editData?.totalLivingAreaWoFlV ?? 0}
-                                    onChange={(e) => setEditData({...editData!, totalLivingAreaWoFlV: parseFloat(e.target.value)})}
+                                    readOnly
                                 />
                             </label>
                         </div>
