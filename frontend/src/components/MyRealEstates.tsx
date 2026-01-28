@@ -5,6 +5,7 @@ import axios from "axios";
 import {PRICE_TYPES, type PriceType} from "./model/PriceType.ts";
 import {type RoomType, ROOM_TYPES} from "./model/RoomType.ts";
 import * as roomHelpers from "./utils/roomHelpers.ts";
+import {calculateAreas} from "./utils/roomHelpers.ts";
 import RealEstateCard from "./RealEstateCard.tsx";
 import Searchbar from "./Searchbar.tsx";
 import "./styles/AddRealEstateCard.css";
@@ -49,6 +50,16 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
     useEffect(() => {
         window.scroll(0, 0);
     }, [location]);
+
+    // Automatische Berechnung der Flächen bei Änderung der Räume
+    useEffect(() => {
+        if (editData) {
+            const { totalFloorArea, totalLivingAreaWoFlV } = calculateAreas(editData.rooms);
+            if (editData.totalFloorArea !== totalFloorArea || editData.totalLivingAreaWoFlV !== totalLivingAreaWoFlV) {
+                setEditData(prev => prev ? { ...prev, totalFloorArea, totalLivingAreaWoFlV } : null);
+            }
+        }
+    }, [editData?.rooms]);
 
 
 

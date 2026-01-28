@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import type {RealEstateModel} from "./model/RealEstateModel.ts";
@@ -6,6 +6,7 @@ import {type PriceType, PRICE_TYPES} from "./model/PriceType.ts";
 import type {RoomModel} from "./model/RoomModel.ts";
 import {type RoomType, ROOM_TYPES} from "./model/RoomType.ts";
 import * as roomHelpers from "./utils/roomHelpers.ts";
+import {calculateAreas} from "./utils/roomHelpers.ts";
 import "./styles/AddRealEstateCard.css"
 
 type AddRealEstateCardProps = {
@@ -26,6 +27,13 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
     const [totalLivingAreaWoFlV, setTotalLivingAreaWoFlV] = useState<number>(0);
     const [image, setImage] = useState<File | null>(null);
     const navigate = useNavigate();
+
+    // Automatische Berechnung der Flächen bei Änderung der Räume
+    useEffect(() => {
+        const { totalFloorArea: floorArea, totalLivingAreaWoFlV: livingArea } = calculateAreas(rooms);
+        setTotalFloorArea(floorArea);
+        setTotalLivingAreaWoFlV(livingArea);
+    }, [rooms]);
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();

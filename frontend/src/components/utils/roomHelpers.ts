@@ -1,6 +1,43 @@
 import type {RoomModel} from "../model/RoomModel.ts";
 import type {RoomSectionModel} from "../model/RoomSectionModel.ts";
 
+export type AreaCalculation = {
+    totalFloorArea: number;
+    totalLivingAreaWoFlV: number;
+};
+
+/**
+ * Berechnet Grundfläche und Wohnfläche nach WoFlV aus den Räumen.
+ * WoFlV-Regeln:
+ * - Höhe >= 2m: 100% der Fläche
+ * - Höhe >= 1m und < 2m: 50% der Fläche
+ * - Höhe < 1m: 0% der Fläche
+ */
+export function calculateAreas(rooms: RoomModel[]): AreaCalculation {
+    let totalFloorArea = 0;
+    let totalLivingAreaWoFlV = 0;
+
+    for (const room of rooms) {
+        for (const section of room.roomSections) {
+            const sectionArea = section.length * section.width;
+            totalFloorArea += sectionArea;
+
+            // WoFlV-Berechnung basierend auf Höhe
+            if (section.height >= 2) {
+                totalLivingAreaWoFlV += sectionArea;
+            } else if (section.height >= 1) {
+                totalLivingAreaWoFlV += sectionArea * 0.5;
+            }
+            // Höhe < 1m: 0% wird nicht addiert
+        }
+    }
+
+    return {
+        totalFloorArea: Math.round(totalFloorArea * 100) / 100,
+        totalLivingAreaWoFlV: Math.round(totalLivingAreaWoFlV * 100) / 100,
+    };
+}
+
 export function addRoom(rooms: RoomModel[]): RoomModel[] {
     return [...rooms, {roomTitel: "", roomType: "LIVING_ROOM", roomSections: [{roomSectionTitel: "", length: 0, width: 0, height: 2.5}]}];
 }
