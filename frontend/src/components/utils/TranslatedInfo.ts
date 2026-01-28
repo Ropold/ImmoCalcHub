@@ -481,8 +481,69 @@ export const translatedInfo: Record<string, Record<string, string>> = {
         "fr": "Votre rôle :",
         "it": "Il tuo ruolo:",
         "ru": "Ваша роль:"
+    },
+    "Favorites": {
+        "en": "Favorites",
+        "de": "Favoriten",
+        "pl": "Ulubione",
+        "es": "Favoritos",
+        "fr": "Favoris",
+        "it": "Preferiti",
+        "ru": "Избранное"
+    },
+    "Add Real Estate": {
+        "en": "Add Real Estate",
+        "de": "Immobilie hinzufügen",
+        "pl": "Dodaj nieruchomość",
+        "es": "Agregar propiedad",
+        "fr": "Ajouter un bien immobilier",
+        "it": "Aggiungi immobile",
+        "ru": "Добавить недвижимость"
+    },
+    "My Real Estates": {
+        "en": "My Real Estates",
+        "de": "Meine Immobilien",
+        "pl": "Moje nieruchomości",
+        "es": "Mis propiedades",
+        "fr": "Mes biens immobiliers",
+        "it": "I miei immobili",
+        "ru": "Моя недвижимость"
+    },
+    "Bio": {
+        "en": "Bio",
+        "de": "Bio",
+        "pl": "Biografia",
+        "es": "Biografía",
+        "fr": "Bio",
+        "it": "Bio",
+        "ru": "Биография"
+    },
+    "Loading...": {
+        "en": "Loading...",
+        "de": "Laden...",
+        "pl": "Ładowanie...",
+        "es": "Cargando...",
+        "fr": "Chargement...",
+        "it": "Caricamento...",
+        "ru": "Загрузка..."
+    },
+    "No name provided": {
+        "en": "No name provided",
+        "de": "Kein Name angegeben",
+        "pl": "Nie podano nazwy",
+        "es": "Sin nombre proporcionado",
+        "fr": "Aucun nom fourni",
+        "it": "Nessun nome fornito",
+        "ru": "Имя не указано"
+    },
+    "No location provided": {
+        "en": "No location provided",
+        "de": "Kein Ort angegeben",
+        "pl": "Nie podano lokalizacji",
+        "es": "Sin ubicación proporcionada",
+        "fr": "Aucun emplacement fourni",
+        "it": "Nessuna posizione fornita",
+        "ru": "Местоположение не указано"
     }
-
-
 
 }

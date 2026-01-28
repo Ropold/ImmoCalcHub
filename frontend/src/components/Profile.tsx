@@ -5,6 +5,7 @@ import "./styles/Profile.css";
 import AddRealEstateCard from "./AddRealEstateCard.tsx";
 import MyRealEstates from "./MyRealEstates.tsx";
 import Favorites from "./Favorites.tsx";
+import {translatedInfo} from "./utils/TranslatedInfo.ts";
 
 type ProfileProps = {
     user: string;
@@ -35,16 +36,16 @@ export default function Profile(props: Readonly<ProfileProps>) {
             <div className="profile-container">
                 <div className="space-between">
                     <button className={activeTab === "profile" ? "active-profile-button" : "blue-button"}
-                            onClick={() => setActiveTab("profile")}>Profile GitHub
+                            onClick={() => setActiveTab("profile")}>{translatedInfo["Profile GitHub"][props.language]}
                     </button>
                     <button className={activeTab === "favorites" ? "active-profile-button" : "blue-button"}
-                            onClick={() => setActiveTab("favorites")}>Favorites
+                            onClick={() => setActiveTab("favorites")}>{translatedInfo["Favorites"][props.language]}
                     </button>
                     <button className={activeTab === "add-real-estate" ? "active-profile-button" : "blue-button"}
-                            onClick={() => setActiveTab("add-real-estate")}>Add Real Estate
+                            onClick={() => setActiveTab("add-real-estate")}>{translatedInfo["Add Real Estate"][props.language]}
                     </button>
                     <button className={activeTab === "my-real-estates" ? "active-profile-button" : "blue-button"}
-                            onClick={() => {setActiveTab("my-real-estates"); setIsEditing(false)}}>My Real Estates
+                            onClick={() => {setActiveTab("my-real-estates"); setIsEditing(false)}}>{translatedInfo["My Real Estates"][props.language]}
                     </button>
                 </div>
             </div>
@@ -52,20 +53,20 @@ export default function Profile(props: Readonly<ProfileProps>) {
             <div>
                 {activeTab === "profile" && (
                     <>
-                        <h2>Profile GitHub</h2>
+                        <h2>{translatedInfo["Profile GitHub"][props.language]}</h2>
                         {props.userDetails ? (
                             <div>
-                                <p>Username: {props.userDetails.login}</p>
-                                <p>Name: {props.userDetails.name || "No name provided"}</p>
-                                <p>Location: {props.userDetails.location ?? "No location provided"}</p>
-                                {props.userDetails.bio && <p>Bio: {props.userDetails.bio}</p>}
-                                <p>Followers: {props.userDetails.followers}</p>
-                                <p>Following: {props.userDetails.following}</p>
-                                <p>Public Repositories: {props.userDetails.public_repos}</p>
+                                <p>{translatedInfo["Username"][props.language]}: {props.userDetails.login}</p>
+                                <p>{translatedInfo["Name"][props.language]}: {props.userDetails.name || translatedInfo["No name provided"][props.language]}</p>
+                                <p>{translatedInfo["Location"][props.language]}: {props.userDetails.location ?? translatedInfo["No location provided"][props.language]}</p>
+                                {props.userDetails.bio && <p>{translatedInfo["Bio"][props.language]}: {props.userDetails.bio}</p>}
+                                <p>{translatedInfo["Followers"][props.language]}: {props.userDetails.followers}</p>
+                                <p>{translatedInfo["Following"][props.language]}: {props.userDetails.following}</p>
+                                <p>{translatedInfo["Public Repositories"][props.language]}: {props.userDetails.public_repos}</p>
                                 <p>
-                                    Profile GitHub:{" "}
+                                    {translatedInfo["Profile GitHub"][props.language]}:{" "}
                                     <a href={props.userDetails.html_url} target="_blank" rel="noopener noreferrer">
-                                        Visit Profile
+                                        {translatedInfo["Visit Profile"][props.language]}
                                     </a>
                                 </p>
                                 {props.userDetails.avatar_url && (
@@ -75,12 +76,12 @@ export default function Profile(props: Readonly<ProfileProps>) {
                                         alt={props.userDetails.login}
                                     />
                                 )}
-                                <p>Account Created: {new Date(props.userDetails.created_at).toLocaleDateString()}</p>
-                                <p>Last Updated: {new Date(props.userDetails.updated_at).toLocaleDateString()}</p>
-                                <h3>Your role: {props.role}</h3>
+                                <p>{translatedInfo["Account Created:"][props.language]} {new Date(props.userDetails.created_at).toLocaleDateString()}</p>
+                                <p>{translatedInfo["Last Updated:"][props.language]} {new Date(props.userDetails.updated_at).toLocaleDateString()}</p>
+                                <h3>{translatedInfo["Your role:"][props.language]} {props.role}</h3>
                             </div>
                         ) : (
-                            <p>Loading...</p>
+                            <p>{translatedInfo["Loading..."][props.language]}</p>
                         )}
                     </>
                 )}
