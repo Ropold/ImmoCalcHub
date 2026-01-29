@@ -1,6 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import type {RealEstateModel} from "./model/RealEstateModel.ts";
 import "./styles/RealEstateCard.css"
+import houseLogo from "../assets/house-logo.jpg";
 
 type RealEstateCardProps = {
     realEstate: RealEstateModel;
@@ -47,7 +48,7 @@ export default function RealEstateCard(props: Readonly<RealEstateCardProps>){
             {/* 3. Bild */}
             <div className="card-section card-image">
                 <img
-                    src={props.realEstate.imageUrl ?? undefined}
+                    src={props.realEstate.imageUrl ?? houseLogo}
                     alt={props.realEstate.realEstateTitle}
                     className="real-estate-card-image"
                 />
