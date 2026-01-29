@@ -24,7 +24,7 @@ export default function Searchbar(props: Readonly<SearchBarProps>) {
 
             <button
                 onClick={handleReset}
-                className={`${props.searchQuery ? "blue-button" : "button-grey"}`}
+                className={`search-button ${props.searchQuery ? "blue-button" : "button-grey"}`}
             >
                 {translatedInfo["Reset"][props.language]}
             </button>

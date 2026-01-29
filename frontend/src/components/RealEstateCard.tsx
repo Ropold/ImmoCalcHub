@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import type {RealEstateModel} from "./model/RealEstateModel.ts";
 import "./styles/RealEstateCard.css"
-import {translatedInfo} from "./utils/TranslatedInfo.ts";
+import houseLogo from "../assets/house-logo.jpg";
 
 type RealEstateCardProps = {
     realEstate: RealEstateModel;
@@ -11,7 +11,6 @@ type RealEstateCardProps = {
     showButtons?: boolean;
     handleEditToggle?: (id: string) => void;
     handleDeleteClick?: (id: string) => void;
-    language: string;
 }
 
 export default function RealEstateCard(props: Readonly<RealEstateCardProps>){
@@ -49,7 +48,7 @@ export default function RealEstateCard(props: Readonly<RealEstateCardProps>){
             {/* 3. Bild */}
             <div className="card-section card-image">
                 <img
-                    src={props.realEstate.imageUrl ?? undefined}
+                    src={props.realEstate.imageUrl ?? houseLogo}
                     alt={props.realEstate.realEstateTitle}
                     className="real-estate-card-image"
                 />
@@ -66,7 +65,7 @@ export default function RealEstateCard(props: Readonly<RealEstateCardProps>){
                                 props.handleEditToggle?.(props.realEstate.id);
                             }}
                         >
-                            {translatedInfo["Edit"][props.language]}
+                            Edit
                         </button>
                         <button
                             className="red-button"
@@ -75,7 +74,7 @@ export default function RealEstateCard(props: Readonly<RealEstateCardProps>){
                                 props.handleDeleteClick?.(props.realEstate.id);
                             }}
                         >
-                            {translatedInfo["Delete"][props.language]}
+                            Delete
                         </button>
                     </div>
                 )}

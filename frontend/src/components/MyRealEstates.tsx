@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import axios from "axios";
 import {PRICE_TYPES, type PriceType, translatedPriceType} from "./model/PriceType.ts";
-import {type RoomType, ROOM_TYPES, translatedRoomType} from "./model/RoomType.ts";
+import {type RoomType, ROOM_TYPES, translatedRoomType, ROOM_TYPES_WITHOUT_HEIGHT} from "./model/RoomType.ts";
 import * as roomHelpers from "./utils/roomHelpers.ts";
 import {calculateAreas} from "./utils/roomHelpers.ts";
 import RealEstateCard from "./RealEstateCard.tsx";
@@ -237,7 +237,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                 </select>
                             </label>
                             <label className="add-real-estate-label">
-                                {translatedInfo["Total Floor Area (m²)"][props.language]}:
+                                {translatedInfo["Total Floor Area"][props.language]}:
                                 <input
                                     className="input-small"
                                     type="text"
@@ -246,7 +246,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                 />
                             </label>
                             <label className="add-real-estate-label">
-                                {translatedInfo["Living Area WoFlV (m²)"][props.language]}:
+                                {translatedInfo["Living Area WoFlV"][props.language]}:
                                 <input
                                     className="input-small"
                                     type="text"
@@ -269,15 +269,6 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
 
                             {editData?.rooms.map((room, roomIndex) => (
                                 <div key={roomIndex} className="edit-form margin-top-20">
-                                    <label className="add-real-estate-label">
-                                        {translatedInfo["Room Title"][props.language]}:
-                                        <input
-                                            className="input-small"
-                                            type="text"
-                                            value={room.roomTitel}
-                                            onChange={(e) => setEditData({...editData!, rooms: roomHelpers.updateRoom(editData!.rooms, roomIndex, "roomTitel", e.target.value)})}
-                                        />
-                                    </label>
                                     <label className="add-real-estate-label">
                                         {translatedInfo["Room Type"][props.language]}:
                                         <select
@@ -338,18 +329,20 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                                         onChange={(e) => setEditData({...editData!, rooms: roomHelpers.updateRoomSection(editData!.rooms, roomIndex, sectionIndex, "width", Number(e.target.value))})}
                                                     />
                                                 </label>
-                                                <label className="add-real-estate-label">
-                                                    {translatedInfo["Height (m)"][props.language]}:
-                                                    <input
-                                                        className="input-small"
-                                                        type="number"
-                                                        min="1"
-                                                        max="4"
-                                                        step="0.5"
-                                                        value={section.height}
-                                                        onChange={(e) => setEditData({...editData!, rooms: roomHelpers.updateRoomSection(editData!.rooms, roomIndex, sectionIndex, "height", Number(e.target.value))})}
-                                                    />
-                                                </label>
+                                                {!ROOM_TYPES_WITHOUT_HEIGHT.includes(room.roomType) && (
+                                                    <label className="add-real-estate-label">
+                                                        {translatedInfo["Height (m)"][props.language]}:
+                                                        <input
+                                                            className="input-small"
+                                                            type="number"
+                                                            min="1"
+                                                            max="5"
+                                                            step="any"
+                                                            value={section.height}
+                                                            onChange={(e) => setEditData({...editData!, rooms: roomHelpers.updateRoomSection(editData!.rooms, roomIndex, sectionIndex, "height", Number(e.target.value))})}
+                                                        />
+                                                    </label>
+                                                )}
                                                 <button
                                                     type="button"
                                                     className="red-button"
@@ -416,7 +409,6 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                         showButtons={true}
                                         handleEditToggle={handleEditToggle}
                                         handleDeleteClick={handleDeleteClick}
-                                        language={props.language}
                                     />
                                 </div>
                             ))

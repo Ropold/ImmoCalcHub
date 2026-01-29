@@ -57,7 +57,7 @@ export function calculateAreas(rooms: RoomModel[]): AreaCalculation {
 }
 
 export function addRoom(rooms: RoomModel[]): RoomModel[] {
-    return [...rooms, {roomTitel: "", roomType: "LIVING_ROOM", roomSections: [{roomSectionTitel: "", length: 0, width: 0, height: 2.5}]}];
+    return [...rooms, {roomType: "LIVING_ROOM", roomSections: [{roomSectionTitel: "", length: 0, width: 0, height: 2.5}]}];
 }
 
 export function updateRoom(rooms: RoomModel[], index: number, field: keyof RoomModel, value: string | RoomSectionModel[]): RoomModel[] {

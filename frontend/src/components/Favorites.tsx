@@ -34,7 +34,6 @@ export default function Favorites(props: Readonly<FavoritesProps>) {
                         user={props.user}
                         favorites={props.favorites}
                         toggleFavorite={props.toggleFavorite}
-                        language={props.language}
                     />
                 ))
             ) : (

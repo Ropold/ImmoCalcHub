@@ -172,16 +172,6 @@ export const translatedInfo: Record<string, Record<string, string>> = {
         "it": "Affitto",
         "ru": "Аренда"
     },
-
-    "Total Floor Area": {
-        "en": "Total Floor Area",
-        "de": "Gesamtfläche",
-        "pl": "Całkowita powierzchnia podłogi",
-        "es": "Superficie total del piso",
-        "fr": "Surface totale du sol",
-        "it": "Superficie totale del pavimento",
-        "ru": "Общая площадь пола"
-    },
     "Living Area (according to WoFlV)": {
         "en": "Living Area (according to WoFlV)",
         "de": "Wohnfläche (nach WoFlV)",
@@ -200,7 +190,6 @@ export const translatedInfo: Record<string, Record<string, string>> = {
         "it": "Numero di stanze",
         "ru": "Количество комнат"
     },
-
     "Room Title": {
         "en": "Room Title",
         "de": "Raumtitel",
@@ -581,7 +570,7 @@ export const translatedInfo: Record<string, Record<string, string>> = {
         "it": "Si prega di selezionare il tipo di prezzo",
         "ru": "Пожалуйста, выберите тип цены"
     },
-    "Total Floor Area (m²)": {
+    "Total Floor Area": {
         "en": "Total Floor Area (m²)",
         "de": "Gesamtfläche (m²)",
         "pl": "Całkowita powierzchnia (m²)",
@@ -590,7 +579,7 @@ export const translatedInfo: Record<string, Record<string, string>> = {
         "it": "Superficie totale (m²)",
         "ru": "Общая площадь (м²)"
     },
-    "Living Area WoFlV (m²)": {
+    "Living Area WoFlV": {
         "en": "Living Area WoFlV (m²)",
         "de": "Wohnfläche WoFlV (m²)",
         "pl": "Powierzchnia mieszkalna WoFlV (m²)",
