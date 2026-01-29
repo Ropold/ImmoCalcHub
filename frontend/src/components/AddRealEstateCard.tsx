@@ -5,8 +5,8 @@ import type {RealEstateModel} from "./model/RealEstateModel.ts";
 import {type PriceType, PRICE_TYPES, translatedPriceType} from "./model/PriceType.ts";
 import type {RoomModel} from "./model/RoomModel.ts";
 import {type RoomType, ROOM_TYPES, translatedRoomType, ROOM_TYPES_WITHOUT_HEIGHT} from "./model/RoomType.ts";
-import * as roomHelpers from "./utils/roomHelpers.ts";
-import {calculateAreas} from "./utils/roomHelpers.ts";
+import * as RoomHelpers from "./utils/RoomHelpers.ts";
+import {calculateAreas} from "./utils/RoomHelpers.ts";
 import "./styles/AddRealEstateCard.css"
 import {translatedInfo} from "./utils/TranslatedInfo.ts";
 
@@ -169,7 +169,7 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                     <button
                         type="button"
                         className="blue-button"
-                        onClick={() => setRooms(roomHelpers.addRoom(rooms))}
+                        onClick={() => setRooms(RoomHelpers.addRoom(rooms))}
                     >
                         {translatedInfo["Add Room"][props.language]}
                     </button>
@@ -181,7 +181,7 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                                 <select
                                     className="input-small"
                                     value={room.roomType}
-                                    onChange={(e) => setRooms(roomHelpers.updateRoom(rooms, roomIndex, "roomType", e.target.value as RoomType))}
+                                    onChange={(e) => setRooms(RoomHelpers.updateRoom(rooms, roomIndex, "roomType", e.target.value as RoomType))}
                                 >
                                     {ROOM_TYPES.map((type) => (
                                         <option key={type} value={type}>{translatedRoomType[type][props.language]}</option>
@@ -192,7 +192,7 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                                 type="button"
                                 id="room-section-button"
                                 className="red-button"
-                                onClick={() => setRooms(roomHelpers.removeRoom(rooms, roomIndex))}
+                                onClick={() => setRooms(RoomHelpers.removeRoom(rooms, roomIndex))}
                             >
                                 {translatedInfo["Remove Room"][props.language]}
                             </button>
@@ -200,7 +200,7 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                                 type="button"
                                 id="room-section-button"
                                 className="green-button"
-                                onClick={() => setRooms(roomHelpers.addRoomSection(rooms, roomIndex))}
+                                onClick={() => setRooms(RoomHelpers.addRoomSection(rooms, roomIndex))}
                             >
                                 {translatedInfo["Add New Section"][props.language]}
                             </button>
@@ -216,7 +216,7 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                                                 className="input-small"
                                                 type="text"
                                                 value={section.roomSectionTitel}
-                                                onChange={(e) => setRooms(roomHelpers.updateRoomSection(rooms, roomIndex, sectionIndex, "roomSectionTitel", e.target.value))}
+                                                onChange={(e) => setRooms(RoomHelpers.updateRoomSection(rooms, roomIndex, sectionIndex, "roomSectionTitel", e.target.value))}
                                             />
                                         </label>
                                         <label className="add-real-estate-label">
@@ -225,7 +225,7 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                                                 className="input-small"
                                                 type="text"
                                                 value={section.length}
-                                                onChange={(e) => setRooms(roomHelpers.updateRoomSection(rooms, roomIndex, sectionIndex, "length", Number(e.target.value)))}
+                                                onChange={(e) => setRooms(RoomHelpers.updateRoomSection(rooms, roomIndex, sectionIndex, "length", Number(e.target.value)))}
                                             />
                                         </label>
                                         <label className="add-real-estate-label">
@@ -234,7 +234,7 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                                                 className="input-small"
                                                 type="text"
                                                 value={section.width}
-                                                onChange={(e) => setRooms(roomHelpers.updateRoomSection(rooms, roomIndex, sectionIndex, "width", Number(e.target.value)))}
+                                                onChange={(e) => setRooms(RoomHelpers.updateRoomSection(rooms, roomIndex, sectionIndex, "width", Number(e.target.value)))}
                                             />
                                         </label>
                                         {!ROOM_TYPES_WITHOUT_HEIGHT.includes(room.roomType) && (
@@ -247,7 +247,7 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                                                     max="5"
                                                     step="any"
                                                     value={section.height}
-                                                    onChange={(e) => setRooms(roomHelpers.updateRoomSection(rooms, roomIndex, sectionIndex, "height", Number(e.target.value)))}
+                                                    onChange={(e) => setRooms(RoomHelpers.updateRoomSection(rooms, roomIndex, sectionIndex, "height", Number(e.target.value)))}
                                                 />
                                             </label>
                                         )}
@@ -255,7 +255,7 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                                             type="button"
                                             className="red-button"
                                             id="room-section-button"
-                                            onClick={() => setRooms(roomHelpers.removeRoomSection(rooms, roomIndex, sectionIndex))}
+                                            onClick={() => setRooms(RoomHelpers.removeRoomSection(rooms, roomIndex, sectionIndex))}
                                         >
                                             {translatedInfo["Remove Section"][props.language]}
                                         </button>

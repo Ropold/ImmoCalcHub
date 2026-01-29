@@ -4,8 +4,8 @@ import {useLocation} from "react-router-dom";
 import axios from "axios";
 import {PRICE_TYPES, type PriceType, translatedPriceType} from "./model/PriceType.ts";
 import {type RoomType, ROOM_TYPES, translatedRoomType, ROOM_TYPES_WITHOUT_HEIGHT} from "./model/RoomType.ts";
-import * as roomHelpers from "./utils/roomHelpers.ts";
-import {calculateAreas} from "./utils/roomHelpers.ts";
+import * as RoomHelpers from "./utils/RoomHelpers.ts";
+import {calculateAreas} from "./utils/RoomHelpers.ts";
 import RealEstateCard from "./RealEstateCard.tsx";
 import Searchbar from "./Searchbar.tsx";
 import "./styles/AddRealEstateCard.css";
@@ -262,7 +262,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                             <button
                                 type="button"
                                 className="blue-button"
-                                onClick={() => setEditData({...editData!, rooms: roomHelpers.addRoom(editData?.rooms ?? [])})}
+                                onClick={() => setEditData({...editData!, rooms: RoomHelpers.addRoom(editData?.rooms ?? [])})}
                             >
                                 {translatedInfo["Add Room"][props.language]}
                             </button>
@@ -274,7 +274,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                         <select
                                             className="input-small"
                                             value={room.roomType}
-                                            onChange={(e) => setEditData({...editData!, rooms: roomHelpers.updateRoom(editData!.rooms, roomIndex, "roomType", e.target.value as RoomType)})}
+                                            onChange={(e) => setEditData({...editData!, rooms: RoomHelpers.updateRoom(editData!.rooms, roomIndex, "roomType", e.target.value as RoomType)})}
                                         >
                                             {ROOM_TYPES.map((type) => (
                                                 <option key={type} value={type}>{translatedRoomType[type][props.language]}</option>
@@ -285,7 +285,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                         type="button"
                                         id="room-section-button"
                                         className="red-button"
-                                        onClick={() => setEditData({...editData!, rooms: roomHelpers.removeRoom(editData!.rooms, roomIndex)})}
+                                        onClick={() => setEditData({...editData!, rooms: RoomHelpers.removeRoom(editData!.rooms, roomIndex)})}
                                     >
                                         {translatedInfo["Remove Room"][props.language]}
                                     </button>
@@ -293,7 +293,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                         type="button"
                                         id="room-section-button"
                                         className="green-button"
-                                        onClick={() => setEditData({...editData!, rooms: roomHelpers.addRoomSection(editData!.rooms, roomIndex)})}
+                                        onClick={() => setEditData({...editData!, rooms: RoomHelpers.addRoomSection(editData!.rooms, roomIndex)})}
                                     >
                                         {translatedInfo["Add New Section"][props.language]}
                                     </button>
@@ -308,7 +308,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                                         className="input-small"
                                                         type="text"
                                                         value={section.roomSectionTitel}
-                                                        onChange={(e) => setEditData({...editData!, rooms: roomHelpers.updateRoomSection(editData!.rooms, roomIndex, sectionIndex, "roomSectionTitel", e.target.value)})}
+                                                        onChange={(e) => setEditData({...editData!, rooms: RoomHelpers.updateRoomSection(editData!.rooms, roomIndex, sectionIndex, "roomSectionTitel", e.target.value)})}
                                                     />
                                                 </label>
                                                 <label className="add-real-estate-label">
@@ -317,7 +317,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                                         className="input-small"
                                                         type="text"
                                                         value={section.length}
-                                                        onChange={(e) => setEditData({...editData!, rooms: roomHelpers.updateRoomSection(editData!.rooms, roomIndex, sectionIndex, "length", Number(e.target.value))})}
+                                                        onChange={(e) => setEditData({...editData!, rooms: RoomHelpers.updateRoomSection(editData!.rooms, roomIndex, sectionIndex, "length", Number(e.target.value))})}
                                                     />
                                                 </label>
                                                 <label className="add-real-estate-label">
@@ -326,7 +326,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                                         className="input-small"
                                                         type="text"
                                                         value={section.width}
-                                                        onChange={(e) => setEditData({...editData!, rooms: roomHelpers.updateRoomSection(editData!.rooms, roomIndex, sectionIndex, "width", Number(e.target.value))})}
+                                                        onChange={(e) => setEditData({...editData!, rooms: RoomHelpers.updateRoomSection(editData!.rooms, roomIndex, sectionIndex, "width", Number(e.target.value))})}
                                                     />
                                                 </label>
                                                 {!ROOM_TYPES_WITHOUT_HEIGHT.includes(room.roomType) && (
@@ -339,7 +339,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                                             max="5"
                                                             step="any"
                                                             value={section.height}
-                                                            onChange={(e) => setEditData({...editData!, rooms: roomHelpers.updateRoomSection(editData!.rooms, roomIndex, sectionIndex, "height", Number(e.target.value))})}
+                                                            onChange={(e) => setEditData({...editData!, rooms: RoomHelpers.updateRoomSection(editData!.rooms, roomIndex, sectionIndex, "height", Number(e.target.value))})}
                                                         />
                                                     </label>
                                                 )}
@@ -347,7 +347,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                                     type="button"
                                                     className="red-button"
                                                     id="room-section-button"
-                                                    onClick={() => setEditData({...editData!, rooms: roomHelpers.removeRoomSection(editData!.rooms, roomIndex, sectionIndex)})}
+                                                    onClick={() => setEditData({...editData!, rooms: RoomHelpers.removeRoomSection(editData!.rooms, roomIndex, sectionIndex)})}
                                                 >
                                                     {translatedInfo["Remove Section"][props.language]}
                                                 </button>
