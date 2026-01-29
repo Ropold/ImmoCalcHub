@@ -23,7 +23,7 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
     const [address, setAddress] = useState<string>("");
     const [price, setPrice] = useState<number>(0);
     const [priceType, setPriceType] = useState<PriceType | null>(null);
-    const [rooms, setRooms] = useState<RoomModel[]>([{roomTitel: "", roomType: "LIVING_ROOM", roomSections: [{roomSectionTitel: "", length: 0, width: 0, height: 2.5}]}]);
+    const [rooms, setRooms] = useState<RoomModel[]>([{roomType: "LIVING_ROOM", roomSections: [{roomSectionTitel: "", length: 0, width: 0, height: 2.5}]}]);
     const [totalFloorArea, setTotalFloorArea] = useState<number>(0);
     const [totalLivingAreaWoFlV, setTotalLivingAreaWoFlV] = useState<number>(0);
     const [image, setImage] = useState<File | null>(null);
@@ -176,15 +176,6 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
 
                     {rooms.map((room, roomIndex) => (
                         <div key={roomIndex} className="edit-form margin-top-20">
-                            <label className="add-real-estate-label">
-                                {translatedInfo["Room Title"][props.language]}:
-                                <input
-                                    className="input-small"
-                                    type="text"
-                                    value={room.roomTitel}
-                                    onChange={(e) => setRooms(roomHelpers.updateRoom(rooms, roomIndex, "roomTitel", e.target.value))}
-                                />
-                            </label>
                             <label className="add-real-estate-label">
                                 {translatedInfo["Room Type"][props.language]}:
                                 <select

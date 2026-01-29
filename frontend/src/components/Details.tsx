@@ -7,6 +7,7 @@ import "./styles/Details.css";
 import "./styles/Profile.css"
 import MapBoxDetails from "./MapBoxDetails.tsx";
 import {translatedInfo} from "./utils/TranslatedInfo.ts";
+import {translatedRoomType} from "./model/RoomType.ts";
 
 type DetailsProps = {
     user: string;
@@ -73,7 +74,7 @@ export default function Details(props: Readonly<DetailsProps>) {
                         <div className="rooms-grid">
                         {realEstate.rooms.map((room, roomIndex) => (
                             <div key={roomIndex} className="room-card">
-                                <p><strong>{translatedInfo["Room Title"][props.language]}:</strong> {room.roomTitel || `Raum ${roomIndex + 1}`} | <strong>Raumtyp:</strong> {room.roomType}</p>
+                                <p><strong>{translatedInfo["Room Type"][props.language]}:</strong> {translatedRoomType[room.roomType][props.language]}</p>
                                 {room.roomSections.length > 0 && (
                                     <div className="room-sections">
                                         {room.roomSections.map((section, sectionIndex) => (

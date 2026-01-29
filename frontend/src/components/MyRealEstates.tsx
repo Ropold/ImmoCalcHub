@@ -270,15 +270,6 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                             {editData?.rooms.map((room, roomIndex) => (
                                 <div key={roomIndex} className="edit-form margin-top-20">
                                     <label className="add-real-estate-label">
-                                        {translatedInfo["Room Title"][props.language]}:
-                                        <input
-                                            className="input-small"
-                                            type="text"
-                                            value={room.roomTitel}
-                                            onChange={(e) => setEditData({...editData!, rooms: roomHelpers.updateRoom(editData!.rooms, roomIndex, "roomTitel", e.target.value)})}
-                                        />
-                                    </label>
-                                    <label className="add-real-estate-label">
                                         {translatedInfo["Room Type"][props.language]}:
                                         <select
                                             className="input-small"
