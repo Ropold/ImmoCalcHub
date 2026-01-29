@@ -17,6 +17,8 @@ export const ROOM_TYPES: RoomType[] = [
     "BALCONY", "TERRACE", "BASEMENT", "STORAGE", "OFFICE", "DINING_ROOM", "OTHER"
 ];
 
+export const ROOM_TYPES_WITHOUT_HEIGHT: RoomType[] = ["BALCONY", "TERRACE"];
+
 export const translatedRoomType: Record<RoomType, Record<string, string>> = {
     "LIVING_ROOM": {
         "en": "Living Room",

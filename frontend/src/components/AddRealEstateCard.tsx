@@ -4,7 +4,7 @@ import axios from "axios";
 import type {RealEstateModel} from "./model/RealEstateModel.ts";
 import {type PriceType, PRICE_TYPES, translatedPriceType} from "./model/PriceType.ts";
 import type {RoomModel} from "./model/RoomModel.ts";
-import {type RoomType, ROOM_TYPES, translatedRoomType} from "./model/RoomType.ts";
+import {type RoomType, ROOM_TYPES, translatedRoomType, ROOM_TYPES_WITHOUT_HEIGHT} from "./model/RoomType.ts";
 import * as roomHelpers from "./utils/roomHelpers.ts";
 import {calculateAreas} from "./utils/roomHelpers.ts";
 import "./styles/AddRealEstateCard.css"
@@ -246,18 +246,20 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                                                 onChange={(e) => setRooms(roomHelpers.updateRoomSection(rooms, roomIndex, sectionIndex, "width", Number(e.target.value)))}
                                             />
                                         </label>
-                                        <label className="add-real-estate-label">
-                                            {translatedInfo["Height (m)"][props.language]}:
-                                            <input
-                                                className="input-small"
-                                                type="number"
-                                                min="1"
-                                                max="4"
-                                                step="0.5"
-                                                value={section.height}
-                                                onChange={(e) => setRooms(roomHelpers.updateRoomSection(rooms, roomIndex, sectionIndex, "height", Number(e.target.value)))}
-                                            />
-                                        </label>
+                                        {!ROOM_TYPES_WITHOUT_HEIGHT.includes(room.roomType) && (
+                                            <label className="add-real-estate-label">
+                                                {translatedInfo["Height (m)"][props.language]}:
+                                                <input
+                                                    className="input-small"
+                                                    type="number"
+                                                    min="1"
+                                                    max="5"
+                                                    step="any"
+                                                    value={section.height}
+                                                    onChange={(e) => setRooms(roomHelpers.updateRoomSection(rooms, roomIndex, sectionIndex, "height", Number(e.target.value)))}
+                                                />
+                                            </label>
+                                        )}
                                         <button
                                             type="button"
                                             className="red-button"

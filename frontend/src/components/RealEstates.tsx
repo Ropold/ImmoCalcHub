@@ -52,7 +52,6 @@ export default function RealEstates(props: Readonly<RealEstatesProps>) {
                         user={props.user}
                         favorites={props.favorites}
                         toggleFavorite={props.toggleFavorite}
-                        language={props.language}
                     />
                 ))}
             </div>
