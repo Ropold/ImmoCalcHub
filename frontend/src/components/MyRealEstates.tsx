@@ -237,7 +237,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                 </select>
                             </label>
                             <label className="add-real-estate-label">
-                                {translatedInfo["Total Floor Area (m²)"][props.language]}:
+                                {translatedInfo["Total Floor Area"][props.language]}:
                                 <input
                                     className="input-small"
                                     type="text"
@@ -246,7 +246,7 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                                 />
                             </label>
                             <label className="add-real-estate-label">
-                                {translatedInfo["Living Area WoFlV (m²)"][props.language]}:
+                                {translatedInfo["Living Area WoFlV"][props.language]}:
                                 <input
                                     className="input-small"
                                     type="text"
