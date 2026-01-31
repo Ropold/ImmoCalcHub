@@ -105,9 +105,8 @@ export default function AddRealEstateCard(props: Readonly<AddRealEstateCardProps
                     </label>
                     <label className="add-real-estate-label">
                         {translatedInfo["Description"][props.language]}:
-                        <input
-                            className="input-small"
-                            type="text"
+                        <textarea
+                            className="textarea-large"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />

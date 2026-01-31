@@ -1,5 +1,8 @@
 .details-container {
     padding: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+    word-wrap: break-word;
 }
 
 .details-image {

@@ -198,9 +198,8 @@ export default function MyRealEstates(props: Readonly<MyRealEstatesProps>) {
                             </label>
                             <label className="add-real-estate-label">
                                 {translatedInfo["Description"][props.language]}:
-                                <input
-                                    className="input-small"
-                                    type="text"
+                                <textarea
+                                    className="textarea-large"
                                     value={editData?.description ?? ""}
                                     onChange={(e) => setEditData({...editData!, description: e.target.value})}
                                 />

@@ -23,12 +23,16 @@ export default function RealEstates(props: Readonly<RealEstatesProps>) {
         window.scroll(0, 0);
     }, [location]);
 
+    function removeDiacritics(str: string): string {
+        return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+
     function filterRealEstates(realEstates: RealEstateModel[], query: string): RealEstateModel[] {
-        const lowerQuery = query.toLowerCase();
+        const normalizedQuery = removeDiacritics(query.toLowerCase());
         return realEstates.filter(realEstate => {
-            return realEstate.realEstateTitle.toLowerCase().includes(lowerQuery) ||
-                   realEstate.description.toLowerCase().includes(lowerQuery) ||
-                   realEstate.address.toLowerCase().includes(lowerQuery);
+            return removeDiacritics(realEstate.realEstateTitle.toLowerCase()).includes(normalizedQuery) ||
+                   removeDiacritics(realEstate.description.toLowerCase()).includes(normalizedQuery) ||
+                   removeDiacritics(realEstate.address.toLowerCase()).includes(normalizedQuery);
         });
     }
 

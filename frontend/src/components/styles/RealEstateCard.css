@@ -3,7 +3,7 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 10px 0 auto; /* Horizontal zentrieren */
 }
 
@@ -16,7 +16,7 @@
     padding: 10px;
     margin: 15px;
     display: grid;
-    grid-template-rows: 10% 17% 38% 35%;
+    grid-template-rows: 10% 16% 44% 26%;
     gap: 5px;
     position: relative;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -56,8 +56,8 @@
 }
 
 .real-estate-card-image {
-    width: 100px; /* Bild passt sich der Breite an */
-    max-height: 70px;
+    width: 120px; /* Bild passt sich der Breite an */
+    max-height: 75px;
     object-fit: cover; /* Bild wird vollständig angezeigt */
     border: 2px solid black; /* Border um das Bild */
     border-radius: 5px;
