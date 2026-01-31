@@ -20,6 +20,7 @@ export default function App() {
     const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
     const [language, setLanguage] = useState<string>("de");
     const [favorites, setFavorites] = useState<string[]>([]);
+    const [favoritesRealEstates, setFavoritesRealEstates] = useState<RealEstateModel[]>([]);
     const [allRealEstates, setAllRealEstates] = useState<RealEstateModel[]>([]);
 
 
@@ -85,6 +86,7 @@ export default function App() {
             .then((response) => {
                 const favoriteIds = response.data.map((realEstate) => realEstate.id);
                 setFavorites(favoriteIds);
+                setFavoritesRealEstates(response.data);
             })
             .catch((error) => {
                 console.error(error);
@@ -110,12 +112,19 @@ export default function App() {
                     setFavorites((prevFavorites) =>
                         prevFavorites.filter((id) => id !== realEstateId)
                     );
+                    setFavoritesRealEstates((prev) =>
+                        prev.filter((realEstate) => realEstate.id !== realEstateId)
+                    );
                 })
                 .catch((error) => console.error(error));
         } else {
             axios.post(`/api/users/favorites/${realEstateId}`)
                 .then(() => {
                     setFavorites((prevFavorites) => [...prevFavorites, realEstateId]);
+                    const realEstate = allRealEstates.find((r) => r.id === realEstateId);
+                    if (realEstate) {
+                        setFavoritesRealEstates((prev) => [...prev, realEstate]);
+                    }
                 })
                 .catch((error) => console.error(error));
         }
@@ -149,7 +158,7 @@ export default function App() {
             <Route path="/map-box" element={<MapBoxButton favorites={favorites} allRealEstates={allRealEstates} toggleFavorite={toggleFavorite} language={language}/>} />
             <Route path="/real-estate/:id" element={<Details user={user} favorites={favorites} toggleFavorite={toggleFavorite} language={language}/>} />
             <Route element={<ProtectedRoute user={user}/>}>
-                <Route path="/profile/*" element={<Profile user={user} userDetails={userDetails} handleNewRealEstateSubmit={handleNewRealEstateSubmit} handleUpdateRealEstate={handleUpdateRealEstate} handleDeleteRealEstate={handleDeleteRealEstate} favorites={favorites} toggleFavorite={toggleFavorite} role={role} language={language}/>} />
+                <Route path="/profile/*" element={<Profile user={user} userDetails={userDetails} handleNewRealEstateSubmit={handleNewRealEstateSubmit} handleUpdateRealEstate={handleUpdateRealEstate} handleDeleteRealEstate={handleDeleteRealEstate} favorites={favorites} favoritesRealEstates={favoritesRealEstates} toggleFavorite={toggleFavorite} role={role} language={language}/>} />
             </Route>
         </Routes>
         <Footer language={language}/>

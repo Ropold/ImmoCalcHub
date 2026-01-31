@@ -14,6 +14,7 @@ type ProfileProps = {
     handleUpdateRealEstate: (updatedRealEstate: RealEstateModel) => void;
     handleDeleteRealEstate: (realEstateId: string) => void;
     favorites: string[];
+    favoritesRealEstates: RealEstateModel[];
     toggleFavorite: (realEstateId: string) => void;
     role: string;
     language: string;
@@ -87,7 +88,7 @@ export default function Profile(props: Readonly<ProfileProps>) {
                 )}
                 {activeTab === "add-real-estate" && <AddRealEstateCard user={props.user} handleNewRealEstateSubmit={props.handleNewRealEstateSubmit} language={props.language}/>}
                 {activeTab === "my-real-estates" && <MyRealEstates user={props.user} favorites={props.favorites} toggleFavorite={props.toggleFavorite} isEditing={isEditing} setIsEditing={setIsEditing} handleUpdateRealEstate={props.handleUpdateRealEstate} handleDeleteRealEstate={props.handleDeleteRealEstate} language={props.language}/>}
-                {activeTab === "favorites" && <Favorites user={props.user} favorites={props.favorites} toggleFavorite={props.toggleFavorite} language={props.language}/>}
+                {activeTab === "favorites" && <Favorites user={props.user} favorites={props.favorites} favoritesRealEstates={props.favoritesRealEstates} toggleFavorite={props.toggleFavorite} language={props.language}/>}
             </div>
         </>
     );
