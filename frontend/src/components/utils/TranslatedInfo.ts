@@ -217,6 +217,15 @@ export const translatedInfo: Record<string, Record<string, string>> = {
         "it": "Area",
         "ru": "Площадь"
     },
+    "Average Area of Rooms": {
+        "en": "Average Area of Rooms",
+        "de": "Durchschnittliche Fläche der Räume",
+        "pl": "Średnia powierzchnia pokoi",
+        "es": "Área promedio de las habitaciones",
+        "fr": "Surface moyenne des pièces",
+        "it": "Area media delle stanze",
+        "ru": "Средняя площадь комнат"
+    },
     "Select Language": {
         "en": "Select Language",
         "de": "Sprache auswählen",
