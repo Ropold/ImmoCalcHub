@@ -47,6 +47,11 @@ export default function Details(props: Readonly<DetailsProps>) {
                 <p><strong>{translatedInfo["Total Floor Area"][props.language]}:</strong> {realEstate.totalFloorArea.toLocaleString("de-DE")} m²</p>
                 <p><strong>{translatedInfo["Living Area (according to WoFlV)"][props.language]}:</strong> {realEstate.totalLivingAreaWoFlV.toLocaleString("de-DE")} m²</p>
                 <p><strong>{translatedInfo["Number of Rooms"][props.language]}:</strong> {realEstate.rooms.length}</p>
+                <p><strong>{translatedInfo["Average Area of Rooms"][props.language]}:</strong> {realEstate.rooms.length > 0
+                    ? (realEstate.rooms.reduce((total, room) =>
+                        total + room.roomSections.reduce((sectionTotal, section) =>
+                            sectionTotal + section.length * section.width, 0), 0) / realEstate.rooms.length).toFixed(2)
+                    : 0} m²</p>
                 <p><strong>{translatedInfo["Created At"][props.language]}:</strong> {new Date(realEstate.createdAt).toLocaleDateString("de-DE")}</p>
 
                 <div className="details-img-container">
