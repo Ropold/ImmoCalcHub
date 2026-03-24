@@ -37,7 +37,8 @@ public class SecurityConfig {
     private String appUrl;
 
     private final AppUserRepository appUserRepository;
-    private static final String ARCRAIDERS = "/api/arc-raiders-hub/**";
+    private static final String IMMOCALCHUB = "/api/immo-calc-hub/**";
+    private static final String USER = "USER";
     private static final String ADMIN = "ADMIN";
 
     @Bean
@@ -45,14 +46,14 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(a -> a
-                        .requestMatchers(HttpMethod.GET, ARCRAIDERS).permitAll()
-                        .requestMatchers(HttpMethod.POST, ARCRAIDERS).hasRole(ADMIN)
-                        .requestMatchers(HttpMethod.PUT, ARCRAIDERS).hasRole(ADMIN)
-                        .requestMatchers(HttpMethod.DELETE, ARCRAIDERS).hasRole(ADMIN)
+                        .requestMatchers(HttpMethod.GET, IMMOCALCHUB).permitAll()
+                        .requestMatchers(HttpMethod.POST, IMMOCALCHUB).hasRole(USER)
+                        .requestMatchers(HttpMethod.PUT, IMMOCALCHUB).hasRole(USER)
+                        .requestMatchers(HttpMethod.DELETE, IMMOCALCHUB).hasRole(USER)
                         .requestMatchers("/api/users/me").permitAll()
                         .requestMatchers("/api/users/me/details").permitAll()
                         //.requestMatchers("/api/high-score").permitAll()
-                        .anyRequest().permitAll()
+                        //.anyRequest().permitAll()
                 )
                 .logout(l -> l.logoutUrl("/api/users/logout")
                         .logoutSuccessHandler((request, response, authentication) -> response.setStatus(200)))
