@@ -67,19 +67,15 @@ export default function App() {
             });
     }
 
-    useEffect(() => {
-        getUser();
-        getAllRealEstates();
-    }, []);
-
-    useEffect(() => {
-        if(user !== "anonymousUser") {
-            getUserDetails();
-            getUserRoles();
-            getAppUserFavorites();
-            getPreferredLanguage();
-        }
-    }, [user]);
+    function getAllRealEstates() {
+        axios.get<RealEstateModel[]>(`/api/immo-calc-hub`)
+            .then((response) => {
+                setAllRealEstates(response.data);
+            })
+            .catch((error) => {
+                console.error("Error fetching real estates:", error);
+            });
+    }
 
     function getAppUserFavorites(){
         axios.get<RealEstateModel[]>(`/api/users/favorites`)
@@ -93,15 +89,19 @@ export default function App() {
             });
     }
 
-    function getAllRealEstates() {
-        axios.get<RealEstateModel[]>(`/api/immo-calc-hub`)
-            .then((response) => {
-                setAllRealEstates(response.data);
-            })
-            .catch((error) => {
-                console.error("Error fetching real estates:", error);
-            });
-    }
+    useEffect(() => {
+        getUser();
+        getAllRealEstates();
+    }, []);
+
+    useEffect(() => {
+        if(user !== "anonymousUser") {
+            getUserDetails();
+            getUserRoles();
+            getAppUserFavorites();
+            getPreferredLanguage();
+        }
+    }, [user]);
 
     function toggleFavorite(realEstateId: string) {
         const isFavorite = favorites.includes(realEstateId);

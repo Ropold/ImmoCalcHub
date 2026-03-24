@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import org.junit.jupiter.api.Assertions;
 import ropold.backend.model.AppUser;
@@ -111,12 +110,11 @@ class AppUserControllerTest {
         OAuth2User mockUser = mock(OAuth2User.class);
         when(mockUser.getName()).thenReturn("user");
 
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
-        Authentication authentication = new UsernamePasswordAuthenticationToken(mockUser, null, mockUser.getAuthorities());
-        context.setAuthentication(authentication);
-        SecurityContextHolder.setContext(context);
+        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                mockUser, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
 
-        mockMvc.perform(get("/api/users/me"))
+        mockMvc.perform(get("/api/users/me")
+                        .with(SecurityMockMvcRequestPostProcessors.authentication(auth)))
                 .andExpect(status().isOk())
                 .andExpect(content().string("user"));
     }
@@ -130,7 +128,6 @@ class AppUserControllerTest {
 
     @Test
     void testGetUserDetails_withLoggedInUser_expectUserDetails() throws Exception {
-        // Erstellen eines Mock OAuth2User
         OAuth2User mockUser = mock(OAuth2User.class);
         when(mockUser.getAttributes()).thenReturn(Map.of(
                 "login", "username",
@@ -139,13 +136,11 @@ class AppUserControllerTest {
                 "html_url", "https://github.com/mustermann"
         ));
 
-        // Simuliere den OAuth2User in der SecurityContext
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
-        Authentication authentication = new UsernamePasswordAuthenticationToken(mockUser, null, mockUser.getAuthorities());
-        context.setAuthentication(authentication);
-        SecurityContextHolder.setContext(context);
+        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                mockUser, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
 
-        mockMvc.perform(get("/api/users/me/details"))
+        mockMvc.perform(get("/api/users/me/details")
+                        .with(SecurityMockMvcRequestPostProcessors.authentication(auth)))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                 {
@@ -173,12 +168,11 @@ class AppUserControllerTest {
         OAuth2User mockUser = mock(OAuth2User.class);
         when(mockUser.getName()).thenReturn("user");
 
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
-        Authentication authentication = new UsernamePasswordAuthenticationToken(mockUser, null, mockUser.getAuthorities());
-        context.setAuthentication(authentication);
-        SecurityContextHolder.setContext(context);
+        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                mockUser, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
 
-        mockMvc.perform(get("/api/users/me/role"))
+        mockMvc.perform(get("/api/users/me/role")
+                        .with(SecurityMockMvcRequestPostProcessors.authentication(auth)))
                 .andExpect(status().isOk())
                 .andExpect(content().string("USER"));
     }
@@ -195,12 +189,11 @@ class AppUserControllerTest {
         OAuth2User mockUser = mock(OAuth2User.class);
         when(mockUser.getName()).thenReturn("user");
 
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
-        Authentication authentication = new UsernamePasswordAuthenticationToken(mockUser, null, mockUser.getAuthorities());
-        context.setAuthentication(authentication);
-        SecurityContextHolder.setContext(context);
+        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                mockUser, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
 
-        mockMvc.perform(get("/api/users/favorites"))
+        mockMvc.perform(get("/api/users/favorites")
+                        .with(SecurityMockMvcRequestPostProcessors.authentication(auth)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value("2"))
                 .andExpect(jsonPath("$[0].realEstateTitle").value("Moderne Wohnung"));
@@ -220,12 +213,11 @@ class AppUserControllerTest {
         OAuth2User mockUser = mock(OAuth2User.class);
         when(mockUser.getName()).thenReturn("user");
 
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
-        Authentication authentication = new UsernamePasswordAuthenticationToken(mockUser, null, mockUser.getAuthorities());
-        context.setAuthentication(authentication);
-        SecurityContextHolder.setContext(context);
+        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                mockUser, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
 
-        mockMvc.perform(post("/api/users/favorites/1"))
+        mockMvc.perform(post("/api/users/favorites/1")
+                        .with(SecurityMockMvcRequestPostProcessors.authentication(auth)))
                 .andExpect(status().isCreated());
 
         AppUser updatedUser = appUserRepository.findById("user").orElseThrow();
@@ -238,12 +230,11 @@ class AppUserControllerTest {
         OAuth2User mockUser = mock(OAuth2User.class);
         when(mockUser.getName()).thenReturn("user");
 
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
-        Authentication authentication = new UsernamePasswordAuthenticationToken(mockUser, null, mockUser.getAuthorities());
-        context.setAuthentication(authentication);
-        SecurityContextHolder.setContext(context);
+        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                mockUser, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
 
-        mockMvc.perform(delete("/api/users/favorites/2"))
+        mockMvc.perform(delete("/api/users/favorites/2")
+                        .with(SecurityMockMvcRequestPostProcessors.authentication(auth)))
                 .andExpect(status().isNoContent());
 
         AppUser updatedUser = appUserRepository.findById("user").orElseThrow();
@@ -256,12 +247,11 @@ class AppUserControllerTest {
         OAuth2User mockUser = mock(OAuth2User.class);
         when(mockUser.getName()).thenReturn("user");
 
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
-        Authentication authentication = new UsernamePasswordAuthenticationToken(mockUser, null, mockUser.getAuthorities());
-        context.setAuthentication(authentication);
-        SecurityContextHolder.setContext(context);
+        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                mockUser, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
 
-        mockMvc.perform(get("/api/users/me/language"))
+        mockMvc.perform(get("/api/users/me/language")
+                        .with(SecurityMockMvcRequestPostProcessors.authentication(auth)))
                 .andExpect(status().isOk())
                 .andExpect(content().string("en"));
     }
@@ -271,12 +261,11 @@ class AppUserControllerTest {
         OAuth2User mockUser = mock(OAuth2User.class);
         when(mockUser.getName()).thenReturn("user");
 
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
-        Authentication authentication = new UsernamePasswordAuthenticationToken(mockUser, null, mockUser.getAuthorities());
-        context.setAuthentication(authentication);
-        SecurityContextHolder.setContext(context);
+        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                mockUser, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
 
-        mockMvc.perform(post("/api/users/me/language/de"))
+        mockMvc.perform(post("/api/users/me/language/de")
+                        .with(SecurityMockMvcRequestPostProcessors.authentication(auth)))
                 .andExpect(status().isOk());
 
         AppUser updatedUser = appUserRepository.findById("user").orElseThrow();
